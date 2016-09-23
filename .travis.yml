@@ -12,3 +12,8 @@ notifications:
     on_success: always
     on_failure: change
     on_start: never
+addons:
+    code_climate:
+        repo_token: cd17849fce8d9273988b6229cd454514d56e69c7fb0463af09bf7b7ba342d8b7
+after_script:
+  - nyc report --reporter=text-lcov | codeclimate-test-reporter
