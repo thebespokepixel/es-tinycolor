@@ -1,0 +1,77 @@
+{
+  "version": "0.1.0",
+  "name": "@thebespokepixel/es-tinycolor",
+  "description": "Fast Color Parsing and Manipulation in es2015+, based on TinyColor2",
+  "scripts": {
+    "test": "xo && snyk test && nyc ava",
+    "code-climate": "nyc report --reporter=text-lcov | codeclimate-test-reporter",
+    "coverage": "nyc ava && nyc report --reporter=lcov --report-dir test/coverage; open test/coverage/lcov-report/index.html"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkGriffiths/TinyColor.git"
+  },
+  "keywords": [
+    "color",
+    "parser",
+    "tinycolor2",
+    "es6"
+  ],
+  "author": "Mark Griffiths <mark@thebespokepixel.com> (http://thebespokepixel.com/)",
+  "contributors": [
+    "Brian Grinstead <briangrinstead@gmail.com> (http://briangrinstead.com)"
+  ],
+  "main": "./index.js",
+  "bugs": {
+    "url": "https://github.com/MarkGriffiths/TinyColor#es-tinycolor"
+  },
+  "homepage": "https://github.com/MarkGriffiths/TinyColor",
+  "files": [
+    "index-es",
+    "index.js"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "engines": {
+    "node": ">=4.0 <7.0"
+  },
+  "devDependencies": {
+    "@thebespokepixel/cordial": "^0.16.4",
+    "@thebespokepixel/string": "*",
+    "ava": "^0.15.2",
+    "babel-plugin-external-helpers": "^6.8.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "xo": "^0.16.0",
+    "codeclimate-test-reporter": "^0.3.3",
+    "nyc": "^8.3.0",
+    "snyk": "^1.19.1"
+  },
+  "ava": {
+    "files": [
+      "test/*.js"
+    ]
+  },
+  "xo": {
+    "semicolon": false,
+    "esnext": true,
+    "ignores": [
+      "index*.js",
+      "lib/**",
+      "docs/**"
+    ],
+    "rules": {
+      "camelcase": [
+        "error",
+        {
+          "properties": "never"
+        }
+      ],
+      "one-var": 0,
+      "max-params": 0
+    }
+  },
+  "buildNumber": 472,
+  "jsnext:main": "index-es.js"
+}

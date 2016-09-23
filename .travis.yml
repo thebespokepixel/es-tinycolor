@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - 4
+  - 5
+  - stable
+sudo: false
+before_install: npm i -g npm@latest
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/d0418713e51ac049564a
+    on_success: always
+    on_failure: change
+    on_start: never
