@@ -40,7 +40,7 @@
   "devDependencies": {
     "@thebespokepixel/cordial": "^0.16.4",
     "@thebespokepixel/string": "*",
-    "ava": "^0.15.2",
+    "ava": "^0.16.0",
     "babel-plugin-external-helpers": "^6.8.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "xo": "^0.16.0",
