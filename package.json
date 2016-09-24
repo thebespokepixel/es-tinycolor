@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/MarkGriffiths/TinyColor",
   "files": [
-    "index-es",
+    "index-es.js",
     "index.js"
   ],
   "directories": {
@@ -75,8 +75,5 @@
     }
   },
   "buildNumber": 475,
-  "jsnext:main": "index-es.js",
-  "dependencies": {
-    "ava": "^0.15.2"
-  }
+  "jsnext:main": "index-es.js"
 }
