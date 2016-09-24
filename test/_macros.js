@@ -16,13 +16,13 @@ function colorObjectMatch(t, tiny, color) {
 colorObjectMatch.title = (title, tiny, color) => `${title}: ${tiny.toHexString()} = ${tinycolor(color).toHexString()}'s identity`
 
 function colorStringLimitDiff(t, tiny, target, max) {
-	const [inR, inG, inB] = tiny.toRgbArray()
-	const [outR, outG, outB] = tinycolor(target).toRgbArray()
+	const input = tiny.toRgbArray()
+	const output = tinycolor(target).toRgbArray()
 
 	t.plan(3)
-	t.true(Math.abs(inR - outR) <= max, `red value difference <= ${max}`)
-	t.true(Math.abs(inG - outG) <= max, `green value difference <= ${max}`)
-	t.true(Math.abs(inB - outB) <= max, `blue value difference <= ${max})`)
+	t.true(Math.abs(input[0] - output[0]) <= max, `red value difference <= ${max}`)
+	t.true(Math.abs(input[1] - output[1]) <= max, `green value difference <= ${max}`)
+	t.true(Math.abs(input[2] - output[2]) <= max, `blue value difference <= ${max})`)
 }
 colorStringLimitDiff.title = (title, tiny, target, max) => `${title}: Set |${pretty(tiny.toRgbArray())} - ${pretty(tinycolor(target).toRgbArray())}| < ${max * 3}`
 
