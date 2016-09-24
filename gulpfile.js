@@ -6,7 +6,7 @@ gulp.task('bundle', cordial.macro({
 		plugins: ['external-helpers']
 	},
 	exports: 'named',
-	source: 'src/index.es6'
+	source: 'src/index.js'
 }).basic())
 
 gulp.task('master', cordial.macro({
@@ -14,12 +14,12 @@ gulp.task('master', cordial.macro({
 	babel: {
 		plugins: ['external-helpers']
 	},
-	source: 'src/index.es6'
+	source: 'src/index.js'
 }).basic())
 
 // Tests
 gulp.task('ava', cordial.test().ava(['test/*.js']))
-gulp.task('xo', cordial.test().xo(['src/*.es6']))
+gulp.task('xo', cordial.test().xo(['src/*.js']))
 gulp.task('test', gulp.parallel('xo', 'ava'))
 
 // Hooks
