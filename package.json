@@ -5,7 +5,8 @@
   "scripts": {
     "test": "xo && snyk test && nyc ava",
     "code-climate": "nyc report --reporter=text-lcov | codeclimate-test-reporter",
-    "coverage": "nyc ava && nyc report --reporter=lcov --report-dir test/coverage; open test/coverage/lcov-report/index.html"
+    "coverage": "nyc ava && nyc report --reporter=lcov --report-dir test/coverage; open test/coverage/lcov-report/index.html",
+    "postpublish": "greenkeeper-postpublish"
   },
   "license": "MIT",
   "repository": {
@@ -40,13 +41,14 @@
   "devDependencies": {
     "@thebespokepixel/cordial": "^0.16.4",
     "@thebespokepixel/string": "*",
-    "ava": "^0.15.2",
+    "ava": "^0.16.0",
     "babel-plugin-external-helpers": "^6.8.0",
-    "gulp": "github:gulpjs/gulp#4.0",
-    "xo": "^0.16.0",
     "codeclimate-test-reporter": "^0.3.3",
+    "greenkeeper-postpublish": "^1.0.1",
+    "gulp": "github:gulpjs/gulp#4.0",
     "nyc": "^8.3.0",
-    "snyk": "^1.19.1"
+    "snyk": "^1.19.1",
+    "xo": "^0.16.0"
   },
   "ava": {
     "files": [
@@ -73,5 +75,8 @@
     }
   },
   "buildNumber": 475,
-  "jsnext:main": "index-es.js"
+  "jsnext:main": "index-es.js",
+  "dependencies": {
+    "ava": "^0.15.2"
+  }
 }
