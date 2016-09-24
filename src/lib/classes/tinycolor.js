@@ -16,6 +16,12 @@ let tinyCounter = 0
 const extensionApi = new TinyColorExtensionAPI()
 
 export default class TinyColor {
+	/**
+	 * Create a new TinyColor instance
+	 * @param  {String|Array|Object} color Notation describing a color
+	 * @param  {Object} opts               Options object (see below)
+	 * @return {TinyColor} An instance representing the color
+	 */
 	constructor(color, opts = {}) {
 		color = color || ''
 		// If input is already a tinycolor, return itself
