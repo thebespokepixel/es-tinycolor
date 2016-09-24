@@ -31,7 +31,7 @@
 [npm]: https://www.npmjs.com/package/@thebespokepixel/es-tinycolor
 [snyk]: https://snyk.io/test/github/markgriffiths/es-tinycolor
 [code-climate]: https://codeclimate.com/github/MarkGriffiths/es-tinycolor
-[coverage]: https://codeclimate.com/coverage/github/MarkGriffiths/es-tinycolor
+[coverage]: https://codeclimate.com/github/MarkGriffiths/es-tinycolor/coverage
 [inch]: http://inch-ci.org/github/MarkGriffiths/es-tinycolor
 [es]: https://github.com/rollup/rollup/wiki/jsnext:main
 [gitter]: https://gitter.im/MarkGriffiths/help?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
