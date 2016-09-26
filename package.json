@@ -74,6 +74,6 @@
       "max-params": 0
     }
   },
-  "buildNumber": 0,
+  "buildNumber": 1,
   "jsnext:main": "index-es.js"
 }
