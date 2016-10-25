@@ -36,19 +36,19 @@
     "test": "test"
   },
   "engines": {
-    "node": ">=4.0 <7.0"
+    "node": ">=4.0 <9.0"
   },
   "devDependencies": {
-    "@thebespokepixel/cordial": "^0.16.4",
-    "@thebespokepixel/string": "*",
+    "@thebespokepixel/cordial": "^0.17.10",
+    "@thebespokepixel/string": "^0.4.3",
     "ava": "^0.16.0",
     "babel-plugin-external-helpers": "^6.8.0",
-    "codeclimate-test-reporter": "^0.3.3",
+    "codeclimate-test-reporter": "^0.4.0",
     "greenkeeper-postpublish": "^1.0.1",
     "gulp": "github:gulpjs/gulp#4.0",
     "nyc": "^8.3.0",
     "snyk": "^1.19.1",
-    "xo": "^0.16.0"
+    "xo": "^0.17.0"
   },
   "ava": {
     "files": [
@@ -74,6 +74,6 @@
       "max-params": 0
     }
   },
-  "buildNumber": 0,
+  "buildNumber": 1,
   "jsnext:main": "index-es.js"
 }
