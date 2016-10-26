@@ -4,6 +4,7 @@
  *  © 2016 Mark Griffiths @ The Bespoke Pixel (MIT licensed)
  *  Based on TinyColor © Brian Grinstead
  */
+/* eslint import/no-unassigned-import: 0 */
 import TinyColor from './lib/classes/tinycolor'
 
 import './lib/extensions/rgb'

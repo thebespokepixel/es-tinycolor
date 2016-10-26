@@ -1,4 +1,4 @@
-/* eslint babel/new-cap: 0 */
+/* eslint new-cap: 0 */
 import test from 'ava'
 import {tinycolor} from '..'
 

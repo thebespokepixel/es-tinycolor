@@ -10,7 +10,7 @@ import {calcMix, calcBrightness, calcLuminance} from '../calculations'
 import {readability as readabilityWCAG, isReadable as isWCAGReadable, mostReadable as mostWCAGReadable} from '../readability'
 import {combine} from '../combiners'
 import {modify} from '../modifiers'
-import {TinyColorExtensionAPI} from './tinycolor-extension-api'
+import TinyColorExtensionAPI from './tinycolor-extension-api'
 
 let tinyCounter = 0
 const extensionApi = new TinyColorExtensionAPI()

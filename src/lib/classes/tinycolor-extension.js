@@ -2,7 +2,7 @@
  *  ES-TinyColor : Color Extension Class
  * ────────────────────────────────────────────────────────────────────────────
  */
-export class TinyColorExtension {
+export default class TinyColorExtension {
 	constructor(api, id, opts = {}) {
 		this.api = api
 		this.id = id

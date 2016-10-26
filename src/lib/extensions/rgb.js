@@ -4,7 +4,7 @@
  */
 import TinyColor from '../classes/tinycolor'
 import {isValidCSSUnitRGB, isPercentage} from '../utilities'
-import {rgbStringToObject} from '../parser'
+import rgbStringToObject from '../parser'
 import {conformRgba, rgbaToString} from '../converters'
 
 const api = TinyColor.registerFormat('rgb')

@@ -3,7 +3,7 @@
  *  ────────────────────────────────────────────────────────────────────────────
  */
 
-import {TinyColorExtension} from './tinycolor-extension'
+import TinyColorExtension from './tinycolor-extension'
 
 const _template = {
 	format: false,
@@ -14,7 +14,7 @@ const _template = {
 	a: 1
 }
 
-export class TinyColorExtensionAPI {
+export default class TinyColorExtensionAPI {
 	constructor() {
 		this.colorspaces = {}
 		this.opts = {
