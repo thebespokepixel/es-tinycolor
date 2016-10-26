@@ -1,657 +1,621 @@
-'use strict'
+'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-	value: true
-})
+Object.defineProperty(exports, '__esModule', { value: true });
 
-const mathRound = Math.round
-const mathMin = Math.min
-const mathMax = Math.max
+const mathRound = Math.round;
+const mathMin = Math.min;
+const mathMax = Math.max;
 
-const isOnePointZero = n => typeof n === 'string' && n.indexOf('.') !== -1 && parseFloat(n) === 1
 
-const isPercentage = n => typeof n === 'string' && n.indexOf('%') !== -1
+const isOnePointZero = n => typeof n === 'string' && n.indexOf('.') !== -1 && parseFloat(n) === 1;
 
-const roundIf01 = n => n < 1 ? mathRound(n) : n
+const isPercentage = n => typeof n === 'string' && n.indexOf('%') !== -1;
 
-const roundAlpha = a => mathRound(100 * a) / 100
+const roundIf01 = n => n < 1 ? mathRound(n) : n;
+
+const roundAlpha = a => mathRound(100 * a) / 100;
 
 const boundAlpha = a => {
-	a = parseFloat(a)
-	return isNaN(a) || a < 0 || a > 1 ? 1 : a
-}
+	a = parseFloat(a);
+	return isNaN(a) || a < 0 || a > 1 ? 1 : a;
+};
 
-const hasAlpha = rgba => rgba.a < 1 && rgba.a >= 0
+const hasAlpha = rgba => rgba.a < 1 && rgba.a >= 0;
 
-const clamp01 = val => mathMin(1, mathMax(0, val))
+const clamp01 = val => mathMin(1, mathMax(0, val));
 
-const pad2 = c => c.length === 1 ? `0${c}` : `${c}`
+const pad2 = c => c.length === 1 ? `0${ c }` : `${ c }`;
 
-const CSS_INTEGER = `[-\+]?\d+%?`
+const CSS_INTEGER = `[-\\+]?\\d+%?`;
 
-const CSS_NUMBER = `[-\+]?\d*\.\d+%?`
+const CSS_NUMBER = `[-\\+]?\\d*\\.\\d+%?`;
 
-const CSS_UNIT = `(?:${CSS_NUMBER})|(?:${CSS_INTEGER})`
+const CSS_UNIT = `(?:${ CSS_NUMBER })|(?:${ CSS_INTEGER })`;
 
-const isValidCSSUnit = color => new RegExp(CSS_UNIT).test(color)
+const isValidCSSUnit = color => new RegExp(CSS_UNIT).test(color);
 
-const isValidCSSUnitRGB = rgb => isValidCSSUnit(rgb.r) && isValidCSSUnit(rgb.g) && isValidCSSUnit(rgb.b)
+const isValidCSSUnitRGB = rgb => isValidCSSUnit(rgb.r) && isValidCSSUnit(rgb.g) && isValidCSSUnit(rgb.b);
 
-const PERMISSIVE_MATCH3 = `[\s|\(]+(${CSS_UNIT})[,|\s]+(${CSS_UNIT})[,|\s]+(${CSS_UNIT})\s*\)?`
-const PERMISSIVE_MATCH4 = `[\s|\(]+(${CSS_UNIT})[,|\s]+(${CSS_UNIT})[,|\s]+(${CSS_UNIT})[,|\s]+(${CSS_UNIT})\s*\)?`
+const PERMISSIVE_MATCH3 = `[\\s|\\(]+(${ CSS_UNIT })[,|\\s]+(${ CSS_UNIT })[,|\\s]+(${ CSS_UNIT })\\s*\\)?`;
+const PERMISSIVE_MATCH4 = `[\\s|\\(]+(${ CSS_UNIT })[,|\\s]+(${ CSS_UNIT })[,|\\s]+(${ CSS_UNIT })[,|\\s]+(${ CSS_UNIT })\\s*\\)?`;
 
 function bound01(n, max) {
 	if (isOnePointZero(n)) {
-		n = '100%'
+		n = '100%';
 	}
 
-	const processPercent = isPercentage(n)
-	n = mathMin(max, mathMax(0, parseFloat(n)))
+	const processPercent = isPercentage(n);
+	n = mathMin(max, mathMax(0, parseFloat(n)));
 
 	if (processPercent) {
-		n = parseInt(n * max, 10) / 100
+		n = parseInt(n * max, 10) / 100;
 	}
 
 	if (Math.abs(n - max) < 0.000001) {
-		return 1
+		return 1;
 	}
 
-	return n % max / parseFloat(max)
+	return n % max / parseFloat(max);
 }
 
-const asyncGenerator = (function () {
-	function AwaitValue(value) {
-		this.value = value
-	}
+var asyncGenerator = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
 
-	function AsyncGenerator(gen) {
-		let front
-		let back
+  function AsyncGenerator(gen) {
+    var front, back;
 
-		function send(key, arg) {
-			return new Promise((resolve, reject) => {
-				const request = {
-					key,
-					arg,
-					resolve,
-					reject,
-					next: null
-				}
+    function send(key, arg) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
 
-				if (back) {
-					back = back.next = request
-				} else {
-					front = back = request
-					resume(key, arg)
-				}
-			})
-		}
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
 
-		function resume(key, arg) {
-			try {
-				const result = gen[key](arg)
-				const value = result.value
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
 
-				if (value instanceof AwaitValue) {
-					Promise.resolve(value.value).then(arg => {
-						resume('next', arg)
-					}, arg => {
-						resume('throw', arg)
-					})
-				} else {
-					settle(result.done ? 'return' : 'normal', result.value)
-				}
-			} catch (err) {
-				settle('throw', err)
-			}
-		}
+        if (value instanceof AwaitValue) {
+          Promise.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
 
-		function settle(type, value) {
-			switch (type) {
-				case 'return':
-					front.resolve({
-						value,
-						done: true
-					})
-					break
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
 
-				case 'throw':
-					front.reject(value)
-					break
+        case "throw":
+          front.reject(value);
+          break;
 
-				default:
-					front.resolve({
-						value,
-						done: false
-					})
-					break
-			}
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
 
-			front = front.next
+      front = front.next;
 
-			if (front) {
-				resume(front.key, front.arg)
-			} else {
-				back = null
-			}
-		}
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
 
-		this._invoke = send
+    this._invoke = send;
 
-		if (typeof gen.return !== 'function') {
-			this.return = undefined
-		}
-	}
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
 
-	if (typeof Symbol === 'function' && Symbol.asyncIterator) {
-		AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
-			return this
-		}
-	}
+  if (typeof Symbol === "function" && Symbol.asyncIterator) {
+    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
+      return this;
+    };
+  }
 
-	AsyncGenerator.prototype.next = function (arg) {
-		return this._invoke('next', arg)
-	}
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
 
-	AsyncGenerator.prototype.throw = function (arg) {
-		return this._invoke('throw', arg)
-	}
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
 
-	AsyncGenerator.prototype.return = function (arg) {
-		return this._invoke('return', arg)
-	}
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
 
-	return {
-		wrap(fn) {
-			return function () {
-				return new AsyncGenerator(fn.apply(this, arguments))
-			}
-		},
-		await(value) {
-			return new AwaitValue(value)
-		}
-	}
-})()
+  return {
+    wrap: function (fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function (value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
 
-const get = function get(object, property, receiver) {
-	if (object === null)
-		{object = Function.prototype}
-	const desc = Object.getOwnPropertyDescriptor(object, property)
 
-	if (desc === undefined) {
-		const parent = Object.getPrototypeOf(object)
 
-		if (parent === null) {
-			return undefined
-		} else {
-			return get(parent, property, receiver)
-		}
-	} else if ('value' in desc) {
-		return desc.value
-	} else {
-		const getter = desc.get
 
-		if (getter === undefined) {
-			return undefined
-		}
 
-		return getter.call(receiver)
-	}
-}
 
-const set = function set(object, property, value, receiver) {
-	const desc = Object.getOwnPropertyDescriptor(object, property)
 
-	if (desc === undefined) {
-		const parent = Object.getPrototypeOf(object)
 
-		if (parent !== null) {
-			set(parent, property, value, receiver)
-		}
-	} else if ('value' in desc && desc.writable) {
-		desc.value = value
-	} else {
-		const setter = desc.set
 
-		if (setter !== undefined) {
-			setter.call(receiver, value)
-		}
-	}
 
-	return value
-}
 
-const slicedToArray = (function () {
-	function sliceIterator(arr, i) {
-		const _arr = []
-		let _n = true
-		let _d = false
-		let _e
 
-		try {
-			for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-				_arr.push(_s.value)
 
-				if (i && _arr.length === i) {break}
-			}
-		} catch (err) {
-			_d = true
-			_e = err
-		} finally {
-			try {
-				if (!_n && _i.return) {_i.return()}
-			} finally {
-				if (_d)
-					{throw _e}
-			}
-		}
 
-		return _arr
-	}
 
-	return function (arr, i) {
-		if (Array.isArray(arr)) {
-			return arr
-		} else if (Symbol.iterator in Object(arr)) {
-			return sliceIterator(arr, i)
-		} else {
-			throw new TypeError('Invalid attempt to destructure non-iterable instance')
-		}
-	}
-})()
+var get = function get(object, property, receiver) {
+  if (object === null) object = Function.prototype;
+  var desc = Object.getOwnPropertyDescriptor(object, property);
 
-const toConsumableArray = function (arr) {
-	if (Array.isArray(arr)) {
-		for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i]}
+  if (desc === undefined) {
+    var parent = Object.getPrototypeOf(object);
 
-		return arr2
-	} else {
-		return Array.from(arr)
-	}
-}
+    if (parent === null) {
+      return undefined;
+    } else {
+      return get(parent, property, receiver);
+    }
+  } else if ("value" in desc) {
+    return desc.value;
+  } else {
+    var getter = desc.get;
 
-const convertHexToInt = val => parseInt(val, 16)
+    if (getter === undefined) {
+      return undefined;
+    }
 
-const convertHexToDecimal = h => convertHexToInt(h) / 255
+    return getter.call(receiver);
+  }
+};
 
-const convertToPercentage = n => n <= 1 ? `${n * 100}%` : n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var set = function set(object, property, value, receiver) {
+  var desc = Object.getOwnPropertyDescriptor(object, property);
+
+  if (desc === undefined) {
+    var parent = Object.getPrototypeOf(object);
+
+    if (parent !== null) {
+      set(parent, property, value, receiver);
+    }
+  } else if ("value" in desc && desc.writable) {
+    desc.value = value;
+  } else {
+    var setter = desc.set;
+
+    if (setter !== undefined) {
+      setter.call(receiver, value);
+    }
+  }
+
+  return value;
+};
+
+var slicedToArray = function () {
+  function sliceIterator(arr, i) {
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"]) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  return function (arr, i) {
+    if (Array.isArray(arr)) {
+      return arr;
+    } else if (Symbol.iterator in Object(arr)) {
+      return sliceIterator(arr, i);
+    } else {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance");
+    }
+  };
+}();
+
+
+
+
+
+
+
+
+
+
+
+
+
+var toConsumableArray = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  } else {
+    return Array.from(arr);
+  }
+};
+
+const convertHexToInt = val => parseInt(val, 16);
+
+const convertHexToDecimal = h => convertHexToInt(h) / 255;
+
+const convertToPercentage = n => n <= 1 ? `${ n * 100 }%` : n;
 
 const rawToRgba = raw => {
-	const _map = [raw._r, raw._g, raw._b].map(mathRound)
-	const _map2 = slicedToArray(_map, 3)
+  var _map = [raw._r, raw._g, raw._b].map(mathRound),
+      _map2 = slicedToArray(_map, 3);
 
-	const r = _map2[0]
-	const g = _map2[1]
-	const b = _map2[2]
+  const r = _map2[0],
+        g = _map2[1],
+        b = _map2[2];
 
-	return {
-		r,
-		g,
-		b,
-		a: raw._roundA
-	}
-}
+  return { r, g, b, a: raw._roundA };
+};
 
-const rawToDeepRgba = raw => ({
-	r: raw._r,
-	g: raw._g,
-	b: raw._b,
-	a: raw._a
-})
+const rawToDeepRgba = raw => ({ r: raw._r, g: raw._g, b: raw._b, a: raw._a });
 
 const conformRgba = rgba => {
-	const _map3 = [rgba.r, rgba.g, rgba.b].map(n => bound01(n, 255) * 255)
-	const _map4 = slicedToArray(_map3, 3)
+  var _map3 = [rgba.r, rgba.g, rgba.b].map(n => bound01(n, 255) * 255),
+      _map4 = slicedToArray(_map3, 3);
 
-	const r = _map4[0]
-	const g = _map4[1]
-	const b = _map4[2]
+  const r = _map4[0],
+        g = _map4[1],
+        b = _map4[2];
 
-	return {
-		r,
-		g,
-		b,
-		a: boundAlpha(rgba.a)
-	}
-}
+  return { r, g, b, a: boundAlpha(rgba.a) };
+};
 
 const rgbaToPercentageRgba = rgba => {
-	const _map5 = [rgba.r, rgba.g, rgba.b].map(n => `${mathRound(bound01(n, 255) * 100)}%`)
-	const _map6 = slicedToArray(_map5, 3)
+  var _map5 = [rgba.r, rgba.g, rgba.b].map(n => `${ mathRound(bound01(n, 255) * 100) }%`),
+      _map6 = slicedToArray(_map5, 3);
 
-	const r = _map6[0]
-	const g = _map6[1]
-	const b = _map6[2]
+  const r = _map6[0],
+        g = _map6[1],
+        b = _map6[2];
 
-	return {
-		r,
-		g,
-		b,
-		a: rgba.a
-	}
-}
+  return { r, g, b, a: rgba.a };
+};
 
-const rgbaToString = rgba => rgba.a === 1 ? `rgb(${rgba.r}, ${rgba.g}, ${rgba.b})` : `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
+const rgbaToString = rgba => rgba.a === 1 ? `rgb(${ rgba.r }, ${ rgba.g }, ${ rgba.b })` : `rgba(${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a })`;
 
-const rgbaToArray = rgba => rgba.a === 1 ? [rgba.r, rgba.g, rgba.b] : [rgba.r, rgba.g, rgba.b, mathRound(rgba.a * 255)]
+const rgbaToArray = rgba => rgba.a === 1 ? [rgba.r, rgba.g, rgba.b] : [rgba.r, rgba.g, rgba.b, mathRound(rgba.a * 255)];
 
 const rgbaToHex = (rgba, allowShort) => {
-	const hex = rgbaToArray(rgba).map(n => n.toString(16)).map(pad2)
-	return allowShort && hex.every(h => h.charAt(0) === h.charAt(1)) ? hex.map(h => h.charAt(0)).join('') : hex.join('')
-}
+  const hex = rgbaToArray(rgba).map(n => n.toString(16)).map(pad2);
+  return allowShort && hex.every(h => h.charAt(0) === h.charAt(1)) ? hex.map(h => h.charAt(0)).join('') : hex.join('');
+};
 
-const rgbToHex = (rgba, allowShort) => rgbaToHex(Object.assign({}, rgba, {
-	a: 1
-}), allowShort)
+const rgbToHex = (rgba, allowShort) => rgbaToHex(Object.assign({}, rgba, { a: 1 }), allowShort);
 
-const calcBrightness = rgb => (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000
+const calcBrightness = rgb => (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
 
 function calcLuminance(rgb, deepRgb) {
-	let R
-	let G
-	let B
-	const RsRGB = deepRgb.r / 255
-	const GsRGB = deepRgb.g / 255
-	const BsRGB = deepRgb.b / 255
+	let R;
+	let G;
+	let B;
+	const RsRGB = deepRgb.r / 255;
+	const GsRGB = deepRgb.g / 255;
+	const BsRGB = deepRgb.b / 255;
 
 	if (RsRGB <= 0.03928) {
-		R = RsRGB / 12.92
+		R = RsRGB / 12.92;
 	} else {
-		R = Math.pow((RsRGB + 0.055) / 1.055, 2.4)
+		R = Math.pow((RsRGB + 0.055) / 1.055, 2.4);
 	}
 	if (GsRGB <= 0.03928) {
-		G = GsRGB / 12.92
+		G = GsRGB / 12.92;
 	} else {
-		G = Math.pow((GsRGB + 0.055) / 1.055, 2.4)
+		G = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
 	}
 	if (BsRGB <= 0.03928) {
-		B = BsRGB / 12.92
+		B = BsRGB / 12.92;
 	} else {
-		B = Math.pow((BsRGB + 0.055) / 1.055, 2.4)
+		B = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
 	}
-	return 0.2126 * R + 0.7152 * G + 0.0722 * B
+	return 0.2126 * R + 0.7152 * G + 0.0722 * B;
 }
 
 function calcMix(color1, color2, amount) {
-	amount = amount === 0 ? 0 : amount || 50
-	const rgb1 = tinycolor(color1).toRgb()
-	const rgb2 = tinycolor(color2).toRgb()
-	const p = amount / 100
+	amount = amount === 0 ? 0 : amount || 50;
+	const rgb1 = tinycolor(color1).toRgb();
+	const rgb2 = tinycolor(color2).toRgb();
+	const p = amount / 100;
 	const rgba = {
 		r: (rgb2.r - rgb1.r) * p + rgb1.r,
 		g: (rgb2.g - rgb1.g) * p + rgb1.g,
 		b: (rgb2.b - rgb1.b) * p + rgb1.b,
 		a: (rgb2.a - rgb1.a) * p + rgb1.a
-	}
-	return tinycolor(rgba)
+	};
+	return tinycolor(rgba);
 }
 
 function validateWCAG2Parms(parms) {
-	let level
-	let size
+	let level;
+	let size;
 	parms = parms || {
 		level: 'AA',
 		size: 'small'
-	}
-	level = (parms.level || 'AA').toUpperCase()
-	size = (parms.size || 'small').toLowerCase()
+	};
+	level = (parms.level || 'AA').toUpperCase();
+	size = (parms.size || 'small').toLowerCase();
 	if (level !== 'AA' && level !== 'AAA') {
-		level = 'AA'
+		level = 'AA';
 	}
 	if (size !== 'small' && size !== 'large') {
-		size = 'small'
+		size = 'small';
 	}
 	return {
 		level,
 		size
-	}
+	};
 }
 
 function readability(color1, color2) {
-	const c1 = tinycolor(color1)
-	const c2 = tinycolor(color2)
-	return (Math.max(c1.getLuminance(), c2.getLuminance()) + 0.05) / (Math.min(c1.getLuminance(), c2.getLuminance()) + 0.05)
+	const c1 = tinycolor(color1);
+	const c2 = tinycolor(color2);
+	return (Math.max(c1.getLuminance(), c2.getLuminance()) + 0.05) / (Math.min(c1.getLuminance(), c2.getLuminance()) + 0.05);
 }
 
 function isReadable(color1, color2, wcag2) {
-	const readable = readability(color1, color2)
-	const wcag2Parms = validateWCAG2Parms(wcag2)
-	let out = false
+	const readable = readability(color1, color2);
+	const wcag2Parms = validateWCAG2Parms(wcag2);
+	let out = false;
 
 	switch (wcag2Parms.level + wcag2Parms.size) {
 		case 'AAlarge':
-			out = readable >= 3
-			break
+			out = readable >= 3;
+			break;
 		case 'AAAsmall':
-			out = readable >= 7
-			break
+			out = readable >= 7;
+			break;
 		default:
-			out = readable >= 4.5
+			out = readable >= 4.5;
 	}
-	return out
+	return out;
 }
 
 function mostReadable(baseColor, colorList) {
-	const args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {}
+	let args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-	const includeFallbackColors = args.includeFallbackColors
-	const level = args.level
-	const size = args.size
-	let readable
-	let bestColor = null
-	let bestScore = 0
+	const includeFallbackColors = args.includeFallbackColors;
+	const level = args.level;
+	const size = args.size;
+	let readable;
+	let bestColor = null;
+	let bestScore = 0;
 
 	colorList.forEach(color => {
-		readable = readability(baseColor, color)
+		readable = readability(baseColor, color);
 		if (readable > bestScore) {
-			bestScore = readable
-			bestColor = tinycolor(color)
+			bestScore = readable;
+			bestColor = tinycolor(color);
 		}
-	})
+	});
 
-	if (isReadable(baseColor, bestColor, {
-		level,
-		size
-	}) || !includeFallbackColors) {
-		return bestColor
+	if (isReadable(baseColor, bestColor, { level, size }) || !includeFallbackColors) {
+		return bestColor;
 	}
-	args.includeFallbackColors = false
-	return mostReadable(baseColor, ['#fff', '#000'], args)
+	args.includeFallbackColors = false;
+	return mostReadable(baseColor, ['#fff', '#000'], args);
 }
 
 function combine(action, args) {
-	const actions = {
-		monochromatic,
-		analogous,
-		complement,
-		splitcomplement,
-		triad,
-		tetrad
-	}
-	return actions[action].apply(actions, toConsumableArray(args))
+	const actions = { monochromatic, analogous, complement, splitcomplement, triad, tetrad };
+	return actions[action].apply(actions, toConsumableArray(args));
 }
 
 function complement(color) {
-	const hsl = tinycolor(color).toHsl()
-	hsl.h = (hsl.h + 180) % 360
-	return tinycolor(hsl)
+	const hsl = tinycolor(color).toHsl();
+	hsl.h = (hsl.h + 180) % 360;
+	return tinycolor(hsl);
 }
 
 function triad(color) {
-	const hsl = tinycolor(color).toHsl()
-	const h = hsl.h
-	return [tinycolor(color), tinycolor({
-		h: (h + 120) % 360,
-		s: hsl.s,
-		l: hsl.l
-	}), tinycolor({
-		h: (h + 240) % 360,
-		s: hsl.s,
-		l: hsl.l
-	})]
+	const hsl = tinycolor(color).toHsl();
+	const h = hsl.h;
+	return [tinycolor(color), tinycolor({ h: (h + 120) % 360, s: hsl.s, l: hsl.l }), tinycolor({ h: (h + 240) % 360, s: hsl.s, l: hsl.l })];
 }
 
 function tetrad(color) {
-	const hsl = tinycolor(color).toHsl()
-	const h = hsl.h
-	return [tinycolor(color), tinycolor({
-		h: (h + 90) % 360,
-		s: hsl.s,
-		l: hsl.l
-	}), tinycolor({
-		h: (h + 180) % 360,
-		s: hsl.s,
-		l: hsl.l
-	}), tinycolor({
-		h: (h + 270) % 360,
-		s: hsl.s,
-		l: hsl.l
-	})]
+	const hsl = tinycolor(color).toHsl();
+	const h = hsl.h;
+	return [tinycolor(color), tinycolor({ h: (h + 90) % 360, s: hsl.s, l: hsl.l }), tinycolor({ h: (h + 180) % 360, s: hsl.s, l: hsl.l }), tinycolor({ h: (h + 270) % 360, s: hsl.s, l: hsl.l })];
 }
 
 function splitcomplement(color) {
-	const hsl = tinycolor(color).toHsl()
-	const h = hsl.h
-	return [tinycolor(color), tinycolor({
-		h: (h + 72) % 360,
-		s: hsl.s,
-		l: hsl.l
-	}), tinycolor({
-		h: (h + 216) % 360,
-		s: hsl.s,
-		l: hsl.l
-	})]
+	const hsl = tinycolor(color).toHsl();
+	const h = hsl.h;
+	return [tinycolor(color), tinycolor({ h: (h + 72) % 360, s: hsl.s, l: hsl.l }), tinycolor({ h: (h + 216) % 360, s: hsl.s, l: hsl.l })];
 }
 
 function analogous(color, results, slices) {
-	results = results || 6
-	slices = slices || 30
+	results = results || 6;
+	slices = slices || 30;
 
-	const hsl = tinycolor(color).toHsl()
-	const part = 360 / slices
-	const ret = [tinycolor(color)]
+	const hsl = tinycolor(color).toHsl();
+	const part = 360 / slices;
+	const ret = [tinycolor(color)];
 
 	for (hsl.h = (hsl.h - (part * results >> 1) + 720) % 360; --results;) {
-		hsl.h = (hsl.h + part) % 360
-		ret.push(tinycolor(hsl))
+		hsl.h = (hsl.h + part) % 360;
+		ret.push(tinycolor(hsl));
 	}
-	return ret
+	return ret;
 }
 
 function monochromatic(color, results) {
-	results = results || 6
-	const hsv = tinycolor(color).toHsv()
-	const h = hsv.h
-	const s = hsv.s
-	let v = hsv.v
+	results = results || 6;
+	const hsv = tinycolor(color).toHsv();
+	let h = hsv.h,
+	    s = hsv.s,
+	    v = hsv.v;
 
-	const ret = []
-	const modification = 1 / results
+	const ret = [];
+	const modification = 1 / results;
 
 	while (results--) {
-		ret.push(tinycolor({
-			h,
-			s,
-			v
-		}))
-		v = (v + modification) % 1
+		ret.push(tinycolor({ h, s, v }));
+		v = (v + modification) % 1;
 	}
-	return ret
+	return ret;
 }
 
 function modify(action, args) {
-	const actions = {
-		desaturate,
-		saturate,
-		greyscale,
-		lighten,
-		brighten,
-		darken,
-		spin
-	}
-	const color = actions[action].apply(actions, toConsumableArray(args))
+  const actions = { desaturate, saturate, greyscale, lighten, brighten, darken, spin };
+  const color = actions[action].apply(actions, toConsumableArray(args));
 
-	const _args = slicedToArray(args, 1)
+  var _args = slicedToArray(args, 1);
 
-	const source = _args[0]
+  const source = _args[0];
 
-	source._r = color._r
-	source._g = color._g
-	source._b = color._b
-	source.setAlpha(color._a)
-	return source
+  source._r = color._r;
+  source._g = color._g;
+  source._b = color._b;
+  source.setAlpha(color._a);
+  return source;
 }
 
 function desaturate(color, amount) {
-	amount = amount === 0 ? 0 : amount || 10
-	const hsl = tinycolor(color).toHsl()
-	hsl.s -= amount / 100
-	hsl.s = clamp01(hsl.s)
-	return tinycolor(hsl)
+  amount = amount === 0 ? 0 : amount || 10;
+  const hsl = tinycolor(color).toHsl();
+  hsl.s -= amount / 100;
+  hsl.s = clamp01(hsl.s);
+  return tinycolor(hsl);
 }
 
 function saturate(color, amount) {
-	amount = amount === 0 ? 0 : amount || 10
-	const hsl = tinycolor(color).toHsl()
-	hsl.s += amount / 100
-	hsl.s = clamp01(hsl.s)
-	return tinycolor(hsl)
+  amount = amount === 0 ? 0 : amount || 10;
+  const hsl = tinycolor(color).toHsl();
+  hsl.s += amount / 100;
+  hsl.s = clamp01(hsl.s);
+  return tinycolor(hsl);
 }
 
 function greyscale(color) {
-	return tinycolor(color).desaturate(100)
+  return tinycolor(color).desaturate(100);
 }
 
 function lighten(color, amount) {
-	amount = amount === 0 ? 0 : amount || 10
-	const hsl = tinycolor(color).toHsl()
-	hsl.l += amount / 100
-	hsl.l = clamp01(hsl.l)
-	return tinycolor(hsl)
+  amount = amount === 0 ? 0 : amount || 10;
+  const hsl = tinycolor(color).toHsl();
+  hsl.l += amount / 100;
+  hsl.l = clamp01(hsl.l);
+  return tinycolor(hsl);
 }
 
 function brighten(color, amount) {
-	amount = amount === 0 ? 0 : amount || 10
-	const rgb = tinycolor(color).toRgb()
-	rgb.r = mathMax(0, mathMin(255, rgb.r - mathRound(255 * -(amount / 100))))
-	rgb.g = mathMax(0, mathMin(255, rgb.g - mathRound(255 * -(amount / 100))))
-	rgb.b = mathMax(0, mathMin(255, rgb.b - mathRound(255 * -(amount / 100))))
-	return tinycolor(rgb)
+  amount = amount === 0 ? 0 : amount || 10;
+  const rgb = tinycolor(color).toRgb();
+  rgb.r = mathMax(0, mathMin(255, rgb.r - mathRound(255 * -(amount / 100))));
+  rgb.g = mathMax(0, mathMin(255, rgb.g - mathRound(255 * -(amount / 100))));
+  rgb.b = mathMax(0, mathMin(255, rgb.b - mathRound(255 * -(amount / 100))));
+  return tinycolor(rgb);
 }
 
 function darken(color, amount) {
-	amount = amount === 0 ? 0 : amount || 10
-	const hsl = tinycolor(color).toHsl()
-	hsl.l -= amount / 100
-	hsl.l = clamp01(hsl.l)
-	return tinycolor(hsl)
+  amount = amount === 0 ? 0 : amount || 10;
+  const hsl = tinycolor(color).toHsl();
+  hsl.l -= amount / 100;
+  hsl.l = clamp01(hsl.l);
+  return tinycolor(hsl);
 }
 
 function spin(color, amount) {
-	const hsl = tinycolor(color).toHsl()
-	const hue = (hsl.h + amount) % 360
-	hsl.h = hue < 0 ? 360 + hue : hue
-	return tinycolor(hsl)
+  const hsl = tinycolor(color).toHsl();
+  const hue = (hsl.h + amount) % 360;
+  hsl.h = hue < 0 ? 360 + hue : hue;
+  return tinycolor(hsl);
 }
 
 class TinyColorExtension {
 	constructor(api, id) {
-		const opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {}
+		let opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-		this.api = api
-		this.id = id
-		this.opts = opts
+		this.api = api;
+		this.id = id;
+		this.opts = opts;
 	}
 	use(specified) {
-		this.wanted = specified
-		return this
+		this.wanted = specified;
+		return this;
 	}
 	parse(input) {
-		const result = this.api.find(input)
+		const result = this.api.find(input);
 		return {
-			as: format => Object.assign(result, {
-				format
-			}),
+			as: format => Object.assign(result, { format }),
 			rgba: {
 				r: result.r,
 				g: result.g,
@@ -659,15 +623,15 @@ class TinyColorExtension {
 				a: result.a
 			},
 			valueOf: () => result
-		}
+		};
 	}
 	print(id, rgba) {
-		return this.api.print(rgba, id)
+		return this.api.print(rgba, id);
 	}
 	complete(rgba) {
-		const output = this.toString(rgba)
-		delete this.wanted
-		return output
+		const output = this.toString(rgba);
+		delete this.wanted;
+		return output;
 	}
 }
 
@@ -678,790 +642,693 @@ const _template = {
 	g: 0,
 	b: 0,
 	a: 1
-}
+};
 
 class TinyColorExtensionAPI {
 	constructor() {
-		this.colorspaces = {}
+		this.colorspaces = {};
 		this.opts = {
 			alphaFormat: 'rgb',
 			shortHex: false,
 			upperCaseHex: false
-		}
+		};
 	}
 	set(opts) {
-		Object.assign(this.opts, opts)
+		Object.assign(this.opts, opts);
 		for (const id in this.colorspaces) {
 			if ({}.hasOwnProperty.call(this.colorspaces, id)) {
-				Object.assign(this.colorspaces[id].opts, opts)
+				Object.assign(this.colorspaces[id].opts, opts);
 			}
 		}
 	}
 	add(id, opts) {
-		this.colorspaces[id] = new TinyColorExtension(this, id, Object.assign({}, this.opts, opts))
+		this.colorspaces[id] = new TinyColorExtension(this, id, Object.assign({}, this.opts, opts));
 		if (opts.alias) {
 			opts.alias.forEach(id_ => {
-				this.colorspaces[id_] = this.colorspaces[id]
-			})
+				this.colorspaces[id_] = this.colorspaces[id];
+			});
 		}
-		return this.colorspaces[id]
+		return this.colorspaces[id];
 	}
 	find(input) {
-		const color = Object.assign({}, _template)
-		input = typeof input === 'string' ? input.trim().toLowerCase() : input
+		const color = Object.assign({}, _template);
+		input = typeof input === 'string' ? input.trim().toLowerCase() : input;
 		if (input) {
 			for (const id in this.colorspaces) {
 				if (this.colorspaces[id].shouldHandleInput(input)) {
-					Object.assign(color, this.colorspaces[id].toRgb(input))
-					color.format = color.format || id
-					color.ok = true
-					break
+					Object.assign(color, this.colorspaces[id].toRgb(input));
+					color.format = color.format || id;
+					color.ok = true;
+					break;
 				}
 			}
 		}
-		return color
+		return color;
 	}
 	raw(rgba, format) {
 		if (format in this.colorspaces) {
-			return this.colorspaces[format].toRaw(rgba)
+			return this.colorspaces[format].toRaw(rgba);
 		}
-		return {
-			r: rgba.r / 255,
-			g: rgba.g / 255,
-			b: rgba.b / 255,
-			a: rgba.a
-		}
+		return { r: rgba.r / 255, g: rgba.g / 255, b: rgba.b / 255, a: rgba.a };
 	}
 	print(rgba, original, format) {
-		const specified = format
-		format = format || original
+		const specified = format;
+		format = format || original;
 		if (format in this.colorspaces) {
-			return this.colorspaces[format].use(specified).complete(rgba)
+			return this.colorspaces[format].use(specified).complete(rgba);
 		}
-		return `[${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a * 255}]`
+		return `[${ rgba.r }, ${ rgba.g }, ${ rgba.b }, ${ rgba.a * 255 }]`;
 	}
 }
 
-let tinyCounter = 0
-const extensionApi = new TinyColorExtensionAPI()
+let tinyCounter = 0;
+const extensionApi = new TinyColorExtensionAPI();
 
 class TinyColor {
 	constructor(color) {
-		const opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {}
+		let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-		color = color || ''
+		color = color || '';
 
 		if (color instanceof TinyColor) {
-			return color
+			return color;
 		}
 
-		const rgba = extensionApi.find(color)
+		const rgba = extensionApi.find(color);
 
-		this._originalInput = color
-		this._r = roundIf01(rgba.r)
-		this._g = roundIf01(rgba.g)
-		this._b = roundIf01(rgba.b)
-		this._a = rgba.a
-		this._roundA = roundAlpha(this._a)
-		this._format = opts.format || rgba.format
-		this._gradientType = opts.gradientType
+		this._originalInput = color;
+		this._r = roundIf01(rgba.r);
+		this._g = roundIf01(rgba.g);
+		this._b = roundIf01(rgba.b);
+		this._a = rgba.a;
+		this._roundA = roundAlpha(this._a);
+		this._format = opts.format || rgba.format;
+		this._gradientType = opts.gradientType;
 
-		this._ok = rgba.ok
-		this._tc_id = TinyColor.newId()
-		extensionApi.set(opts)
+		this._ok = rgba.ok;
+		this._tc_id = TinyColor.newId();
+		extensionApi.set(opts);
 	}
 	static newId() {
-		return tinyCounter++
+		return tinyCounter++;
 	}
 	static registerFormat(id) {
-		const opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {}
+		let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-		return extensionApi.add(id, opts)
+		return extensionApi.add(id, opts);
 	}
 	static equals(color1, color2) {
 		if (!color1 || !color2) {
-			return false
+			return false;
 		}
-		return new TinyColor(color1).toRgbString() === new TinyColor(color2).toRgbString()
+		return new TinyColor(color1).toRgbString() === new TinyColor(color2).toRgbString();
 	}
 	static fromRatio(color, opts) {
 		if (typeof color === 'object') {
-			const newColor = {}
+			const newColor = {};
 			for (const i in color) {
 				if ({}.hasOwnProperty.call(color, i)) {
 					if (i === 'a') {
-						newColor[i] = color[i]
+						newColor[i] = color[i];
 					} else {
-						newColor[i] = convertToPercentage(color[i])
+						newColor[i] = convertToPercentage(color[i]);
 					}
 				}
 			}
-			color = newColor
+			color = newColor;
 		}
-		return new TinyColor(color, opts)
+		return new TinyColor(color, opts);
 	}
 	static readability(color1, color2) {
-		return readability(color1, color2)
+		return readability(color1, color2);
 	}
 	static isReadable(color1, color2, wcag2) {
-		return isReadable(color1, color2, wcag2)
+		return isReadable(color1, color2, wcag2);
 	}
 	static mostReadable(baseColor, colorList, args) {
-		return mostReadable(baseColor, colorList, args)
+		return mostReadable(baseColor, colorList, args);
 	}
 	static mix(color1, color2, amount) {
-		return calcMix(color1, color2, amount)
+		return calcMix(color1, color2, amount);
 	}
 	isDark() {
-		return this.getBrightness() < 128
+		return this.getBrightness() < 128;
 	}
 	isLight() {
-		return !this.isDark()
+		return !this.isDark();
 	}
 	isValid() {
-		return this._ok
+		return this._ok;
 	}
 	getOriginalInput() {
-		return this._originalInput
+		return this._originalInput;
 	}
 	getFormat() {
-		return this._format
+		return this._format;
 	}
 	getAlpha() {
-		return this._a
+		return this._a;
 	}
 	getBrightness() {
-		return calcBrightness(this.toRgb())
+		return calcBrightness(this.toRgb());
 	}
 	getLuminance() {
-		return calcLuminance(this.toRgb(), rawToDeepRgba(this))
+		return calcLuminance(this.toRgb(), rawToDeepRgba(this));
 	}
 	toString(format) {
-		return extensionApi.print(rawToRgba(this), this._format, format)
+		return extensionApi.print(rawToRgba(this), this._format, format);
 	}
 	toName() {
-		return extensionApi.print(rawToRgba(this), 'name', 'toName')
+		return extensionApi.print(rawToRgba(this), 'name', 'toName');
 	}
 	toRgb() {
-		return rawToDeepRgba(this)
+		return rawToDeepRgba(this);
 	}
 	toRgbString() {
-		return rgbaToString(rawToRgba(this))
+		return rgbaToString(rawToRgba(this));
 	}
 	toRgbArray() {
-		return rgbaToArray(rawToRgba(this))
+		return rgbaToArray(rawToRgba(this));
 	}
 	toPercentageRgb() {
-		return rgbaToPercentageRgba(rawToDeepRgba(this))
+		return rgbaToPercentageRgba(rawToDeepRgba(this));
 	}
 	toPercentageRgbString() {
-		return rgbaToString(rgbaToPercentageRgba(rawToRgba(this)))
+		return rgbaToString(rgbaToPercentageRgba(rawToRgba(this)));
 	}
 	toHex(allow3Char) {
-		return rgbToHex(rawToRgba(this), allow3Char)
+		return rgbToHex(rawToRgba(this), allow3Char);
 	}
 	toHexString(allow3Char) {
-		return `#${this.toHex(allow3Char)}`
+		return `#${ this.toHex(allow3Char) }`;
 	}
 	toHex8(allow4Char) {
-		return rgbaToHex(rawToRgba(this), allow4Char)
+		return rgbaToHex(rawToRgba(this), allow4Char);
 	}
 	toHex8String(allow4Char) {
-		return `#${this.toHex8(allow4Char)}`
+		return `#${ this.toHex8(allow4Char) }`;
 	}
 	toHsv() {
-		return extensionApi.raw(rawToDeepRgba(this), 'hsv')
+		return extensionApi.raw(rawToDeepRgba(this), 'hsv');
 	}
 	toHsvString() {
-		return extensionApi.print(rawToDeepRgba(this), this._format, 'hsv')
+		return extensionApi.print(rawToDeepRgba(this), this._format, 'hsv');
 	}
 	toHsl() {
-		return extensionApi.raw(rawToDeepRgba(this), 'hsl')
+		return extensionApi.raw(rawToDeepRgba(this), 'hsl');
 	}
 	toHslString() {
-		return extensionApi.print(rawToDeepRgba(this), this._format, 'hsl')
+		return extensionApi.print(rawToDeepRgba(this), this._format, 'hsl');
 	}
 	setAlpha(value) {
-		this._a = boundAlpha(value)
-		this._roundA = mathRound(100 * this._a) / 100
-		return this
+		this._a = boundAlpha(value);
+		this._roundA = mathRound(100 * this._a) / 100;
+		return this;
 	}
 	clone() {
-		return new TinyColor(this.toString())
+		return new TinyColor(this.toString());
 	}
 
 	lighten() {
-		return modify('lighten', [this].concat(Array.prototype.slice.call(arguments)))
+		return modify('lighten', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	brighten() {
-		return modify('brighten', [this].concat(Array.prototype.slice.call(arguments)))
+		return modify('brighten', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	darken() {
-		return modify('darken', [this].concat(Array.prototype.slice.call(arguments)))
+		return modify('darken', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	desaturate() {
-		return modify('desaturate', [this].concat(Array.prototype.slice.call(arguments)))
+		return modify('desaturate', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	saturate() {
-		return modify('saturate', [this].concat(Array.prototype.slice.call(arguments)))
+		return modify('saturate', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	greyscale() {
-		return modify('greyscale', [this].concat(Array.prototype.slice.call(arguments)))
+		return modify('greyscale', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	spin() {
-		return modify('spin', [this].concat(Array.prototype.slice.call(arguments)))
+		return modify('spin', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	analogous() {
-		return combine('analogous', [this].concat(Array.prototype.slice.call(arguments)))
+		return combine('analogous', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	complement() {
-		return combine('complement', [this].concat(Array.prototype.slice.call(arguments)))
+		return combine('complement', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	monochromatic() {
-		return combine('monochromatic', [this].concat(Array.prototype.slice.call(arguments)))
+		return combine('monochromatic', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	splitcomplement() {
-		return combine('splitcomplement', [this].concat(Array.prototype.slice.call(arguments)))
+		return combine('splitcomplement', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	triad() {
-		return combine('triad', [this].concat(Array.prototype.slice.call(arguments)))
+		return combine('triad', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 	tetrad() {
-		return combine('tetrad', [this].concat(Array.prototype.slice.call(arguments)))
+		return combine('tetrad', [this].concat(Array.prototype.slice.call(arguments)));
 	}
 }
 
-const matchers = (function () {
+const matchers = function () {
 	return {
-		rgb: new RegExp(`rgb${PERMISSIVE_MATCH3}`),
-		rgba: new RegExp(`rgba${PERMISSIVE_MATCH4}`)
-	}
-})()
+		rgb: new RegExp(`rgb${ PERMISSIVE_MATCH3 }`),
+		rgba: new RegExp(`rgba${ PERMISSIVE_MATCH4 }`)
+	};
+}();
 
 function rgbStringToObject(color) {
-	let r
-	let g
-	let b
-	let a
-	let match
+	let r, g, b, a, match;
 	if (match = matchers.rgb.exec(color)) {
-		const _match$splice = match.splice(1, 3)
+		var _match$splice = match.splice(1, 3);
 
-		const _match$splice2 = slicedToArray(_match$splice, 3)
+		var _match$splice2 = slicedToArray(_match$splice, 3);
 
-		r = _match$splice2[0]
-		g = _match$splice2[1]
-		b = _match$splice2[2]
+		r = _match$splice2[0];
+		g = _match$splice2[1];
+		b = _match$splice2[2];
 
-		return {
-			r,
-			g,
-			b
-		}
+		return { r, g, b };
 	}
 	if (match = matchers.rgba.exec(color)) {
-		const _match$splice3 = match.splice(1, 4)
+		var _match$splice3 = match.splice(1, 4);
 
-		const _match$splice4 = slicedToArray(_match$splice3, 4)
+		var _match$splice4 = slicedToArray(_match$splice3, 4);
 
-		r = _match$splice4[0]
-		g = _match$splice4[1]
-		b = _match$splice4[2]
-		a = _match$splice4[3]
+		r = _match$splice4[0];
+		g = _match$splice4[1];
+		b = _match$splice4[2];
+		a = _match$splice4[3];
 
-		return {
-			r,
-			g,
-			b,
-			a
-		}
+		return { r, g, b, a };
 	}
 
-	return false
+	return false;
 }
 
-const api = TinyColor.registerFormat('rgb')
+const api = TinyColor.registerFormat('rgb');
 
-api.shouldHandleInput = input => typeof input === 'object' && isValidCSSUnitRGB(input) && !isPercentage(input.r) || rgbStringToObject(input)
+api.shouldHandleInput = input => typeof input === 'object' && isValidCSSUnitRGB(input) && !isPercentage(input.r) || rgbStringToObject(input);
 
-api.toRgb = input => typeof input === 'object' && conformRgba(input) || conformRgba(rgbStringToObject(input))
+api.toRgb = input => typeof input === 'object' && conformRgba(input) || conformRgba(rgbStringToObject(input));
 
-api.toRaw = rgba => rgba
+api.toRaw = rgba => rgba;
 
-api.toString = rgba => rgbaToString(rgba)
+api.toString = rgba => rgbaToString(rgba);
 
-const api$1 = TinyColor.registerFormat('prgb')
+const api$1 = TinyColor.registerFormat('prgb');
 
 api$1.shouldHandleInput = input => {
 	if (typeof input === 'string') {
-		const rgbCheck = rgbStringToObject(input)
-		return rgbCheck && isPercentage(rgbCheck.r)
+		const rgbCheck = rgbStringToObject(input);
+		return rgbCheck && isPercentage(rgbCheck.r);
 	}
-	return isValidCSSUnitRGB(input) && isPercentage(input.r)
-}
-api$1.toRgb = input => typeof input === 'object' ? conformRgba(input) : conformRgba(rgbStringToObject(input))
-api$1.toRaw = rgba => rgbaToPercentageRgba(rgba)
-api$1.toString = rgba => rgbaToString(rgbaToPercentageRgba(rgba))
+	return isValidCSSUnitRGB(input) && isPercentage(input.r);
+};
+api$1.toRgb = input => typeof input === 'object' ? conformRgba(input) : conformRgba(rgbStringToObject(input));
+api$1.toRaw = rgba => rgbaToPercentageRgba(rgba);
+api$1.toString = rgba => rgbaToString(rgbaToPercentageRgba(rgba));
 
 const api$2 = TinyColor.registerFormat('hex', {
 	alias: ['hex3', 'hex6']
-})
+});
 
-const matchers$1 = (function () {
+const matchers$1 = function () {
 	return {
 		hex3: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
 		hex6: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
-	}
-})()
+	};
+}();
 
 function hexToRgba(color) {
-	let match
+	let match;
 	if (match = matchers$1.hex3.exec(color)) {
-		const _match$splice$map$map = match.splice(1, 3).map(h => `${h}${h}`).map(convertHexToInt)
-		const _match$splice$map$map2 = slicedToArray(_match$splice$map$map, 3)
+		var _match$splice$map$map = match.splice(1, 3).map(h => `${ h }${ h }`).map(convertHexToInt),
+		    _match$splice$map$map2 = slicedToArray(_match$splice$map$map, 3);
 
-		const r = _match$splice$map$map2[0]
-		const g = _match$splice$map$map2[1]
-		const b = _match$splice$map$map2[2]
+		const r = _match$splice$map$map2[0],
+		      g = _match$splice$map$map2[1],
+		      b = _match$splice$map$map2[2];
 
-		return {
-			r,
-			g,
-			b,
-			a: 1
-		}
+		return { r, g, b, a: 1 };
 	}
 	if (match = matchers$1.hex6.exec(color)) {
-		const _match$splice$map = match.splice(1, 3).map(convertHexToInt)
-		const _match$splice$map2 = slicedToArray(_match$splice$map, 3)
+		var _match$splice$map = match.splice(1, 3).map(convertHexToInt),
+		    _match$splice$map2 = slicedToArray(_match$splice$map, 3);
 
-		const r = _match$splice$map2[0]
-		const g = _match$splice$map2[1]
-		const b = _match$splice$map2[2]
+		const r = _match$splice$map2[0],
+		      g = _match$splice$map2[1],
+		      b = _match$splice$map2[2];
 
-		return {
-			r,
-			g,
-			b,
-			a: 1
-		}
+		return { r, g, b, a: 1 };
 	}
-	return false
+	return false;
 }
 
 const hexToString = function hexToString(rgba) {
-	const short = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : api$2.opts.shortHex
-	return `#${api$2.opts.upperCaseHex ? rgbToHex(rgba, short).toUpperCase() : rgbToHex(rgba, short)}`
-}
+	let short = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : api$2.opts.shortHex;
+	return `#${ api$2.opts.upperCaseHex ? rgbToHex(rgba, short).toUpperCase() : rgbToHex(rgba, short) }`;
+};
 
-api$2.shouldHandleInput = input => matchers$1.hex6.test(input) || matchers$1.hex3.test(input)
-api$2.toRgb = input => hexToRgba(input)
-api$2.toRaw = rgba => rgba
+api$2.shouldHandleInput = input => matchers$1.hex6.test(input) || matchers$1.hex3.test(input);
+api$2.toRgb = input => hexToRgba(input);
+api$2.toRaw = rgba => rgba;
 api$2.toString = rgba => {
 	if (/^hex6?$/.test(api$2.wanted)) {
-		return hexToString(rgba)
+		return hexToString(rgba);
 	}
 	if (api$2.wanted === 'hex3') {
-		return hexToString(rgba, true)
+		return hexToString(rgba, true);
 	}
 	if (hasAlpha(rgba)) {
-		return api$2.opts.alphaFormat === 'hex' ? hexToString(rgba) : api$2.print(api$2.opts.alphaFormat, rgba)
+		return api$2.opts.alphaFormat === 'hex' ? hexToString(rgba) : api$2.print(api$2.opts.alphaFormat, rgba);
 	}
-	return hexToString(rgba)
-}
+	return hexToString(rgba);
+};
 
 const api$3 = TinyColor.registerFormat('hex8', {
 	alias: ['hex4']
-})
+});
 
-const matchers$2 = (function () {
+const matchers$2 = function () {
 	return {
 		hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
 		hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
-	}
-})()
+	};
+}();
 
 function hexToRgba$1(color) {
-	let match
+	let match;
 	if (match = matchers$2.hex4.exec(color)) {
-		const a = convertHexToDecimal(`${match[4]}${match[4]}`)
+		const a = convertHexToDecimal(`${ match[4] }${ match[4] }`);
 
-		const _match$splice$map$map = match.splice(1, 3).map(h => `${h}${h}`).map(convertHexToInt)
-		const _match$splice$map$map2 = slicedToArray(_match$splice$map$map, 3)
+		var _match$splice$map$map = match.splice(1, 3).map(h => `${ h }${ h }`).map(convertHexToInt),
+		    _match$splice$map$map2 = slicedToArray(_match$splice$map$map, 3);
 
-		const r = _match$splice$map$map2[0]
-		const g = _match$splice$map$map2[1]
-		const b = _match$splice$map$map2[2]
+		const r = _match$splice$map$map2[0],
+		      g = _match$splice$map$map2[1],
+		      b = _match$splice$map$map2[2];
 
-		return {
-			r,
-			g,
-			b,
-			a
-		}
+		return { r, g, b, a };
 	}
 	if (match = matchers$2.hex8.exec(color)) {
-		const a = convertHexToDecimal(match[4])
+		const a = convertHexToDecimal(match[4]);
 
-		const _match$splice$map = match.splice(1, 3).map(convertHexToInt)
-		const _match$splice$map2 = slicedToArray(_match$splice$map, 3)
+		var _match$splice$map = match.splice(1, 3).map(convertHexToInt),
+		    _match$splice$map2 = slicedToArray(_match$splice$map, 3);
 
-		const r = _match$splice$map2[0]
-		const g = _match$splice$map2[1]
-		const b = _match$splice$map2[2]
+		const r = _match$splice$map2[0],
+		      g = _match$splice$map2[1],
+		      b = _match$splice$map2[2];
 
-		return {
-			r,
-			g,
-			b,
-			a
-		}
+		return { r, g, b, a };
 	}
-	return false
+	return false;
 }
 
 const hexToString$1 = function hexToString$1(rgba) {
-	const short = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : api$3.opts.shortHex
-	return `#${api$3.opts.upperCaseHex ? rgbaToHex(rgba, short).toUpperCase() : rgbaToHex(rgba, short)}`
-}
+	let short = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : api$3.opts.shortHex;
+	return `#${ api$3.opts.upperCaseHex ? rgbaToHex(rgba, short).toUpperCase() : rgbaToHex(rgba, short) }`;
+};
 
-api$3.shouldHandleInput = input => matchers$2.hex8.test(input) || matchers$2.hex4.test(input)
-api$3.toRgb = input => hexToRgba$1(input)
-api$3.toRaw = rgba => rgba
+api$3.shouldHandleInput = input => matchers$2.hex8.test(input) || matchers$2.hex4.test(input);
+api$3.toRgb = input => hexToRgba$1(input);
+api$3.toRaw = rgba => rgba;
 api$3.toString = rgba => {
 	if (api$3.wanted === 'hex4') {
-		return hexToString$1(rgba, true)
+		return hexToString$1(rgba, true);
 	}
 	if (api$3.wanted === 'hex8') {
-		return hexToString$1(rgba)
+		return hexToString$1(rgba);
 	}
 	if (hasAlpha(rgba)) {
-		return api$3.opts.alphaFormat === 'hex' ? hexToString$1(rgba) : api$3.print(api$3.opts.alphaFormat, rgba)
+		return api$3.opts.alphaFormat === 'hex' ? hexToString$1(rgba) : api$3.print(api$3.opts.alphaFormat, rgba);
 	}
-	return hexToString$1(rgba)
-}
+	return hexToString$1(rgba);
+};
 
-const api$4 = TinyColor.registerFormat('hsl')
+const api$4 = TinyColor.registerFormat('hsl');
 
-const matchers$3 = (function () {
+const matchers$3 = function () {
 	return {
-		hsl: new RegExp(`hsl${PERMISSIVE_MATCH3}`),
-		hsla: new RegExp(`hsla${PERMISSIVE_MATCH4}`)
-	}
-})()
+		hsl: new RegExp(`hsl${ PERMISSIVE_MATCH3 }`),
+		hsla: new RegExp(`hsla${ PERMISSIVE_MATCH4 }`)
+	};
+}();
 
-const isValidCSSUnitHSL = hsl => isValidCSSUnit(hsl.h) && isValidCSSUnit(hsl.s) && isValidCSSUnit(hsl.l)
+const isValidCSSUnitHSL = hsl => isValidCSSUnit(hsl.h) && isValidCSSUnit(hsl.s) && isValidCSSUnit(hsl.l);
 
 function rgbaToHsla(rgba) {
-	const r = bound01(rgba.r, 255)
-	const g = bound01(rgba.g, 255)
-	const b = bound01(rgba.b, 255)
-	const a = rgba.a || 1
-	const max = mathMax(r, g, b)
-	const min = mathMin(r, g, b)
-	let h
-	let s
-	const l = (max + min) / 2
+	const r = bound01(rgba.r, 255);
+	const g = bound01(rgba.g, 255);
+	const b = bound01(rgba.b, 255);
+	const a = rgba.a || 1;
+	const max = mathMax(r, g, b);
+	const min = mathMin(r, g, b);
+	let h, s;
+	const l = (max + min) / 2;
 
 	if (max === min) {
-		h = s = 0
+		h = s = 0;
 	} else {
-		const d = max - min
-		s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+		const d = max - min;
+		s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 		switch (max) {
 			case r:
-				h = (g - b) / d + (g < b ? 6 : 0)
-				break
+				h = (g - b) / d + (g < b ? 6 : 0);
+				break;
 			case g:
-				h = (b - r) / d + 2
-				break
+				h = (b - r) / d + 2;
+				break;
 			default:
-				h = (r - g) / d + 4
-				break
+				h = (r - g) / d + 4;
+				break;
 		}
-		h /= 6
+		h /= 6;
 	}
-	return {
-		h,
-		s,
-		l,
-		a
-	}
+	return { h, s, l, a };
 }
 
 function hslaToRgba(hsla) {
-	const h = bound01(hsla.h, 360)
-	const s = bound01(convertToPercentage(hsla.s), 100)
-	const l = bound01(convertToPercentage(hsla.l), 100)
-	const a = hsla.a || 1
-	let r
-	let g
-	let b
+	const h = bound01(hsla.h, 360);
+	const s = bound01(convertToPercentage(hsla.s), 100);
+	const l = bound01(convertToPercentage(hsla.l), 100);
+	const a = hsla.a || 1;
+	let r, g, b;
 
 	function hue2rgb(p, q, t) {
-		t = t < 0 ? t + 1 : t
-		t = t > 1 ? t - 1 : t
+		t = t < 0 ? t + 1 : t;
+		t = t > 1 ? t - 1 : t;
 		if (t < 1 / 6) {
-			return p + (q - p) * 6 * t
+			return p + (q - p) * 6 * t;
 		}
 		if (t < 1 / 2) {
-			return q
+			return q;
 		}
 		if (t < 2 / 3) {
-			return p + (q - p) * (2 / 3 - t) * 6
+			return p + (q - p) * (2 / 3 - t) * 6;
 		}
-		return p
+		return p;
 	}
 
 	if (s === 0) {
-		r = g = b = l
+		r = g = b = l;
 	} else {
-		const q = l < 0.5 ? l * (1 + s) : l + s - l * s
-		const p = 2 * l - q
-		r = hue2rgb(p, q, h + 1 / 3)
-		g = hue2rgb(p, q, h)
-		b = hue2rgb(p, q, h - 1 / 3)
+		const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+		const p = 2 * l - q;
+		r = hue2rgb(p, q, h + 1 / 3);
+		g = hue2rgb(p, q, h);
+		b = hue2rgb(p, q, h - 1 / 3);
 	}
 
-	return {
-		r: r * 255,
-		g: g * 255,
-		b: b * 255,
-		a
-	}
+	return { r: r * 255, g: g * 255, b: b * 255, a };
 }
 
 function hslStringToObject(color) {
-	let h
-	let s
-	let l
-	let a
-	let match
+	let h, s, l, a, match;
 	if (match = matchers$3.hsl.exec(color)) {
-		const _match$splice = match.splice(1, 3)
+		var _match$splice = match.splice(1, 3);
 
-		const _match$splice2 = slicedToArray(_match$splice, 3)
+		var _match$splice2 = slicedToArray(_match$splice, 3);
 
-		h = _match$splice2[0]
-		s = _match$splice2[1]
-		l = _match$splice2[2]
+		h = _match$splice2[0];
+		s = _match$splice2[1];
+		l = _match$splice2[2];
 
-		return {
-			h,
-			s,
-			l
-		}
+		return { h, s, l };
 	}
 	if (match = matchers$3.hsla.exec(color)) {
-		const _match$splice3 = match.splice(1, 4)
+		var _match$splice3 = match.splice(1, 4);
 
-		const _match$splice4 = slicedToArray(_match$splice3, 4)
+		var _match$splice4 = slicedToArray(_match$splice3, 4);
 
-		h = _match$splice4[0]
-		s = _match$splice4[1]
-		l = _match$splice4[2]
-		a = _match$splice4[3]
+		h = _match$splice4[0];
+		s = _match$splice4[1];
+		l = _match$splice4[2];
+		a = _match$splice4[3];
 
-		return {
-			h,
-			s,
-			l,
-			a
-		}
+		return { h, s, l, a };
 	}
-	return false
+	return false;
 }
 
 function hslaToString(hsla) {
-	let h = hsla.h
-	let s = hsla.s
-	let l = hsla.l
-	const a = hsla.a
+	let h = hsla.h,
+	    s = hsla.s,
+	    l = hsla.l,
+	    a = hsla.a;
 
-	h = mathRound(h * 360)
-	s = mathRound(s * 100)
-	l = mathRound(l * 100)
-	return a === 1 ? `hsl(${h}, ${s}%, ${l}%)` : `hsla(${h}, ${s}%, ${l}%, ${a})`
+	h = mathRound(h * 360);
+	s = mathRound(s * 100);
+	l = mathRound(l * 100);
+	return a === 1 ? `hsl(${ h }, ${ s }%, ${ l }%)` : `hsla(${ h }, ${ s }%, ${ l }%, ${ a })`;
 }
 
 function hslaToRaw(hsla) {
-	let h = hsla.h
-	const s = hsla.s
-	const l = hsla.l
-	const a = hsla.a
+	let h = hsla.h,
+	    s = hsla.s,
+	    l = hsla.l,
+	    a = hsla.a;
 
-	h *= 360
+	h *= 360;
 
-	return {
-		h,
-		s,
-		l,
-		a
-	}
+	return { h, s, l, a };
 }
 
-api$4.shouldHandleInput = input => typeof input === 'object' && isValidCSSUnitHSL(input) || hslStringToObject(input)
-api$4.toRgb = input => typeof input === 'object' && hslaToRgba(input) || hslaToRgba(hslStringToObject(input))
-api$4.toRaw = rgba => hslaToRaw(rgbaToHsla(rgba))
-api$4.toString = rgba => hslaToString(rgbaToHsla(rgba))
+api$4.shouldHandleInput = input => typeof input === 'object' && isValidCSSUnitHSL(input) || hslStringToObject(input);
+api$4.toRgb = input => typeof input === 'object' && hslaToRgba(input) || hslaToRgba(hslStringToObject(input));
+api$4.toRaw = rgba => hslaToRaw(rgbaToHsla(rgba));
+api$4.toString = rgba => hslaToString(rgbaToHsla(rgba));
 
-const api$5 = TinyColor.registerFormat('hsv')
+const api$5 = TinyColor.registerFormat('hsv');
 
-const matchers$4 = (function () {
+const matchers$4 = function () {
 	return {
-		hsv: new RegExp(`hsv${PERMISSIVE_MATCH3}`),
-		hsva: new RegExp(`hsva${PERMISSIVE_MATCH4}`)
-	}
-})()
+		hsv: new RegExp(`hsv${ PERMISSIVE_MATCH3 }`),
+		hsva: new RegExp(`hsva${ PERMISSIVE_MATCH4 }`)
+	};
+}();
 
-const isValidCSSUnitHSV = hsv => isValidCSSUnit(hsv.h) && isValidCSSUnit(hsv.s) && isValidCSSUnit(hsv.v)
+const isValidCSSUnitHSV = hsv => isValidCSSUnit(hsv.h) && isValidCSSUnit(hsv.s) && isValidCSSUnit(hsv.v);
 
 function rgbaToHsva(rgba) {
-	const r = bound01(rgba.r, 255)
-	const g = bound01(rgba.g, 255)
-	const b = bound01(rgba.b, 255)
-	const a = rgba.a || 1
-	const max = mathMax(r, g, b)
-	const min = mathMin(r, g, b)
-	const d = max - min
-	let h
-	const s = max === 0 ? 0 : d / max
-	const v = max
+	const r = bound01(rgba.r, 255);
+	const g = bound01(rgba.g, 255);
+	const b = bound01(rgba.b, 255);
+	const a = rgba.a || 1;
+	const max = mathMax(r, g, b);
+	const min = mathMin(r, g, b);
+	const d = max - min;
+	let h;
+	const s = max === 0 ? 0 : d / max;
+	const v = max;
 
 	if (max === min) {
-		h = 0
+		h = 0;
 	} else {
 		switch (max) {
 			case r:
-				h = (g - b) / d + (g < b ? 6 : 0)
-				break
+				h = (g - b) / d + (g < b ? 6 : 0);
+				break;
 			case g:
-				h = (b - r) / d + 2
-				break
+				h = (b - r) / d + 2;
+				break;
 			default:
-				h = (r - g) / d + 4
-				break
+				h = (r - g) / d + 4;
+				break;
 		}
-		h /= 6
+		h /= 6;
 	}
-	return {
-		h,
-		s,
-		v,
-		a
-	}
+	return { h, s, v, a };
 }
 
 function hsvaToRgba(hsva) {
-	const h = bound01(hsva.h, 360) * 6
-	const s = bound01(convertToPercentage(hsva.s), 100)
-	const v = bound01(convertToPercentage(hsva.v), 100)
-	const a = hsva.a || 1
+	const h = bound01(hsva.h, 360) * 6;
+	const s = bound01(convertToPercentage(hsva.s), 100);
+	const v = bound01(convertToPercentage(hsva.v), 100);
+	const a = hsva.a || 1;
 
-	const i = Math.floor(h)
-	const f = h - i
-	const p = v * (1 - s)
-	const q = v * (1 - f * s)
-	const t = v * (1 - (1 - f) * s)
-	const mod = i % 6
-	const r = [v, q, p, p, t, v][mod]
-	const g = [t, v, v, q, p, p][mod]
-	const b = [p, p, t, v, v, q][mod]
+	const i = Math.floor(h);
+	const f = h - i;
+	const p = v * (1 - s);
+	const q = v * (1 - f * s);
+	const t = v * (1 - (1 - f) * s);
+	const mod = i % 6;
+	const r = [v, q, p, p, t, v][mod];
+	const g = [t, v, v, q, p, p][mod];
+	const b = [p, p, t, v, v, q][mod];
 
-	return {
-		r: r * 255,
-		g: g * 255,
-		b: b * 255,
-		a
-	}
+	return { r: r * 255, g: g * 255, b: b * 255, a };
 }
 
 function hsvStringToObject(color) {
-	let h
-	let s
-	let v
-	let a
-	let match
+	let h, s, v, a, match;
 	if (match = matchers$4.hsv.exec(color)) {
-		const _match$splice = match.splice(1, 3)
+		var _match$splice = match.splice(1, 3);
 
-		const _match$splice2 = slicedToArray(_match$splice, 3)
+		var _match$splice2 = slicedToArray(_match$splice, 3);
 
-		h = _match$splice2[0]
-		s = _match$splice2[1]
-		v = _match$splice2[2]
+		h = _match$splice2[0];
+		s = _match$splice2[1];
+		v = _match$splice2[2];
 
-		return {
-			h,
-			s,
-			v
-		}
+		return { h, s, v };
 	}
 	if (match = matchers$4.hsva.exec(color)) {
-		const _match$splice3 = match.splice(1, 4)
+		var _match$splice3 = match.splice(1, 4);
 
-		const _match$splice4 = slicedToArray(_match$splice3, 4)
+		var _match$splice4 = slicedToArray(_match$splice3, 4);
 
-		h = _match$splice4[0]
-		s = _match$splice4[1]
-		v = _match$splice4[2]
-		a = _match$splice4[3]
+		h = _match$splice4[0];
+		s = _match$splice4[1];
+		v = _match$splice4[2];
+		a = _match$splice4[3];
 
-		return {
-			h,
-			s,
-			v,
-			a
-		}
+		return { h, s, v, a };
 	}
-	return false
+	return false;
 }
 
 function hsvaToString(hsva) {
-	let h = hsva.h
-	let s = hsva.s
-	let v = hsva.v
-	const a = hsva.a
+	let h = hsva.h,
+	    s = hsva.s,
+	    v = hsva.v,
+	    a = hsva.a;
 
-	h = mathRound(h * 360)
-	s = mathRound(s * 100)
-	v = mathRound(v * 100)
-	return a === 1 ? `hsv(${h}, ${s}%, ${v}%)` : `hsva(${h}, ${s}%, ${v}%, ${a})`
+	h = mathRound(h * 360);
+	s = mathRound(s * 100);
+	v = mathRound(v * 100);
+	return a === 1 ? `hsv(${ h }, ${ s }%, ${ v }%)` : `hsva(${ h }, ${ s }%, ${ v }%, ${ a })`;
 }
 
 function hsvaToRaw(hsla) {
-	let h = hsla.h
-	const s = hsla.s
-	const v = hsla.v
-	const a = hsla.a
+	let h = hsla.h,
+	    s = hsla.s,
+	    v = hsla.v,
+	    a = hsla.a;
 
-	h *= 360
+	h *= 360;
 
-	return {
-		h,
-		s,
-		v,
-		a
-	}
+	return { h, s, v, a };
 }
 
-api$5.shouldHandleInput = input => typeof input === 'object' && isValidCSSUnitHSV(input) || hsvStringToObject(input)
-api$5.toRgb = input => typeof input === 'object' && hsvaToRgba(input) || hsvaToRgba(hsvStringToObject(input))
-api$5.toRaw = rgba => hsvaToRaw(rgbaToHsva(rgba))
-api$5.toString = rgba => hsvaToString(rgbaToHsva(rgba))
+api$5.shouldHandleInput = input => typeof input === 'object' && isValidCSSUnitHSV(input) || hsvStringToObject(input);
+api$5.toRgb = input => typeof input === 'object' && hsvaToRgba(input) || hsvaToRgba(hsvStringToObject(input));
+api$5.toRaw = rgba => hsvaToRaw(rgbaToHsva(rgba));
+api$5.toString = rgba => hsvaToString(rgbaToHsva(rgba));
 
 const api$6 = TinyColor.registerFormat('name', {
 	alias: ['toName']
-})
+});
 
 function flip(o) {
-	const flipped = {}
+	const flipped = {};
 	for (const i in o) {
 		if ({}.hasOwnProperty.call(o, i)) {
-			flipped[o[i]] = i
+			flipped[o[i]] = i;
 		}
 	}
-	return flipped
+	return flipped;
 }
 
 const names = {
@@ -1614,49 +1481,48 @@ const names = {
 	whitesmoke: 'f5f5f5',
 	yellow: 'ff0',
 	yellowgreen: '9acd32'
-}
+};
 
-names.transparent = '00000000'
+names.transparent = '00000000';
 
-const hexNames = flip(names)
+const hexNames = flip(names);
 
-api$6.shouldHandleInput = input => names[input]
+api$6.shouldHandleInput = input => names[input];
 
-api$6.toRgb = input => api$6.parse(names[input]).rgba
+api$6.toRgb = input => api$6.parse(names[input]).rgba;
 
-api$6.toRaw = rgba => rgba
+api$6.toRaw = rgba => rgba;
 
 api$6.toString = rgba => {
 	if (rgba.a === 0) {
-		return 'transparent'
+		return 'transparent';
 	}
 	if (hasAlpha(rgba) && api$6.wanted === 'toName') {
-		return false
+		return false;
 	}
 	if (hasAlpha(rgba) && api$6.wanted === 'name') {
-		return `#${rgbToHex(rgba)}`
+		return `#${ rgbToHex(rgba) }`;
 	}
 	if (hasAlpha(rgba)) {
-		return api$6.print(api$6.opts.alphaFormat, rgba)
+		return api$6.print(api$6.opts.alphaFormat, rgba);
 	}
 
-	return hexNames[rgbToHex(rgba, true)] || false
-}
+	return hexNames[rgbToHex(rgba, true)] || false;
+};
 
 function tinycolor(color, opts) {
-	return new TinyColor(color, opts)
+  return new TinyColor(color, opts);
 }
 
-tinycolor.equals = TinyColor.equals
-tinycolor.registerFormat = TinyColor.registerFormat
-tinycolor.fromRatio = TinyColor.fromRatio
-tinycolor.mix = TinyColor.mix
-tinycolor.readability = TinyColor.readability
-tinycolor.isReadable = TinyColor.isReadable
-tinycolor.mostReadable = TinyColor.mostReadable
-tinycolor.names = names
+tinycolor.equals = TinyColor.equals;
+tinycolor.registerFormat = TinyColor.registerFormat;
+tinycolor.fromRatio = TinyColor.fromRatio;
+tinycolor.mix = TinyColor.mix;
+tinycolor.readability = TinyColor.readability;
+tinycolor.isReadable = TinyColor.isReadable;
+tinycolor.mostReadable = TinyColor.mostReadable;
+tinycolor.names = names;
 
-exports.TinyColor = TinyColor
-exports.tinycolor = tinycolor
-exports.names = names
-
+exports.TinyColor = TinyColor;
+exports.tinycolor = tinycolor;
+exports.names = names;
