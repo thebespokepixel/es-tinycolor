@@ -1,9 +1,9 @@
 {
-  "version": "0.2.3",
+  "version": "0.2.4",
   "name": "@thebespokepixel/es-tinycolor",
   "description": "Fast Color Parsing and Manipulation in es2015+, based on TinyColor2",
   "scripts": {
-    "test": "xo && snyk test && nyc ava",
+    "test": "xo && nyc ava",
     "code-climate": "nyc report --reporter=text-lcov | codeclimate-test-reporter",
     "coverage": "nyc ava && nyc report --reporter=lcov --report-dir test/coverage; open test/coverage/lcov-report/index.html",
     "postpublish": "greenkeeper-postpublish"
@@ -23,13 +23,13 @@
   "contributors": [
     "Brian Grinstead <briangrinstead@gmail.com> (http://briangrinstead.com)"
   ],
-  "main": "./index.js",
+  "main": "index.js",
   "bugs": {
     "url": "https://github.com/MarkGriffiths/TinyColor#es-tinycolor"
   },
   "homepage": "https://github.com/MarkGriffiths/TinyColor",
   "files": [
-    "index-es.js",
+    "lib",
     "index.js"
   ],
   "directories": {
@@ -39,15 +39,14 @@
     "node": ">=4.0 <9.0"
   },
   "devDependencies": {
-    "@thebespokepixel/cordial": "^0.17.10",
-    "@thebespokepixel/string": "^0.4.3",
+    "@thebespokepixel/cordial": "^0.17.11",
+    "@thebespokepixel/string": "^0.4.4",
     "ava": "^0.16.0",
     "babel-plugin-external-helpers": "^6.8.0",
     "codeclimate-test-reporter": "^0.4.0",
     "greenkeeper-postpublish": "^1.0.1",
     "gulp": "github:gulpjs/gulp#4.0",
     "nyc": "^8.3.0",
-    "snyk": "^1.19.1",
     "xo": "^0.17.0"
   },
   "ava": {
@@ -75,5 +74,5 @@
     }
   },
   "buildNumber": 0,
-  "jsnext:main": "index-es.js"
+  "jsnext:main": "lib/index-es.js"
 }
