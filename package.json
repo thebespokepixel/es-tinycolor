@@ -1,5 +1,5 @@
 {
-  "version": "0.2.3",
+  "version": "0.2.4",
   "name": "@thebespokepixel/es-tinycolor",
   "description": "Fast Color Parsing and Manipulation in es2015+, based on TinyColor2",
   "scripts": {
@@ -73,6 +73,6 @@
       "max-params": 0
     }
   },
-  "buildNumber": 12,
+  "buildNumber": 0,
   "jsnext:main": "lib/index-es.js"
 }
