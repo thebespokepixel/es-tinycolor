@@ -1,5 +1,5 @@
 {
-  "version": "0.2.4",
+  "version": "0.2.5",
   "name": "@thebespokepixel/es-tinycolor",
   "description": "Fast Color Parsing and Manipulation in es2015+, based on TinyColor2",
   "scripts": {
@@ -40,13 +40,13 @@
   },
   "devDependencies": {
     "@thebespokepixel/cordial": "^0.17.11",
-    "@thebespokepixel/string": "^0.4.4",
+    "@thebespokepixel/string": "^0.4.5",
     "ava": "^0.16.0",
     "babel-plugin-external-helpers": "^6.8.0",
     "codeclimate-test-reporter": "^0.4.0",
     "greenkeeper-postpublish": "^1.0.1",
     "gulp": "github:gulpjs/gulp#4.0",
-    "nyc": "^8.3.0",
+    "nyc": "^8.4.0",
     "xo": "^0.17.0"
   },
   "ava": {
