@@ -46,7 +46,7 @@
     "codeclimate-test-reporter": "^0.4.0",
     "greenkeeper-postpublish": "^1.0.1",
     "gulp": "github:gulpjs/gulp#4.0",
-    "nyc": "^8.4.0",
+    "nyc": "^9.0.1",
     "xo": "^0.17.0"
   },
   "ava": {
