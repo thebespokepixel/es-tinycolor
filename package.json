@@ -39,7 +39,7 @@
     "node": ">=4.0 <9.0"
   },
   "devDependencies": {
-    "@thebespokepixel/cordial": "^0.17.11",
+    "@thebespokepixel/cordial": "^0.17.14",
     "@thebespokepixel/string": "^0.4.5",
     "ava": "^0.16.0",
     "babel-plugin-external-helpers": "^6.8.0",
