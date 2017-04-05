@@ -41,7 +41,7 @@
   "devDependencies": {
     "@thebespokepixel/cordial": "^0.17.14",
     "@thebespokepixel/string": "^0.4.5",
-    "ava": "^0.17.0",
+    "ava": "^0.19.0",
     "babel-plugin-external-helpers": "^6.8.0",
     "codeclimate-test-reporter": "^0.4.0",
     "greenkeeper-postpublish": "^1.0.1",
