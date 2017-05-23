@@ -3,6 +3,7 @@ branches:
   - master
   - develop
   - /^greenkeeper-.*$/
+  - /^greenkeeper/.*$/
 language: node_js
 node_js:
   - stable
