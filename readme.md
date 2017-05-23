@@ -1,4 +1,6 @@
 # es-tinycolor
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/MarkGriffiths/es-tinycolor.svg)](https://greenkeeper.io/)
 >An ES2017 port of Brian Grinstead's [TinyColor][1] for Node > v4.0
 >
 > [![Build Status][build-badge]][travis]
