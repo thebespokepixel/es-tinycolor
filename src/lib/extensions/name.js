@@ -189,9 +189,9 @@ api.toString = rgba => {
 	}
 
 	if (hasAlpha(rgba) && api.wanted === 'toName') {
-		return
-		 false
+		return false
 	}
+
 	if (hasAlpha(rgba) && api.wanted === 'name') {
 		return `#${rgbToHex(rgba)}`
 	}
