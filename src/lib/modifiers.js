@@ -4,7 +4,7 @@
  *  Thanks to less.js for some of the basics here
  *  <https://github.com/cloudhead/less.js/blob/master/lib/less/functions.js>
  */
-import {tinycolor} from '..'
+import TinyColor from './classes/tinycolor'
 import {mathRound, clamp01, mathMax, mathMin} from './utilities'
 
 /**
@@ -32,10 +32,10 @@ export function modify(action, args) {
  */
 export function desaturate(color, amount) {
 	amount = (amount === 0) ? 0 : (amount || 10)
-	const hsl = tinycolor(color).toHsl()
+	const hsl = new TinyColor(color).toHsl()
 	hsl.s -= amount / 100
 	hsl.s = clamp01(hsl.s)
-	return tinycolor(hsl)
+	return new TinyColor(hsl)
 }
 
 /**
@@ -46,10 +46,10 @@ export function desaturate(color, amount) {
  */
 export function saturate(color, amount) {
 	amount = (amount === 0) ? 0 : (amount || 10)
-	const hsl = tinycolor(color).toHsl()
+	const hsl = new TinyColor(color).toHsl()
 	hsl.s += amount / 100
 	hsl.s = clamp01(hsl.s)
-	return tinycolor(hsl)
+	return new TinyColor(hsl)
 }
 
 /**
@@ -58,7 +58,7 @@ export function saturate(color, amount) {
  * @return {TinyColor}       The modified color
  */
 export function greyscale(color) {
-	return tinycolor(color).desaturate(100)
+	return new TinyColor(color).desaturate(100)
 }
 
 /**
@@ -69,10 +69,10 @@ export function greyscale(color) {
  */
 export function lighten(color, amount) {
 	amount = (amount === 0) ? 0 : (amount || 10)
-	const hsl = tinycolor(color).toHsl()
+	const hsl = new TinyColor(color).toHsl()
 	hsl.l += amount / 100
 	hsl.l = clamp01(hsl.l)
-	return tinycolor(hsl)
+	return new TinyColor(hsl)
 }
 
 /**
@@ -83,11 +83,11 @@ export function lighten(color, amount) {
  */
 export function brighten(color, amount) {
 	amount = (amount === 0) ? 0 : (amount || 10)
-	const rgb = tinycolor(color).toRgb()
+	const rgb = new TinyColor(color).toRgb()
 	rgb.r = mathMax(0, mathMin(255, rgb.r - mathRound(255 * -(amount / 100))))
 	rgb.g = mathMax(0, mathMin(255, rgb.g - mathRound(255 * -(amount / 100))))
 	rgb.b = mathMax(0, mathMin(255, rgb.b - mathRound(255 * -(amount / 100))))
-	return tinycolor(rgb)
+	return new TinyColor(rgb)
 }
 
 /**
@@ -98,10 +98,10 @@ export function brighten(color, amount) {
  */
 export function darken(color, amount) {
 	amount = (amount === 0) ? 0 : (amount || 10)
-	const hsl = tinycolor(color).toHsl()
+	const hsl = new TinyColor(color).toHsl()
 	hsl.l -= amount / 100
 	hsl.l = clamp01(hsl.l)
-	return tinycolor(hsl)
+	return new TinyColor(hsl)
 }
 
 /**
@@ -112,8 +112,8 @@ export function darken(color, amount) {
  * @return {TinyColor}        The modified color
  */
 export function spin(color, amount) {
-	const hsl = tinycolor(color).toHsl()
+	const hsl = new TinyColor(color).toHsl()
 	const hue = (hsl.h + amount) % 360
 	hsl.h = hue < 0 ? 360 + hue : hue
-	return tinycolor(hsl)
+	return new TinyColor(hsl)
 }

@@ -5,8 +5,7 @@
   "scripts": {
     "test": "xo && nyc ava",
     "code-climate": "nyc report --reporter=text-lcov | codeclimate-test-reporter",
-    "coverage": "nyc ava && nyc report --reporter=lcov --report-dir test/coverage; open test/coverage/lcov-report/index.html",
-    "postpublish": "greenkeeper-postpublish"
+    "coverage": "nyc ava && nyc report --reporter=lcov --report-dir test/coverage; open test/coverage/lcov-report/index.html"
   },
   "license": "MIT",
   "repository": {
@@ -23,31 +22,31 @@
   "contributors": [
     "Brian Grinstead <briangrinstead@gmail.com> (http://briangrinstead.com)"
   ],
-  "main": "index.js",
+  "main": "lib/index.js",
   "bugs": {
     "url": "https://github.com/MarkGriffiths/TinyColor#es-tinycolor"
   },
   "homepage": "https://github.com/MarkGriffiths/TinyColor",
   "files": [
-    "lib",
-    "index.js"
+    "lib"
   ],
   "directories": {
     "test": "test"
   },
   "engines": {
-    "node": ">=4.0 <9.0"
+    "node": ">=4.0"
   },
   "devDependencies": {
-    "@thebespokepixel/cordial": "^0.17.14",
-    "@thebespokepixel/string": "^0.4.5",
-    "ava": "^0.17.0",
-    "babel-plugin-external-helpers": "^6.8.0",
-    "codeclimate-test-reporter": "^0.4.0",
-    "greenkeeper-postpublish": "^1.0.1",
-    "gulp": "github:gulpjs/gulp#4.0",
-    "nyc": "^10.0.0",
-    "xo": "^0.17.0"
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
+    "ava": "^0.25.0",
+    "codeclimate-test-reporter": "^0.4.1",
+    "gulp": "^4.0.0",
+    "gulp-better-rollup": "^3.1.0",
+    "gulp-rename": "^1.2.3",
+    "nyc": "^12.0.2",
+    "rollup-plugin-babel": "^4.0.0-beta.4",
+    "xo": "^0.21.1"
   },
   "ava": {
     "files": [

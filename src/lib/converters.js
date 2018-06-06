@@ -70,8 +70,8 @@ export const rgbaToPercentageRgba = rgba => {
 }
 
 export const rgbaToString = rgba => (rgba.a === 1) ?
-		`rgb(${rgba.r}, ${rgba.g}, ${rgba.b})` :
-		`rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
+	`rgb(${rgba.r}, ${rgba.g}, ${rgba.b})` :
+	`rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
 
 export const rgbaToArray = rgba => (rgba.a === 1) ? [rgba.r, rgba.g, rgba.b] : [rgba.r, rgba.g, rgba.b, mathRound(rgba.a * 255)]
 

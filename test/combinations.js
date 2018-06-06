@@ -1,6 +1,6 @@
 
 import test from 'ava'
-import {tinycolor} from '..'
+import {tinycolor} from '../lib'
 
 // The combination tests need to be expanded further
 function colorsToHexString(colors) {

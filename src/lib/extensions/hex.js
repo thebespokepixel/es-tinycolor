@@ -2,11 +2,11 @@
  * # ES-TinyColor : HEX colors
  *────────────────────────────────────────────────────────────────────────────
  */
-import tinycolor from '../classes/tinycolor'
+import TinyColor from '../classes/tinycolor'
 import {convertHexToInt, rgbToHex} from '../converters'
 import {hasAlpha} from '../utilities'
 
-const api = tinycolor.registerFormat('hex', {
+const api = TinyColor.registerFormat('hex', {
 	alias: ['hex3', 'hex6']
 })
 
