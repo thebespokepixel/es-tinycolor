@@ -37,7 +37,7 @@ function rgbaToHsva(rgba) {
 	const v = max
 
 	if (max === min) {
-		h = 0 // achromatic
+		h = 0 // Achromatic
 	} else {
 		switch (max) {
 			case r:
@@ -108,8 +108,6 @@ function hsvaToString(hsva) {
 function hsvaToRaw(hsla) {
 	let {h, s, v, a} = hsla
 	h *= 360
-	// s *= 100
-	// v *= 100
 	return {h, s, v, a}
 }
 

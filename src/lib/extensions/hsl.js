@@ -35,7 +35,8 @@ function rgbaToHsla(rgba) {
 	const l = (max + min) / 2
 
 	if (max === min) {
-		h = s = 0 // achromatic
+		h = 0
+		s = 0 // Achromatic
 	} else {
 		const d = max - min
 		s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
@@ -82,7 +83,9 @@ function hslaToRgba(hsla) {
 	}
 
 	if (s === 0) {
-		r = g = b = l // achromatic
+		r = l
+		g = l
+		b = l // Achromatic
 	} else {
 		const q = l < 0.5 ? l * (1 + s) : l + s - (l * s)
 		const p = (2 * l) - q
@@ -124,8 +127,6 @@ function hslaToString(hsla) {
 function hslaToRaw(hsla) {
 	let {h, s, l, a} = hsla
 	h *= 360
-	// s *= 100
-	// l *= 100
 	return {h, s, l, a}
 }
 

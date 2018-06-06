@@ -1,6 +1,6 @@
 /* eslint new-cap: 0 */
 import test from 'ava'
-import {tinycolor} from '..'
+import {tinycolor} from '../lib'
 
 test('TinyColor initialization', t => {
 	t.false(typeof tinycolor === 'undefined', 'tinycolor is initialized on the page')
@@ -24,7 +24,6 @@ test('Original input', t => {
 	const colorRgbMix = 'RgB(39, 39, 39)'
 	const tinycolorObj = tinycolor(colorRgbMix)
 	const inputObj = {r: 100, g: 100, b: 100}
-	// const r = tinycolor('red')
 
 	t.true(tinycolor(colorRgbLow).getOriginalInput() === colorRgbLow, 'original lowercase input is returned')
 	t.true(tinycolor(colorRgbUp).getOriginalInput() === colorRgbUp, 'original uppercase input is returned')

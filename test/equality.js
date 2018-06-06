@@ -1,5 +1,5 @@
 import test from 'ava'
-import {tinycolor} from '..'
+import {tinycolor} from '../lib'
 
 import conversions from './_conversions'
 import {colorValid, colorEquals} from './_macros'

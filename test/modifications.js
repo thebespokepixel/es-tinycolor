@@ -1,5 +1,5 @@
 import test from 'ava'
-import {tinycolor} from '..'
+import {tinycolor} from '../lib'
 
 /* Originally generated with:
 const results = []
@@ -20,7 +20,8 @@ const DESATURATIONS = [
 	'a35c5c', 'a25d5d', 'a15e5e', '9f6060', '9e6161', '9d6262', '9c6363', '9a6565',
 	'996666', '986767', '966969', '956a6a', '946b6b', '936c6c', '916e6e', '906f6f',
 	'8f7070', '8e7171', '8c7373', '8b7474', '8a7575', '887777', '877878', '867979',
-	'857a7a', '837c7c', '827d7d', '817e7e', '808080']
+	'857a7a', '837c7c', '827d7d', '817e7e', '808080'
+]
 
 const SATURATIONS = [
 	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000',
@@ -35,7 +36,8 @@ const SATURATIONS = [
 	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000',
 	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000',
 	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000',
-	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000']
+	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000'
+]
 
 const LIGHTENS = [
 	'ff0000', 'ff0505', 'ff0a0a', 'ff0f0f', 'ff1414', 'ff1a1a', 'ff1f1f', 'ff2424',
@@ -50,7 +52,8 @@ const LIGHTENS = [
 	'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff',
 	'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff',
 	'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff',
-	'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff']
+	'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff'
+]
 
 const BRIGHTENS = [
 	'ff0000', 'ff0303', 'ff0505', 'ff0808', 'ff0a0a', 'ff0d0d', 'ff0f0f', 'ff1212',
@@ -65,7 +68,8 @@ const BRIGHTENS = [
 	'ffb8b8', 'ffbaba', 'ffbdbd', 'ffbfbf', 'ffc2c2', 'ffc4c4', 'ffc7c7', 'ffc9c9',
 	'ffcccc', 'ffcfcf', 'ffd1d1', 'ffd4d4', 'ffd6d6', 'ffd9d9', 'ffdbdb', 'ffdede',
 	'ffe0e0', 'ffe3e3', 'ffe5e5', 'ffe8e8', 'ffebeb', 'ffeded', 'fff0f0', 'fff2f2',
-	'fff5f5', 'fff7f7', 'fffafa', 'fffcfc', 'ffffff']
+	'fff5f5', 'fff7f7', 'fffafa', 'fffcfc', 'ffffff'
+]
 
 const DARKENS = [
 	'ff0000', 'fa0000', 'f50000', 'f00000', 'eb0000', 'e60000', 'e00000', 'db0000',
@@ -80,7 +84,8 @@ const DARKENS = [
 	'000000', '000000', '000000', '000000', '000000', '000000', '000000', '000000',
 	'000000', '000000', '000000', '000000', '000000', '000000', '000000', '000000',
 	'000000', '000000', '000000', '000000', '000000', '000000', '000000', '000000',
-	'000000', '000000', '000000', '000000', '000000']
+	'000000', '000000', '000000', '000000', '000000'
+]
 
 test('Modifications', t => {
 	t.plan(506)
@@ -121,18 +126,18 @@ test('Spin', t => {
 
 test('Mix', t => {
 	t.plan(503)
-	// amount 0 or none
+	// Amount 0 or none
 	t.is(tinycolor.mix('#000', '#fff').toHsl().l, 0.5, 'Mixing without amount works')
 	t.is(tinycolor.mix('#f00', '#000', 0).toHex(), 'ff0000', 'Mixing with 0 amount works')
 	// This case checks the the problem with floating point numbers (eg 255/90)
 	t.is(tinycolor.mix('#fff', '#000', 90).toHex(), '1a1a1a', 'Mixing with 90 amount works correctly')
 
-	// black and white
+	// Black and white
 	for (let i = 0; i < 100; i++) {
 		t.is(Math.round(tinycolor.mix('#000', '#fff', i).toHsl().l * 100) / 100, i / 100, `Mixing black and white with ${i} amount works`)
 	}
 
-	// with colors
+	// With colors
 	for (let i = 0; i < 100; i++) {
 		let newHex = Math.round((255 * (100 - i)) / 100).toString(16)
 
