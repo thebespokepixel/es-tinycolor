@@ -26,7 +26,7 @@ test('isReadable', t => {
 	t.false(tinycolor.isReadable('#ff0088', '#8822aa', {level: 'AAA', size: 'small'}), 'not readable - AAA small')
 	t.false(tinycolor.isReadable('#ff0088', '#8822aa', {level: 'AAA', size: 'large'}), 'not readable - AAA large')
 
-	// values derived from and validated using the calculators at http://www.dasplankton.de/ContrastA/
+	// Values derived from and validated using the calculators at http://www.dasplankton.de/ContrastA/
 	// and http://webaim.org/resources/contrastchecker/
 
 	// '#ff0088', '#5c1a72': contrast ratio 3.04
@@ -49,7 +49,7 @@ test('isReadable', t => {
 })
 
 test('readability', t => {
-	// check return values from readability function. See isReadable above for standards tests.
+	// Check return values from readability function. See isReadable above for standards tests.
 	t.is(tinycolor.readability('#000', '#000'), 1, 'Readability function test 0')
 	t.deepEqual(tinycolor.readability('#000', '#111'), 1.1121078324840545, 'Readability function test 1')
 	t.deepEqual(tinycolor.readability('#000', '#fff'), 21, 'Readability function test 2')
@@ -60,7 +60,7 @@ test('mostReadable', t => {
 	t.is(tinycolor.mostReadable('#f00', ['#d00', '#0d0'], {wcag2: {}}).toHexString(), '#00dd00', 'readable color present')
 	t.is(tinycolor.mostReadable('#fff', ['#fff', '#fff'], {wcag2: {}}).toHexString(), '#ffffff', 'no different color in list')
 
-	// includeFallbackColors
+	// With includeFallbackColors
 	t.is(tinycolor.mostReadable('#fff', ['#fff', '#fff'], {includeFallbackColors: true}).toHexString(), '#000000', 'no different color in list')
 	t.is(tinycolor.mostReadable('#123', ['#124', '#125'], {includeFallbackColors: false}).toHexString(), '#112255', 'no readable color in list')
 	t.is(tinycolor.mostReadable('#123', ['#000', '#fff'], {includeFallbackColors: false}).toHexString(), '#ffffff', 'verify assumption')

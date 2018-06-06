@@ -1,8 +1,8 @@
 const gulp = require('gulp')
 const rename = require('gulp-rename')
 const rollup = require('gulp-better-rollup')
+const strip = require('gulp-strip-comments')
 const babel = require('rollup-plugin-babel')
-
 
 const babelConfig = {
 	presets: [['@babel/preset-env', {
@@ -13,17 +13,30 @@ const babelConfig = {
 	}]]
 }
 
-gulp.task('default', () =>
-	gulp
-		.src('src/index.js')
+gulp.task('cjs', () =>
+	gulp.src('src/index.js')
+		.pipe(rollup({
+			plugins: [babel(babelConfig)]
+		}, {
+			format: 'cjs'
+		}))
+		.pipe(strip())
+		.pipe(gulp.dest('lib'))
+)
+
+gulp.task('es6', () =>
+	gulp.src('src/index.js')
 		.pipe(rollup({
 			plugins: [babel(babelConfig)]
 		}, {
 			format: 'es'
 		}))
+		.pipe(strip())
 		.pipe(rename('index.mjs'))
 		.pipe(gulp.dest('lib'))
 )
+
+gulp.task('default', gulp.series('cjs', 'es6'))
 
 /* Old:
 gulp.task('default', () =>

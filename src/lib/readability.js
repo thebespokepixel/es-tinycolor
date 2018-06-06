@@ -3,7 +3,7 @@
  *  ────────────────────────────────────────────────────────────────────────────
  *  <http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef (WCAG Version 2)
  */
-/* eslint capitalized-comments: [0, "always"] */
+/* eslint capitalized-comments: [0] */
 
 import TinyColor from './classes/tinycolor'
 
