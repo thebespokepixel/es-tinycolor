@@ -17,4 +17,3 @@ ratings:
 exclude_paths:
 - test/
 - lib/
-- index*.js

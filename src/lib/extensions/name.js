@@ -187,12 +187,15 @@ api.toString = rgba => {
 	if (rgba.a === 0) {
 		return 'transparent'
 	}
+
 	if (hasAlpha(rgba) && api.wanted === 'toName') {
-		return false
+		return
+		 false
 	}
 	if (hasAlpha(rgba) && api.wanted === 'name') {
 		return `#${rgbToHex(rgba)}`
 	}
+
 	if (hasAlpha(rgba)) {
 		return api.print(api.opts.alphaFormat, rgba)
 	}
