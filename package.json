@@ -4,7 +4,6 @@
   "description": "Fast Color Parsing and Manipulation in es2015+, based on TinyColor2",
   "scripts": {
     "test": "xo && nyc ava",
-    "code-climate": "nyc report --reporter=text-lcov | codeclimate-test-reporter",
     "coverage": "nyc ava && nyc report --reporter=lcov --report-dir test/coverage; open test/coverage/lcov-report/index.html"
   },
   "license": "MIT",
@@ -40,7 +39,6 @@
     "@babel/core": "^7.0.0-beta.49",
     "@babel/preset-env": "^7.0.0-beta.49",
     "ava": "^0.25.0",
-    "codeclimate-test-reporter": "^0.4.1",
     "gulp": "^4.0.0",
     "gulp-better-rollup": "^3.1.0",
     "gulp-rename": "^1.2.3",
