@@ -1,5 +1,5 @@
 import test from 'ava'
-import {tinycolor} from '../lib'
+import {tinycolor} from '..'
 
 /* Originally generated with:
 const results = []

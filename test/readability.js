@@ -1,5 +1,5 @@
 import test from 'ava'
-import {tinycolor} from '../lib'
+import {tinycolor} from '..'
 
 test('Color equality', t => {
 	t.true(tinycolor.equals('#ff0000', '#ff0000'), 'Same hex')

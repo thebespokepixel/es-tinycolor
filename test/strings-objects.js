@@ -1,5 +1,5 @@
 import test from 'ava'
-import {tinycolor} from '../lib'
+import {tinycolor} from '..'
 
 import conversions from './_conversions'
 import {colorObjectMatch, colorStringLimitDiff} from './_macros'

@@ -1,6 +1,6 @@
 
 import test from 'ava'
-import {tinycolor} from '../lib'
+import {tinycolor} from '..'
 
 test('With Ratio', t => {
 	t.is(tinycolor.fromRatio({r: 1, g: 1, b: 1}).toHexString(), '#ffffff', 'white')

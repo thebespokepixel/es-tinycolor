@@ -1,5 +1,5 @@
 import test from 'ava'
-import {tinycolor} from '../lib'
+import {tinycolor} from '..'
 
 test('RGB Text Parsing', t => {
 	t.is(tinycolor('rgb 255 0 0').toHexString(), '#ff0000', 'spaced input')

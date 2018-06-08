@@ -1,6 +1,6 @@
 /* eslint new-cap: 0 */
 import test from 'ava'
-import {tinycolor} from '../lib'
+import {tinycolor} from '..'
 
 test('TinyColor initialization', t => {
 	t.false(typeof tinycolor === 'undefined', 'tinycolor is initialized on the page')

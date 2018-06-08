@@ -1,6 +1,6 @@
 
 import test from 'ava'
-import {tinycolor} from '../lib'
+import {tinycolor} from '..'
 
 test('Invalid alpha should normalize to 1', t => {
 	t.is(tinycolor({r: 255, g: 20, b: 10, a: -1}).toRgbString(), 'rgb(255, 20, 10)', 'Negative value')
