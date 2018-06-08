@@ -8,7 +8,7 @@ const babelConfig = {
 	presets: [['@babel/preset-env', {
 		modules: false,
 		targets: {
-			node: '10'
+			node: '8.0.0'
 		}
 	}]]
 }
@@ -21,7 +21,7 @@ gulp.task('cjs', () =>
 			format: 'cjs'
 		}))
 		.pipe(strip())
-		.pipe(gulp.dest('lib'))
+		.pipe(gulp.dest('.'))
 )
 
 gulp.task('es6', () =>
@@ -33,7 +33,7 @@ gulp.task('es6', () =>
 		}))
 		.pipe(strip())
 		.pipe(rename('index.mjs'))
-		.pipe(gulp.dest('lib'))
+		.pipe(gulp.dest('.'))
 )
 
 gulp.task('default', gulp.series('cjs', 'es6'))

@@ -18,22 +18,28 @@
     "es6"
   ],
   "author": "Mark Griffiths <mark@thebespokepixel.com> (http://thebespokepixel.com/)",
+  "copyright": {
+    "year": "2018",
+    "owner": "The Bespoke Pixel"
+  },
   "contributors": [
     "Brian Grinstead <briangrinstead@gmail.com> (http://briangrinstead.com)"
   ],
-  "main": "lib/index.js",
+  "main": "index.js",
+  "module": "index.mjs",
   "bugs": {
     "url": "https://github.com/MarkGriffiths/TinyColor#es-tinycolor"
   },
   "homepage": "https://github.com/MarkGriffiths/TinyColor",
   "files": [
-    "lib"
+    "index.js",
+    "index.mjs"
   ],
   "directories": {
     "test": "test"
   },
   "engines": {
-    "node": ">=4.0"
+    "node": ">=8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.49",
@@ -70,7 +76,5 @@
       "one-var": 0,
       "max-params": 0
     }
-  },
-  "buildNumber": 0,
-  "module": "lib/index.mjs"
+  }
 }
