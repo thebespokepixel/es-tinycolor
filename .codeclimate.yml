@@ -16,4 +16,3 @@ ratings:
   - "src/**.js"
 exclude_paths:
 - test/
-- lib/
