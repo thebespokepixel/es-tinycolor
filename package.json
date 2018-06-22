@@ -9,7 +9,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MarkGriffiths/TinyColor.git"
+    "url": "git+https://github.com/MarkGriffiths/es-tinycolor.git"
   },
   "keywords": [
     "color",
@@ -28,9 +28,9 @@
   "main": "index.js",
   "module": "index.mjs",
   "bugs": {
-    "url": "https://github.com/MarkGriffiths/TinyColor#es-tinycolor"
+    "url": "https://github.com/MarkGriffiths/es-tinycolor"
   },
-  "homepage": "https://github.com/MarkGriffiths/TinyColor",
+  "homepage": "https://github.com/MarkGriffiths/es-tinycolor",
   "files": [
     "index.js",
     "index.mjs"
