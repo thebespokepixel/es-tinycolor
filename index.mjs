@@ -1,7 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
 const mathRound = Math.round;
 const mathMin = Math.min;
 const mathMax = Math.max;
@@ -1463,6 +1459,4 @@ tinycolor.isReadable = TinyColor.isReadable;
 tinycolor.mostReadable = TinyColor.mostReadable;
 tinycolor.names = names;
 
-exports.TinyColor = TinyColor;
-exports.tinycolor = tinycolor;
-exports.names = names;
+export { TinyColor, tinycolor, names };

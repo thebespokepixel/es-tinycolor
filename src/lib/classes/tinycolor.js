@@ -4,6 +4,7 @@
  *  © 2016 Mark Griffiths @ The Bespoke Pixel (MIT licensed)
  *  Based on TinyColor © Brian Grinstead
  */
+
 import {mathRound, boundAlpha, roundAlpha, roundIf01} from '../utilities'
 import {rawToDeepRgba, rawToRgba, rgbaToHex, rgbToHex, rgbaToArray, rgbaToString, convertToPercentage, rgbaToPercentageRgba} from '../converters'
 import {calcMix, calcBrightness, calcLuminance} from '../calculations'
@@ -28,9 +29,7 @@ export default class TinyColor {
 		if (color instanceof TinyColor) {
 			return color
 		}
-		// console.log('In:', color)
 		const rgba = extensionApi.find(color)
-		// console.log('Out:', rgba)
 		this._originalInput = color
 		this._r = roundIf01(rgba.r)
 		this._g = roundIf01(rgba.g)
@@ -44,18 +43,22 @@ export default class TinyColor {
 		this._tc_id = TinyColor.newId()
 		extensionApi.set(opts)
 	}
+
 	static newId() {
 		return tinyCounter++
 	}
+
 	static registerFormat(id, opts = {}) {
 		return extensionApi.add(id, opts)
 	}
+
 	static equals(color1, color2) {
 		if (!color1 || !color2) {
 			return false
 		}
 		return new TinyColor(color1).toRgbString() === new TinyColor(color2).toRgbString()
 	}
+
 	static fromRatio(color, opts) {
 		if (typeof color === 'object') {
 			const newColor = {}
@@ -72,133 +75,174 @@ export default class TinyColor {
 		}
 		return new TinyColor(color, opts)
 	}
+
 	static readability(color1, color2) {
 		return readabilityWCAG(color1, color2)
 	}
+
 	static isReadable(color1, color2, wcag2) {
 		return isWCAGReadable(color1, color2, wcag2)
 	}
+
 	static mostReadable(baseColor, colorList, args) {
 		return mostWCAGReadable(baseColor, colorList, args)
 	}
+
 	static mix(color1, color2, amount) {
 		return calcMix(color1, color2, amount)
 	}
+
 	isDark() {
 		return this.getBrightness() < 128
 	}
+
 	isLight() {
 		return !this.isDark()
 	}
+
 	isValid() {
 		return this._ok
 	}
+
 	getOriginalInput() {
 		return this._originalInput
 	}
+
 	getFormat() {
 		return this._format
 	}
+
 	getAlpha() {
 		return this._a
 	}
+
 	getBrightness() {
 		return calcBrightness(this.toRgb())
 	}
+
 	getLuminance() {
 		return calcLuminance(this.toRgb(), rawToDeepRgba(this))
 	}
+
 	toString(format) {
 		return extensionApi.print(rawToRgba(this), this._format, format)
 	}
+
 	toName() {
 		return extensionApi.print(rawToRgba(this), 'name', 'toName')
 	}
+
 	toRgb() {
 		return rawToDeepRgba(this)
 	}
+
 	toRgbString() {
 		return rgbaToString(rawToRgba(this))
 	}
+
 	toRgbArray() {
 		return rgbaToArray(rawToRgba(this))
 	}
+
 	toPercentageRgb() {
 		return rgbaToPercentageRgba(rawToDeepRgba(this))
 	}
+
 	toPercentageRgbString() {
 		return rgbaToString(rgbaToPercentageRgba(rawToRgba(this)))
 	}
+
 	toHex(allow3Char) {
 		return rgbToHex(rawToRgba(this), allow3Char)
 	}
+
 	toHexString(allow3Char) {
 		return `#${this.toHex(allow3Char)}`
 	}
+
 	toHex8(allow4Char) {
 		return rgbaToHex(rawToRgba(this), allow4Char)
 	}
+
 	toHex8String(allow4Char) {
 		return `#${this.toHex8(allow4Char)}`
 	}
+
 	toHsv() {
 		return extensionApi.raw(rawToDeepRgba(this), 'hsv')
 	}
+
 	toHsvString() {
 		return extensionApi.print(rawToDeepRgba(this), this._format, 'hsv')
 	}
+
 	toHsl() {
 		return extensionApi.raw(rawToDeepRgba(this), 'hsl')
 	}
+
 	toHslString() {
 		return extensionApi.print(rawToDeepRgba(this), this._format, 'hsl')
 	}
+
 	setAlpha(value) {
 		this._a = boundAlpha(value)
 		this._roundA = mathRound(100 * this._a) / 100
 		return this
 	}
+
 	clone() {
 		return new TinyColor(this.toString())
 	}
 
-	lighten() {
-		return modify('lighten', [this, ...arguments])
+	lighten(...args) {
+		return modify('lighten', [this, ...args])
 	}
-	brighten() {
-		return modify('brighten', [this, ...arguments])
+
+	brighten(...args) {
+		return modify('brighten', [this, ...args])
 	}
-	darken() {
-		return modify('darken', [this, ...arguments])
+
+	darken(...args) {
+		return modify('darken', [this, ...args])
 	}
-	desaturate() {
-		return modify('desaturate', [this, ...arguments])
+
+	desaturate(...args) {
+		return modify('desaturate', [this, ...args])
 	}
-	saturate() {
-		return modify('saturate', [this, ...arguments])
+
+	saturate(...args) {
+		return modify('saturate', [this, ...args])
 	}
-	greyscale() {
-		return modify('greyscale', [this, ...arguments])
+
+	greyscale(...args) {
+		return modify('greyscale', [this, ...args])
 	}
-	spin() {
-		return modify('spin', [this, ...arguments])
+
+	spin(...args) {
+		return modify('spin', [this, ...args])
 	}
-	analogous() {
-		return combine('analogous', [this, ...arguments])
+
+	analogous(...args) {
+		return combine('analogous', [this, ...args])
 	}
-	complement() {
-		return combine('complement', [this, ...arguments])
+
+	complement(...args) {
+		return combine('complement', [this, ...args])
 	}
-	monochromatic() {
-		return combine('monochromatic', [this, ...arguments])
+
+	monochromatic(...args) {
+		return combine('monochromatic', [this, ...args])
 	}
-	splitcomplement() {
-		return combine('splitcomplement', [this, ...arguments])
+
+	splitcomplement(...args) {
+		return combine('splitcomplement', [this, ...args])
 	}
-	triad() {
-		return combine('triad', [this, ...arguments])
+
+	triad(...args) {
+		return combine('triad', [this, ...args])
 	}
-	tetrad() {
-		return combine('tetrad', [this, ...arguments])
+
+	tetrad(...args) {
+		return combine('tetrad', [this, ...args])
 	}
 }

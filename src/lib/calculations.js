@@ -2,7 +2,7 @@
  *  ES-TinyColor : Caluculation Functions
  *  ────────────────────────────────────────────────────────────────────────────
  */
-import {tinycolor} from '..'
+import TinyColor from './classes/tinycolor'
 
 // http://www.w3.org/TR/AERT#color-contrast
 export const calcBrightness = rgb => ((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000
@@ -36,8 +36,8 @@ export function calcLuminance(rgb, deepRgb) {
 
 export function calcMix(color1, color2, amount) {
 	amount = (amount === 0) ? 0 : (amount || 50)
-	const rgb1 = tinycolor(color1).toRgb()
-	const rgb2 = tinycolor(color2).toRgb()
+	const rgb1 = new TinyColor(color1).toRgb()
+	const rgb2 = new TinyColor(color2).toRgb()
 	const p = amount / 100
 	const rgba = {
 		r: ((rgb2.r - rgb1.r) * p) + rgb1.r,
@@ -45,6 +45,6 @@ export function calcMix(color1, color2, amount) {
 		b: ((rgb2.b - rgb1.b) * p) + rgb1.b,
 		a: ((rgb2.a - rgb1.a) * p) + rgb1.a
 	}
-	return tinycolor(rgba)
+	return new TinyColor(rgba)
 }
 

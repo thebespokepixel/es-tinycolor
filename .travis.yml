@@ -1,3 +1,4 @@
+---
 branches:
   only:
   - master
@@ -6,9 +7,8 @@ branches:
 language: node_js
 node_js:
   - stable
-  - 6
-  - 5
-  - 4
+  - 9
+  - 8
 sudo: false
 before_install: npm i -g npm@latest
 notifications:
@@ -19,14 +19,14 @@ notifications:
     on_failure: change
     on_start: never
 env:
-  - CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
-  code_climate:
-      repo_token: cd17849fce8d9273988b6229cd454514d56e69c7fb0463af09bf7b7ba342d8b7
+  global:
+    - CC_TEST_REPORTER_ID=cd17849fce8d9273988b6229cd454514d56e69c7fb0463af09bf7b7ba342d8b7
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 after_script:
-  - "[ $TRAVIS_NODE_VERSION = stable ] && nyc report --reporter=text-lcov | codeclimate-test-reporter"
+  - "[ $TRAVIS_NODE_VERSION = stable ]
+  && nyc report --reporter=lcov
+  && ./cc-test-reporter after-build --debug -t lcov --exit-code $TRAVIS_TEST_RESULT
+  || echo 'Coverage skipped'"

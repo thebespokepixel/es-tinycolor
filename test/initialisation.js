@@ -24,7 +24,6 @@ test('Original input', t => {
 	const colorRgbMix = 'RgB(39, 39, 39)'
 	const tinycolorObj = tinycolor(colorRgbMix)
 	const inputObj = {r: 100, g: 100, b: 100}
-	// const r = tinycolor('red')
 
 	t.true(tinycolor(colorRgbLow).getOriginalInput() === colorRgbLow, 'original lowercase input is returned')
 	t.true(tinycolor(colorRgbUp).getOriginalInput() === colorRgbUp, 'original uppercase input is returned')

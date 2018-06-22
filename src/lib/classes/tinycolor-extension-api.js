@@ -23,6 +23,7 @@ export default class TinyColorExtensionAPI {
 			upperCaseHex: false
 		}
 	}
+
 	set(opts) {
 		Object.assign(this.opts, opts)
 		for (const id in this.colorspaces) {
@@ -31,6 +32,7 @@ export default class TinyColorExtensionAPI {
 			}
 		}
 	}
+
 	add(id, opts) {
 		this.colorspaces[id] = new TinyColorExtension(this, id, Object.assign({}, this.opts, opts))
 		if (opts.alias) {
@@ -40,6 +42,7 @@ export default class TinyColorExtensionAPI {
 		}
 		return this.colorspaces[id]
 	}
+
 	find(input) {
 		const color = Object.assign({}, _template)
 		input = typeof input === 'string' ? input.trim().toLowerCase() : input
@@ -55,12 +58,14 @@ export default class TinyColorExtensionAPI {
 		}
 		return color
 	}
+
 	raw(rgba, format) {
 		if (format in this.colorspaces) {
 			return this.colorspaces[format].toRaw(rgba)
 		}
 		return {r: rgba.r / 255, g: rgba.g / 255, b: rgba.b / 255, a: rgba.a}
 	}
+
 	print(rgba, original, format) {
 		const specified = format
 		format = format || original
@@ -69,4 +74,4 @@ export default class TinyColorExtensionAPI {
 		}
 		return `[${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a * 255}]`
 	}
- }
+}

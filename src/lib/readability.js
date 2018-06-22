@@ -3,7 +3,9 @@
  *  ────────────────────────────────────────────────────────────────────────────
  *  <http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef (WCAG Version 2)
  */
-import {tinycolor} from '..'
+/* eslint capitalized-comments: [0] */
+
+import TinyColor from './classes/tinycolor'
 
 // `validateWCAG2Parms`
 // Return valid WCAG2 parms for isReadable.
@@ -23,17 +25,14 @@ function validateWCAG2Parms(parms) {
 	if (size !== 'small' && size !== 'large') {
 		size = 'small'
 	}
-	return {
-		level,
-		size
-	}
+	return {level, size}
 }
 
 // `readability`
 // Analyze the 2 colors and returns the color contrast defined by (WCAG Version 2)
 export function readability(color1, color2) {
-	const c1 = tinycolor(color1)
-	const c2 = tinycolor(color2)
+	const c1 = new TinyColor(color1)
+	const c2 = new TinyColor(color2)
 	return (Math.max(c1.getLuminance(), c2.getLuminance()) + 0.05) / (Math.min(c1.getLuminance(), c2.getLuminance()) + 0.05)
 }
 
@@ -76,9 +75,7 @@ export function isReadable(color1, color2, wcag2) {
 //     tinycolor.mostReadable("#a8015a", ["#faf3f3"], {includeFallbackColors:true,level:"AAA",size:"large"}).toHexString(); // "#faf3f3"
 //     tinycolor.mostReadable("#a8015a", ["#faf3f3"], {includeFallbackColors:true,level:"AAA",size:"small"}).toHexString(); // "#ffffff"
 export function mostReadable(baseColor, colorList, args = {}) {
-	const includeFallbackColors = args.includeFallbackColors
-	const level = args.level
-	const size = args.size
+	const {includeFallbackColors, level, size} = args
 	let readable
 	let bestColor = null
 	let bestScore = 0
@@ -87,7 +84,7 @@ export function mostReadable(baseColor, colorList, args = {}) {
 		readable = readability(baseColor, color)
 		if (readable > bestScore) {
 			bestScore = readable
-			bestColor = tinycolor(color)
+			bestColor = new TinyColor(color)
 		}
 	})
 
