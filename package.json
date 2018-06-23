@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "name": "@thebespokepixel/es-tinycolor",
   "description": "Fast Color Parsing and Manipulation in es2015+, based on TinyColor2",
   "scripts": {
@@ -9,7 +9,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MarkGriffiths/TinyColor.git"
+    "url": "git+https://github.com/MarkGriffiths/es-tinycolor.git"
   },
   "keywords": [
     "color",
@@ -28,9 +28,9 @@
   "main": "index.js",
   "module": "index.mjs",
   "bugs": {
-    "url": "https://github.com/MarkGriffiths/TinyColor#es-tinycolor"
+    "url": "https://github.com/MarkGriffiths/es-tinycolor"
   },
-  "homepage": "https://github.com/MarkGriffiths/TinyColor",
+  "homepage": "https://github.com/MarkGriffiths/es-tinycolor",
   "files": [
     "index.js",
     "index.mjs"

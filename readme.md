@@ -1,6 +1,6 @@
 # es-tinycolor
 
->An ES2017 port of Brian Grinstead's [TinyColor][1] for Node > v4.0
+>An ES2017 port of Brian Grinstead's [TinyColor][1] for Node > v8.0
 >
 > [![Build Status][build-badge]][travis]
 > [![Dependency Status][david-badge]][david]
