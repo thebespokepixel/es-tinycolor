@@ -1,64 +1,80 @@
 const mathRound = Math.round;
 const mathMin = Math.min;
 const mathMax = Math.max;
-
-const isOnePointZero = n => typeof n === 'string' && n.indexOf('.') !== -1 && parseFloat(n) === 1; 
-
-const isPercentage = n => typeof n === 'string' && n.indexOf('%') !== -1; 
-
+const isOnePointZero = n => typeof n === 'string' && n.indexOf('.') !== -1 && parseFloat(n) === 1;
+const isPercentage = n => typeof n === 'string' && n.indexOf('%') !== -1;
 const roundIf01 = n => n < 1 ? mathRound(n) : n;
 const roundAlpha = a => mathRound(100 * a) / 100;
 const boundAlpha = a => {
   a = parseFloat(a);
   return isNaN(a) || a < 0 || a > 1 ? 1 : a;
 };
-const hasAlpha = rgba => rgba.a < 1 && rgba.a >= 0; 
-
-const clamp01 = val => mathMin(1, mathMax(0, val)); 
-
-const pad2 = c => c.length === 1 ? `0${c}` : `${c}`; 
-
-const CSS_INTEGER = `[-\\+]?\\d+%?`; 
-
-const CSS_NUMBER = `[-\\+]?\\d*\\.\\d+%?`; 
-
-const CSS_UNIT = `(?:${CSS_NUMBER})|(?:${CSS_INTEGER})`; 
-
-const isValidCSSUnit = color => new RegExp(CSS_UNIT).test(color); 
-
-const isValidCSSUnitRGB = rgb => isValidCSSUnit(rgb.r) && isValidCSSUnit(rgb.g) && isValidCSSUnit(rgb.b); 
-
+const hasAlpha = rgba => rgba.a < 1 && rgba.a >= 0;
+const clamp01 = val => mathMin(1, mathMax(0, val));
+const pad2 = c => c.length === 1 ? `0${c}` : `${c}`;
+const CSS_INTEGER = '[-\\+]?\\d+%?';
+const CSS_NUMBER = '[-\\+]?\\d*\\.\\d+%?';
+const CSS_UNIT = `(?:${CSS_NUMBER})|(?:${CSS_INTEGER})`;
+const isValidCSSUnit = color => new RegExp(CSS_UNIT).test(color);
+const isValidCSSUnitRGB = rgb => isValidCSSUnit(rgb.r) && isValidCSSUnit(rgb.g) && isValidCSSUnit(rgb.b);
 const PERMISSIVE_MATCH3 = `[\\s|\\(]+(${CSS_UNIT})[,|\\s]+(${CSS_UNIT})[,|\\s]+(${CSS_UNIT})\\s*\\)?`;
-const PERMISSIVE_MATCH4 = `[\\s|\\(]+(${CSS_UNIT})[,|\\s]+(${CSS_UNIT})[,|\\s]+(${CSS_UNIT})[,|\\s]+(${CSS_UNIT})\\s*\\)?`; 
-
+const PERMISSIVE_MATCH4 = `[\\s|\\(]+(${CSS_UNIT})[,|\\s]+(${CSS_UNIT})[,|\\s]+(${CSS_UNIT})[,|\\s]+(${CSS_UNIT})\\s*\\)?`;
 function bound01(n, max) {
   if (isOnePointZero(n)) {
     n = '100%';
   }
 
   const processPercent = isPercentage(n);
-  n = mathMin(max, mathMax(0, parseFloat(n))); 
+  n = mathMin(max, mathMax(0, parseFloat(n)));
 
   if (processPercent) {
     n = parseInt(n * max, 10) / 100;
-  } 
-
+  }
 
   if (Math.abs(n - max) < 0.000001) {
     return 1;
-  } 
-
+  }
 
   return n % max / parseFloat(max);
 }
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
 
 const convertHexToInt = val => parseInt(val, 16);
-
 const convertHexToDecimal = h => convertHexToInt(h) / 255;
-
 const convertToPercentage = n => n <= 1 ? `${n * 100}%` : n;
-
 const rawToRgba = raw => {
   const [r, g, b] = [raw._r, raw._g, raw._b].map(mathRound);
   return {
@@ -68,14 +84,12 @@ const rawToRgba = raw => {
     a: raw._roundA
   };
 };
-
 const rawToDeepRgba = raw => ({
   r: raw._r,
   g: raw._g,
   b: raw._b,
   a: raw._a
 });
-
 const conformRgba = rgba => {
   const [r, g, b] = [rgba.r, rgba.g, rgba.b].map(n => bound01(n, 255) * 255);
   return {
@@ -95,17 +109,14 @@ const rgbaToPercentageRgba = rgba => {
   };
 };
 const rgbaToString = rgba => rgba.a === 1 ? `rgb(${rgba.r}, ${rgba.g}, ${rgba.b})` : `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
-const rgbaToArray = rgba => rgba.a === 1 ? [rgba.r, rgba.g, rgba.b] : [rgba.r, rgba.g, rgba.b, mathRound(rgba.a * 255)]; 
-
+const rgbaToArray = rgba => rgba.a === 1 ? [rgba.r, rgba.g, rgba.b] : [rgba.r, rgba.g, rgba.b, mathRound(rgba.a * 255)];
 const rgbaToHex = (rgba, allowShort) => {
   const hex = rgbaToArray(rgba).map(n => n.toString(16)).map(pad2);
   return allowShort && hex.every(h => h.charAt(0) === h.charAt(1)) ? hex.map(h => h.charAt(0)).join('') : hex.join('');
-}; 
-
-const rgbToHex = (rgba, allowShort) => rgbaToHex(Object.assign({}, rgba, {
+};
+const rgbToHex = (rgba, allowShort) => rgbaToHex(_objectSpread({}, rgba, {
   a: 1
 }), allowShort);
-
 
 const calcBrightness = rgb => (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
 function calcLuminance(rgb, deepRgb) {
@@ -119,19 +130,19 @@ function calcLuminance(rgb, deepRgb) {
   if (RsRGB <= 0.03928) {
     R = RsRGB / 12.92;
   } else {
-    R = Math.pow((RsRGB + 0.055) / 1.055, 2.4);
+    R = ((RsRGB + 0.055) / 1.055) ** 2.4;
   }
 
   if (GsRGB <= 0.03928) {
     G = GsRGB / 12.92;
   } else {
-    G = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
+    G = ((GsRGB + 0.055) / 1.055) ** 2.4;
   }
 
   if (BsRGB <= 0.03928) {
     B = BsRGB / 12.92;
   } else {
-    B = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
+    B = ((BsRGB + 0.055) / 1.055) ** 2.4;
   }
 
   return 0.2126 * R + 0.7152 * G + 0.0722 * B;
@@ -149,7 +160,6 @@ function calcMix(color1, color2, amount) {
   };
   return new TinyColor(rgba);
 }
-
 
 function validateWCAG2Parms(parms) {
   let level;
@@ -173,15 +183,13 @@ function validateWCAG2Parms(parms) {
     level,
     size
   };
-} 
-
+}
 
 function readability(color1, color2) {
   const c1 = new TinyColor(color1);
   const c2 = new TinyColor(color2);
   return (Math.max(c1.getLuminance(), c2.getLuminance()) + 0.05) / (Math.min(c1.getLuminance(), c2.getLuminance()) + 0.05);
-} 
-
+}
 function isReadable(color1, color2, wcag2) {
   const readable = readability(color1, color2);
   const wcag2Parms = validateWCAG2Parms(wcag2);
@@ -201,8 +209,7 @@ function isReadable(color1, color2, wcag2) {
   }
 
   return out;
-} 
-
+}
 function mostReadable(baseColor, colorList, args = {}) {
   const {
     includeFallbackColors,
@@ -334,7 +341,6 @@ function monochromatic(color, results) {
   return ret;
 }
 
-
 function modify(action, args) {
   const actions = {
     desaturate,
@@ -353,7 +359,6 @@ function modify(action, args) {
   source.setAlpha(color._a);
   return source;
 }
-
 function desaturate(color, amount) {
   amount = amount === 0 ? 0 : amount || 10;
   const hsl = new TinyColor(color).toHsl();
@@ -361,7 +366,6 @@ function desaturate(color, amount) {
   hsl.s = clamp01(hsl.s);
   return new TinyColor(hsl);
 }
-
 function saturate(color, amount) {
   amount = amount === 0 ? 0 : amount || 10;
   const hsl = new TinyColor(color).toHsl();
@@ -369,11 +373,9 @@ function saturate(color, amount) {
   hsl.s = clamp01(hsl.s);
   return new TinyColor(hsl);
 }
-
 function greyscale(color) {
   return new TinyColor(color).desaturate(100);
 }
-
 function lighten(color, amount) {
   amount = amount === 0 ? 0 : amount || 10;
   const hsl = new TinyColor(color).toHsl();
@@ -381,7 +383,6 @@ function lighten(color, amount) {
   hsl.l = clamp01(hsl.l);
   return new TinyColor(hsl);
 }
-
 function brighten(color, amount) {
   amount = amount === 0 ? 0 : amount || 10;
   const rgb = new TinyColor(color).toRgb();
@@ -390,7 +391,6 @@ function brighten(color, amount) {
   rgb.b = mathMax(0, mathMin(255, rgb.b - mathRound(255 * -(amount / 100))));
   return new TinyColor(rgb);
 }
-
 function darken(color, amount) {
   amount = amount === 0 ? 0 : amount || 10;
   const hsl = new TinyColor(color).toHsl();
@@ -398,7 +398,6 @@ function darken(color, amount) {
   hsl.l = clamp01(hsl.l);
   return new TinyColor(hsl);
 }
-
 function spin(color, amount) {
   const hsl = new TinyColor(color).toHsl();
   const hue = (hsl.h + amount) % 360;
@@ -475,7 +474,7 @@ class TinyColorExtensionAPI {
   }
 
   add(id, opts) {
-    this.colorspaces[id] = new TinyColorExtension(this, id, Object.assign({}, this.opts, opts));
+    this.colorspaces[id] = new TinyColorExtension(this, id, _objectSpread({}, this.opts, opts));
 
     if (opts.alias) {
       opts.alias.forEach(id_ => {
@@ -487,7 +486,8 @@ class TinyColorExtensionAPI {
   }
 
   find(input) {
-    const color = Object.assign({}, _template);
+    const color = _objectSpread({}, _template);
+
     input = typeof input === 'string' ? input.trim().toLowerCase() : input;
 
     if (input) {
@@ -534,7 +534,7 @@ let tinyCounter = 0;
 const extensionApi = new TinyColorExtensionAPI();
 class TinyColor {
   constructor(color, opts = {}) {
-    color = color || ''; 
+    color = color || '';
 
     if (color instanceof TinyColor) {
       return color;
@@ -762,14 +762,12 @@ class TinyColor {
 
 }
 
-
 const matchers = function () {
   return {
     rgb: new RegExp(`rgb${PERMISSIVE_MATCH3}`),
     rgba: new RegExp(`rgba${PERMISSIVE_MATCH4}`)
   };
-}(); 
-
+}();
 
 function rgbStringToObject(color) {
   let r, g, b, a, match;
@@ -956,8 +954,7 @@ const matchers$3 = function () {
   };
 }();
 
-const isValidCSSUnitHSL = hsl => isValidCSSUnit(hsl.h) && isValidCSSUnit(hsl.s) && isValidCSSUnit(hsl.l); 
-
+const isValidCSSUnitHSL = hsl => isValidCSSUnit(hsl.h) && isValidCSSUnit(hsl.s) && isValidCSSUnit(hsl.l);
 
 function rgbaToHsla(rgba) {
   const r = bound01(rgba.r, 255);
@@ -971,7 +968,7 @@ function rgbaToHsla(rgba) {
 
   if (max === min) {
     h = 0;
-    s = 0; 
+    s = 0;
   } else {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
@@ -999,8 +996,7 @@ function rgbaToHsla(rgba) {
     l,
     a
   };
-} 
-
+}
 
 function hslaToRgba(hsla) {
   const h = bound01(hsla.h, 360);
@@ -1031,7 +1027,7 @@ function hslaToRgba(hsla) {
   if (s === 0) {
     r = l;
     g = l;
-    b = l; 
+    b = l;
   } else {
     const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
     const p = 2 * l - q;
@@ -1119,8 +1115,7 @@ const matchers$4 = function () {
   };
 }();
 
-const isValidCSSUnitHSV = hsv => isValidCSSUnit(hsv.h) && isValidCSSUnit(hsv.s) && isValidCSSUnit(hsv.v); 
-
+const isValidCSSUnitHSV = hsv => isValidCSSUnit(hsv.h) && isValidCSSUnit(hsv.s) && isValidCSSUnit(hsv.v);
 
 function rgbaToHsva(rgba) {
   const r = bound01(rgba.r, 255);
@@ -1135,7 +1130,7 @@ function rgbaToHsva(rgba) {
   const v = max;
 
   if (max === min) {
-    h = 0; 
+    h = 0;
   } else {
     switch (max) {
       case r:
@@ -1160,8 +1155,7 @@ function rgbaToHsva(rgba) {
     v,
     a
   };
-} 
-
+}
 
 function hsvaToRgba(hsva) {
   const h = bound01(hsva.h, 360) * 6;
@@ -1261,8 +1255,7 @@ function flip(o) {
   }
 
   return flipped;
-} 
-
+}
 
 const names = {
   aliceblue: 'f0f8ff',
@@ -1444,11 +1437,9 @@ api$6.toString = rgba => {
   return hexNames[rgbToHex(rgba, true)] || false;
 };
 
-
 function tinycolor(color, opts) {
   return new TinyColor(color, opts);
-} 
-
+}
 
 tinycolor.equals = TinyColor.equals;
 tinycolor.registerFormat = TinyColor.registerFormat;

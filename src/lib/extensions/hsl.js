@@ -51,8 +51,10 @@ function rgbaToHsla(rgba) {
 				h = ((r - g) / d) + 4
 				break
 		}
+
 		h /= 6
 	}
+
 	return {h, s, l, a}
 }
 
@@ -73,12 +75,15 @@ function hslaToRgba(hsla) {
 		if (t < 1 / 6) {
 			return p + ((q - p) * 6 * t)
 		}
+
 		if (t < 1 / 2) {
 			return q
 		}
+
 		if (t < 2 / 3) {
 			return p + ((q - p) * ((2 / 3) - t) * 6)
 		}
+
 		return p
 	}
 
@@ -107,10 +112,12 @@ function hslStringToObject(color) {
 		[h, s, l] = match.splice(1, 3)
 		return {h, s, l}
 	}
+
 	if ((match = matchers.hsla.exec(color))) {
 		[h, s, l, a] = match.splice(1, 4)
 		return {h, s, l, a}
 	}
+
 	return false
 }
 

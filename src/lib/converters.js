@@ -85,4 +85,4 @@ export const rgbaToHex = (rgba, allowShort) => {
 }
 
 // `rgbToHex`
-export const rgbToHex = (rgba, allowShort) => rgbaToHex(Object.assign({}, rgba, {a: 1}), allowShort)
+export const rgbToHex = (rgba, allowShort) => rgbaToHex({...rgba, a: 1}, allowShort)

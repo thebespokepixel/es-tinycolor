@@ -61,6 +61,7 @@ export function analogous(color, results, slices) {
 		hsl.h = (hsl.h + part) % 360
 		ret.push(new TinyColor(hsl))
 	}
+
 	return ret
 }
 
@@ -75,5 +76,6 @@ export function monochromatic(color, results) {
 		ret.push(new TinyColor({h, s, v}))
 		v = (v + modification) % 1
 	}
+
 	return ret
 }
