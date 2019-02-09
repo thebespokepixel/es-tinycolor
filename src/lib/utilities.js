@@ -36,10 +36,10 @@ export const clamp01 = val => mathMin(1, mathMax(0, val))
 export const pad2 = c => c.length === 1 ? `0${c}` : `${c}`
 
 // <http://www.w3.org/TR/css3-values/#integers>
-export const CSS_INTEGER = `[-\\+]?\\d+%?`
+export const CSS_INTEGER = '[-\\+]?\\d+%?'
 
 // <http://www.w3.org/TR/css3-values/#number-value>
-export const CSS_NUMBER = `[-\\+]?\\d*\\.\\d+%?`
+export const CSS_NUMBER = '[-\\+]?\\d*\\.\\d+%?'
 
 // Allow positive/negative integer/number.  Don't capture the either/or, just the entire outcome.
 export const CSS_UNIT = `(?:${CSS_NUMBER})|(?:${CSS_INTEGER})`

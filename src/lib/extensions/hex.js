@@ -23,10 +23,12 @@ function hexToRgba(color) {
 		const [r, g, b] = match.splice(1, 3).map(h => `${h}${h}`).map(convertHexToInt)
 		return {r, g, b, a: 1}
 	}
+
 	if ((match = matchers.hex6.exec(color))) {
 		const [r, g, b] = match.splice(1, 3).map(convertHexToInt)
 		return {r, g, b, a: 1}
 	}
+
 	return false
 }
 
@@ -41,12 +43,15 @@ api.toString = rgba => {
 	if (/^hex6?$/.test(api.wanted)) {
 		return hexToString(rgba)
 	}
+
 	if (api.wanted === 'hex3') {
 		return hexToString(rgba, true)
 	}
+
 	if (hasAlpha(rgba)) {
 		return api.opts.alphaFormat === 'hex' ?
 			hexToString(rgba) : api.print(api.opts.alphaFormat, rgba)
 	}
+
 	return hexToString(rgba)
 }

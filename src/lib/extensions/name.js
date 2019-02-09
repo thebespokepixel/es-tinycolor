@@ -17,6 +17,7 @@ function flip(o) {
 			flipped[o[i]] = i
 		}
 	}
+
 	return flipped
 }
 

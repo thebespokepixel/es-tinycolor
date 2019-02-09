@@ -29,6 +29,7 @@ export default class TinyColor {
 		if (color instanceof TinyColor) {
 			return color
 		}
+
 		const rgba = extensionApi.find(color)
 		this._originalInput = color
 		this._r = roundIf01(rgba.r)
@@ -56,6 +57,7 @@ export default class TinyColor {
 		if (!color1 || !color2) {
 			return false
 		}
+
 		return new TinyColor(color1).toRgbString() === new TinyColor(color2).toRgbString()
 	}
 
@@ -71,8 +73,10 @@ export default class TinyColor {
 					}
 				}
 			}
+
 			color = newColor
 		}
+
 		return new TinyColor(color, opts)
 	}
 

@@ -24,11 +24,13 @@ function hexToRgba(color) {
 		const [r, g, b] = match.splice(1, 3).map(h => `${h}${h}`).map(convertHexToInt)
 		return {r, g, b, a}
 	}
+
 	if ((match = matchers.hex8.exec(color))) {
 		const a = convertHexToDecimal(match[4])
 		const [r, g, b] = match.splice(1, 3).map(convertHexToInt)
 		return {r, g, b, a}
 	}
+
 	return false
 }
 
@@ -43,12 +45,15 @@ api.toString = rgba => {
 	if (api.wanted === 'hex4') {
 		return hexToString(rgba, true)
 	}
+
 	if (api.wanted === 'hex8') {
 		return hexToString(rgba)
 	}
+
 	if (hasAlpha(rgba)) {
 		return api.opts.alphaFormat === 'hex' ?
 			hexToString(rgba) : api.print(api.opts.alphaFormat, rgba)
 	}
+
 	return hexToString(rgba)
 }

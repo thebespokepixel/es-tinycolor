@@ -24,6 +24,7 @@ export default function rgbStringToObject(color) {
 		[r, g, b] = match.splice(1, 3)
 		return {r, g, b}
 	}
+
 	if ((match = matchers.rgba.exec(color))) {
 		[r, g, b, a] = match.splice(1, 4)
 		return {r, g, b, a}

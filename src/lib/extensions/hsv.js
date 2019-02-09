@@ -50,8 +50,10 @@ function rgbaToHsva(rgba) {
 				h = ((r - g) / d) + 4
 				break
 		}
+
 		h /= 6
 	}
+
 	return {h, s, v, a}
 }
 
@@ -88,10 +90,12 @@ function hsvStringToObject(color) {
 		[h, s, v] = match.splice(1, 3)
 		return {h, s, v}
 	}
+
 	if ((match = matchers.hsva.exec(color))) {
 		[h, s, v, a] = match.splice(1, 4)
 		return {h, s, v, a}
 	}
+
 	return false
 }
 

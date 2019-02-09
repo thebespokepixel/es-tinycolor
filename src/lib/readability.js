@@ -22,9 +22,11 @@ function validateWCAG2Parms(parms) {
 	if (level !== 'AA' && level !== 'AAA') {
 		level = 'AA'
 	}
+
 	if (size !== 'small' && size !== 'large') {
 		size = 'small'
 	}
+
 	return {level, size}
 }
 
@@ -61,6 +63,7 @@ export function isReadable(color1, color2, wcag2) {
 		default:
 			out = readable >= 4.5
 	}
+
 	return out
 }
 
@@ -91,6 +94,7 @@ export function mostReadable(baseColor, colorList, args = {}) {
 	if (isReadable(baseColor, bestColor, {level, size}) || !includeFallbackColors) {
 		return bestColor
 	}
+
 	args.includeFallbackColors = false
 	return mostReadable(baseColor, ['#fff', '#000'], args)
 }

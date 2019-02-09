@@ -1,3 +1,5 @@
+/* eslint array-element-newline:0 */
+
 import test from 'ava'
 import {tinycolor} from '..'
 
@@ -92,18 +94,23 @@ test('Modifications', t => {
 	for (let i = 0; i <= 100; i++) {
 		t.is(tinycolor('red').desaturate(i).toHex(), DESATURATIONS[i], `Desaturation ${i} works`)
 	}
+
 	for (let i = 0; i <= 100; i++) {
 		t.is(tinycolor('red').saturate(i).toHex(), SATURATIONS[i], `Saturation ${i} works`)
 	}
+
 	for (let i = 0; i <= 100; i++) {
 		t.is(tinycolor('red').lighten(i).toHex(), LIGHTENS[i], `Lighten ${i} works`)
 	}
+
 	for (let i = 0; i <= 100; i++) {
 		t.is(tinycolor('red').brighten(i).toHex(), BRIGHTENS[i], `Brighter ${i} works`)
 	}
+
 	for (let i = 0; i <= 100; i++) {
 		t.is(tinycolor('red').darken(i).toHex(), DARKENS[i], `Darken ${i} works`)
 	}
+
 	t.is(tinycolor('red').greyscale().toHex(), '808080', 'Greyscale works')
 })
 

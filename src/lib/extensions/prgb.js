@@ -14,8 +14,10 @@ api.shouldHandleInput = input => {
 		const rgbCheck = rgbStringToObject(input)
 		return rgbCheck && isPercentage(rgbCheck.r)
 	}
+
 	return isValidCSSUnitRGB(input) && isPercentage(input.r)
 }
+
 api.toRgb = input => typeof input === 'object' ? conformRgba(input) : conformRgba(rgbStringToObject(input))
 api.toRaw = rgba => rgbaToPercentageRgba(rgba)
 api.toString = rgba => rgbaToString(rgbaToPercentageRgba(rgba))
