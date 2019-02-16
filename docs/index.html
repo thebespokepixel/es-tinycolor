@@ -1,0 +1,1912 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>@thebespokepixel/es-tinycolor 1.0.2 | Documentation</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="assets/css/ace.min.css" rel="stylesheet">
+  <link href="assets/fonts/TypoPRO-Hack/TypoPRO-Hack.css" type="text/css" rel="stylesheet" />
+  <link href="assets/fonts/TypoPRO-FiraSans/TypoPRO-FiraSans.css" type="text/css" rel="stylesheet" />
+  <link href="assets/css/style.css" type="text/css" rel="stylesheet" />
+  <meta name='description' content='Fast Color Parsing and Manipulation in es2015+, based on TinyColor2'>
+</head>
+<body class='documentation m0'>
+  <div class="flex">
+    <div id='split-left' class='overflow-auto fs0 height-viewport-100 sidebar'>
+      <div class='py1 px2'>
+        <h3 class="m0 no-anchor">@thebespokepixel/es-tinycolor</h3>
+        <div class="mb1"><code>1.0.2</code></div>
+        <input
+          placeholder="Filter"
+          id="filter-input"
+          class="col12 block input"
+          type="text" />
+        <div id="toc">
+          <ul class="list-reset h5 py1-ul">
+            
+              
+              <li><a
+                href="#installation"
+                class="h5 bold black caps">
+                Installation
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#usage"
+                class="h5 bold black caps">
+                Usage
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#api"
+                class="h5 bold black caps">
+                API
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#constructor"
+                class="">
+                constructor
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#convertdecimaltohex"
+                class="">
+                convertDecimalToHex
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#converthextoint"
+                class="">
+                convertHexToInt
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#converthextodecimal"
+                class="">
+                convertHexToDecimal
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#converttopercentage"
+                class="">
+                convertToPercentage
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#rawtorgba"
+                class="">
+                rawToRgba
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#rawtodeeprgba"
+                class="">
+                rawToDeepRgba
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#conformrgba"
+                class="">
+                conformRgba
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#modify"
+                class="">
+                modify
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#desaturate"
+                class="">
+                desaturate
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#saturate"
+                class="">
+                saturate
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#greyscale"
+                class="">
+                greyscale
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#lighten"
+                class="">
+                lighten
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#brighten"
+                class="">
+                brighten
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#darken"
+                class="">
+                darken
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#spin"
+                class="">
+                spin
+                
+              </a>
+              
+              </li>
+            
+          </ul>
+        </div>
+        <div class="badges"><p><p><a href="https://github.com/MarkGriffiths/es-tinycolor" title="Github"><img src="https://img.shields.io/badge/github-source-4E73B6.svg?style=flat" alt="Github"></a> <a href="https://travis-ci.org/MarkGriffiths/es-tinycolor" title="Travis"><img src="https://img.shields.io/travis/MarkGriffiths/es-tinycolor.svg?branch=master&#x26;style=flat&#x26;logo=travis" alt="Travis"></a> <br>
+</p> <p><a href="https://codeclimate.com/github/MarkGriffiths/es-tinycolor/maintainability" title="Code-climate"><img src="https://api.codeclimate.com/v1/badges/fbe4afd7bf57c41a0e06/maintainability?style=flat" alt="Code-climate"></a> <a href="https://codeclimate.com/github/MarkGriffiths/es-tinycolor/test_coverage" title="Coverage"><img src="https://api.codeclimate.com/v1/badges/fbe4afd7bf57c41a0e06/test_coverage?style=flat" alt="Coverage"></a> <br>
+</p> <p><a href="https://david-dm.org/MarkGriffiths/es-tinycolor/master" title="David"><img src="https://img.shields.io/david/MarkGriffiths/es-tinycolor.svg?branch=master&#x26;style=flat" alt="David"></a> <br>
+</p> <br>
+</p></div>
+        <div class="mt1 h6 quiet">
+          <a href="http://documentation.js.org/reading-documentation.html">Need help reading this?</a>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="flex-column px2 sidespace">
+      <h3 class="m0 no-anchor">@thebespokepixel/es-tinycolor</h3>
+    </div> -->
+    <div id='split-right' class='relative overflow-auto height-viewport-100'>
+      
+        
+          <div class="keyline-top-not py1"><section class="py0 px3 clearfix note">
+	<h2 id="installation" class="m0">
+		Installation
+	</h2>
+	
+		<pre><code>  npm install @thebespokepixel/es-tinycolor
+</code></pre>
+
+	
+	
+</section>
+</div>
+        
+      
+        
+          <div class="keyline-top-not py1"><section class="py0 px3 clearfix note">
+	<h2 id="usage" class="m0">
+		Usage
+	</h2>
+	
+		
+
+	
+	
+		<pre class='hljs'><span class="hljs-keyword">import</span> estinycolor <span class="hljs-keyword">from</span> <span class="hljs-string">'@thebespokepixel/es-tinycolor'</span>
+
+<span class="hljs-keyword">const</span> color = tinycolor(<span class="hljs-string">"red"</span>)
+
+color.toRgbString() <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></pre>
+<p>Call <code>tinycolor(input)</code> or <code>new tinycolor(input)</code>, and you will have an object with the following properties.  See Accepted String Input and Accepted Object Input below for more information about what is accepted.</p>
+<h3>Accepted String Input</h3>
+<p>The string parsing is very permissive.  It is meant to make typing a color as input as easy as possible.  All commas, percentages, parenthesis are optional, and most input allow either 0-1, 0%-100%, or 0-n (where n is either 100, 255, or 360 depending on the value).</p>
+<p>HSL and HSV both require either 0%-100% or 0-1 for the <code>S</code>/<code>L</code>/<code>V</code> properties.  The <code>H</code> (hue) can have values between 0%-100% or 0-360.</p>
+<p>RGB input requires either 0-255 or 0%-100%.</p>
+<p>If you call <code>tinycolor.fromRatio</code>, RGB and Hue input can also accept 0-1.</p>
+<p>Here are some examples of string input:</p>
+<h4>Hex, 8-digit (RGBA) Hex</h4>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"#000"</span>);
+tinycolor(<span class="hljs-string">"000"</span>);
+tinycolor(<span class="hljs-string">"#369C"</span>);
+tinycolor(<span class="hljs-string">"369C"</span>);
+tinycolor(<span class="hljs-string">"#f0f0f6"</span>);
+tinycolor(<span class="hljs-string">"f0f0f6"</span>);
+tinycolor(<span class="hljs-string">"#f0f0f688"</span>);
+tinycolor(<span class="hljs-string">"f0f0f688"</span>);</pre>
+<h4>RGB, RGBA</h4>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"rgb (255, 0, 0)"</span>);
+tinycolor(<span class="hljs-string">"rgb 255 0 0"</span>);
+tinycolor(<span class="hljs-string">"rgba (255, 0, 0, .5)"</span>);
+tinycolor({ <span class="hljs-attr">r</span>: <span class="hljs-number">255</span>, <span class="hljs-attr">g</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">0</span> });
+tinycolor.fromRatio({ <span class="hljs-attr">r</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">g</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">0</span> });
+tinycolor.fromRatio({ <span class="hljs-attr">r</span>: <span class="hljs-number">.5</span>, <span class="hljs-attr">g</span>: <span class="hljs-number">.5</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">.5</span> });</pre>
+<h4>HSL, HSLA</h4>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"hsl(0, 100%, 50%)"</span>);
+tinycolor(<span class="hljs-string">"hsla(0, 100%, 50%, .5)"</span>);
+tinycolor(<span class="hljs-string">"hsl(0, 100%, 50%)"</span>);
+tinycolor(<span class="hljs-string">"hsl 0 1.0 0.5"</span>);
+tinycolor({ <span class="hljs-attr">h</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">s</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">l</span>: <span class="hljs-number">.5</span> });
+tinycolor.fromRatio({ <span class="hljs-attr">h</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">s</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">l</span>: <span class="hljs-number">0</span> });
+tinycolor.fromRatio({ <span class="hljs-attr">h</span>: <span class="hljs-number">.5</span>, <span class="hljs-attr">s</span>: <span class="hljs-number">.5</span>, <span class="hljs-attr">l</span>: <span class="hljs-number">.5</span> });</pre>
+<h4>HSV, HSVA</h4>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"hsv(0, 100%, 100%)"</span>);
+tinycolor(<span class="hljs-string">"hsva(0, 100%, 100%, .5)"</span>);
+tinycolor(<span class="hljs-string">"hsv (0 100% 100%)"</span>);
+tinycolor(<span class="hljs-string">"hsv 0 1 1"</span>);
+tinycolor({ <span class="hljs-attr">h</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">s</span>: <span class="hljs-number">100</span>, <span class="hljs-attr">v</span>: <span class="hljs-number">100</span> });
+tinycolor.fromRatio({ <span class="hljs-attr">h</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">s</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">v</span>: <span class="hljs-number">0</span> });
+tinycolor.fromRatio({ <span class="hljs-attr">h</span>: <span class="hljs-number">.5</span>, <span class="hljs-attr">s</span>: <span class="hljs-number">.5</span>, <span class="hljs-attr">v</span>: <span class="hljs-number">.5</span> });</pre>
+<h4>Named</h4>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"RED"</span>);
+tinycolor(<span class="hljs-string">"blanchedalmond"</span>);
+tinycolor(<span class="hljs-string">"darkblue"</span>);</pre>
+<h3>Accepted Object Input</h3>
+<p>If you are calling this from code, you may want to use object input.  Here are some examples of the different types of accepted object inputs:</p>
+<pre><code>{ r: 255, g: 0, b: 0 }
+{ r: 255, g: 0, b: 0, a: .5 }
+{ h: 0, s: 100, l: 50 }
+{ h: 0, s: 100, v: 100 }
+</code></pre>
+<h2>Methods</h2>
+<h3>getFormat</h3>
+<p>Returns the format used to create the tinycolor instance</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.getFormat(); <span class="hljs-comment">// "name"</span>
+color = tinycolor({<span class="hljs-attr">r</span>:<span class="hljs-number">255</span>, <span class="hljs-attr">g</span>:<span class="hljs-number">255</span>, <span class="hljs-attr">b</span>:<span class="hljs-number">255</span>});
+color.getFormat(); <span class="hljs-comment">// "rgb"</span></pre>
+<h3>getOriginalInput</h3>
+<p>Returns the input passed into the constructer used to create the tinycolor instance</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.getOriginalInput(); <span class="hljs-comment">// "red"</span>
+color = tinycolor({<span class="hljs-attr">r</span>:<span class="hljs-number">255</span>, <span class="hljs-attr">g</span>:<span class="hljs-number">255</span>, <span class="hljs-attr">b</span>:<span class="hljs-number">255</span>});
+color.getOriginalInput(); <span class="hljs-comment">// "{r: 255, g: 255, b: 255}"</span></pre>
+<h3>isValid</h3>
+<p>Return a boolean indicating whether the color was successfully parsed.  Note: if the color is not valid then it will act like <code>black</code> when being used with other methods.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color1 = tinycolor(<span class="hljs-string">"red"</span>);
+color1.isValid(); <span class="hljs-comment">// true</span>
+color1.toHexString(); <span class="hljs-comment">// "#ff0000"</span>
+
+<span class="hljs-keyword">var</span> color2 = tinycolor(<span class="hljs-string">"not a color"</span>);
+color2.isValid(); <span class="hljs-comment">// false</span>
+color2.toString(); <span class="hljs-comment">// "#000000"</span></pre>
+<h3>getBrightness</h3>
+<p>Returns the perceived brightness of a color, from <code>0-255</code>, as defined by <a href="http://www.w3.org/TR/AERT#color-contrast">Web Content Accessibility Guidelines (Version 1.0)</a>.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color1 = tinycolor(<span class="hljs-string">"#fff"</span>);
+color1.getBrightness(); <span class="hljs-comment">// 255</span>
+
+<span class="hljs-keyword">var</span> color2 = tinycolor(<span class="hljs-string">"#000"</span>);
+color2.getBrightness(); <span class="hljs-comment">// 0</span></pre>
+<h3>isLight</h3>
+<p>Return a boolean indicating whether the color's perceived brightness is light.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color1 = tinycolor(<span class="hljs-string">"#fff"</span>);
+color1.isLight(); <span class="hljs-comment">// true</span>
+
+<span class="hljs-keyword">var</span> color2 = tinycolor(<span class="hljs-string">"#000"</span>);
+color2.isLight(); <span class="hljs-comment">// false</span></pre>
+<h3>isDark</h3>
+<p>Return a boolean indicating whether the color's perceived brightness is dark.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color1 = tinycolor(<span class="hljs-string">"#fff"</span>);
+color1.isDark(); <span class="hljs-comment">// false</span>
+
+<span class="hljs-keyword">var</span> color2 = tinycolor(<span class="hljs-string">"#000"</span>);
+color2.isDark(); <span class="hljs-comment">// true</span></pre>
+<h3>getLuminance</h3>
+<p>Returns the perceived luminance of a color, from <code>0-1</code> as defined by <a href="http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef">Web Content Accessibility Guidelines (Version 2.0).</a></p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color1 = tinycolor(<span class="hljs-string">"#fff"</span>);
+color1.getLuminance(); <span class="hljs-comment">// 1</span>
+
+<span class="hljs-keyword">var</span> color2 = tinycolor(<span class="hljs-string">"#000"</span>);
+color2.getLuminance(); <span class="hljs-comment">// 0</span></pre>
+<h3>getAlpha</h3>
+<p>Returns the alpha value of a color, from <code>0-1</code>.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color1 = tinycolor(<span class="hljs-string">"rgba(255, 0, 0, .5)"</span>);
+color1.getAlpha(); <span class="hljs-comment">// 0.5</span>
+
+<span class="hljs-keyword">var</span> color2 = tinycolor(<span class="hljs-string">"rgb(255, 0, 0)"</span>);
+color2.getAlpha(); <span class="hljs-comment">// 1</span>
+
+<span class="hljs-keyword">var</span> color3 = tinycolor(<span class="hljs-string">"transparent"</span>);
+color3.getAlpha(); <span class="hljs-comment">// 0</span></pre>
+<h3>setAlpha</h3>
+<p>Sets the alpha value on a current color.  Accepted range is in between <code>0-1</code>.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.getAlpha(); <span class="hljs-comment">// 1</span>
+color.setAlpha(<span class="hljs-number">.5</span>);
+color.getAlpha(); <span class="hljs-comment">// .5</span>
+color.toRgbString(); <span class="hljs-comment">// "rgba(255, 0, 0, .5)"</span></pre>
+<h3>String Representations</h3>
+<p>The following methods will return a property for the <code>alpha</code> value, which can be ignored: <code>toHsv</code>, <code>toHsl</code>, <code>toRgb</code></p>
+<h3>toHsv</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toHsv(); <span class="hljs-comment">// { h: 0, s: 1, v: 1, a: 1 }</span></pre>
+<h3>toHsvString</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toHsvString(); <span class="hljs-comment">// "hsv(0, 100%, 100%)"</span>
+color.setAlpha(<span class="hljs-number">0.5</span>);
+color.toHsvString(); <span class="hljs-comment">// "hsva(0, 100%, 100%, 0.5)"</span></pre>
+<h3>toHsl</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toHsl(); <span class="hljs-comment">// { h: 0, s: 1, l: 0.5, a: 1 }</span></pre>
+<h3>toHslString</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toHslString(); <span class="hljs-comment">// "hsl(0, 100%, 50%)"</span>
+color.setAlpha(<span class="hljs-number">0.5</span>);
+color.toHslString(); <span class="hljs-comment">// "hsla(0, 100%, 50%, 0.5)"</span></pre>
+<h3>toHex</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toHex(); <span class="hljs-comment">// "ff0000"</span></pre>
+<h3>toHexString</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toHexString(); <span class="hljs-comment">// "#ff0000"</span></pre>
+<h3>toHex8</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toHex8(); <span class="hljs-comment">// "ff0000ff"</span></pre>
+<h3>toHex8String</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toHex8String(); <span class="hljs-comment">// "#ff0000ff"</span></pre>
+<h3>toRgb</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toRgb(); <span class="hljs-comment">// { r: 255, g: 0, b: 0, a: 1 }</span></pre>
+<h3>toRgbString</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toRgbString(); <span class="hljs-comment">// "rgb(255, 0, 0)"</span>
+color.setAlpha(<span class="hljs-number">0.5</span>);
+color.toRgbString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></pre>
+<h3>toPercentageRgb</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toPercentageRgb() <span class="hljs-comment">// { r: "100%", g: "0%", b: "0%", a: 1 }</span></pre>
+<h3>toPercentageRgbString</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toPercentageRgbString(); <span class="hljs-comment">// "rgb(100%, 0%, 0%)"</span>
+color.setAlpha(<span class="hljs-number">0.5</span>);
+color.toPercentageRgbString(); <span class="hljs-comment">// "rgba(100%, 0%, 0%, 0.5)"</span></pre>
+<h3>toName</h3>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor(<span class="hljs-string">"red"</span>);
+color.toName(); <span class="hljs-comment">// "red"</span></pre>
+<h3>toFilter</h3>
+<pre><code>var color = tinycolor("red");
+color.toFilter(); // "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffff0000,endColorstr=#ffff0000)"
+</code></pre>
+<h3>toString</h3>
+<p>Print to a string, depending on the input format.  You can also override this by passing one of <code>"rgb", "prgb", "hex6", "hex3", "hex8", "name", "hsl", "hsv"</code> into the function.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color1 = tinycolor(<span class="hljs-string">"red"</span>);
+color1.toString(); <span class="hljs-comment">// "red"</span>
+color1.toString(<span class="hljs-string">"hsv"</span>); <span class="hljs-comment">// "hsv(0, 100%, 100%)"</span>
+
+<span class="hljs-keyword">var</span> color2 = tinycolor(<span class="hljs-string">"rgb(255, 0, 0)"</span>);
+color2.toString(); <span class="hljs-comment">// "rgb(255, 0, 0)"</span>
+color2.setAlpha(<span class="hljs-number">.5</span>);
+color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></pre>
+<h3>Color Modification</h3>
+<p>These methods manipulate the current color, and return it for chaining.  For instance:</p>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"red"</span>).lighten().desaturate().toHexString() <span class="hljs-comment">// "#f53d3d"</span></pre>
+<h3>lighten</h3>
+<p><code>lighten: function(amount = 10) -> TinyColor</code>.  Lighten the color a given amount, from 0 to 100.  Providing 100 will always return white.</p>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"#f00"</span>).lighten().toString(); <span class="hljs-comment">// "#ff3333"</span>
+tinycolor(<span class="hljs-string">"#f00"</span>).lighten(<span class="hljs-number">100</span>).toString(); <span class="hljs-comment">// "#ffffff"</span></pre>
+<h3>brighten</h3>
+<p><code>brighten: function(amount = 10) -> TinyColor</code>.  Brighten the color a given amount, from 0 to 100.</p>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"#f00"</span>).brighten().toString(); <span class="hljs-comment">// "#ff1919"</span></pre>
+<h3>darken</h3>
+<p><code>darken: function(amount = 10) -> TinyColor</code>.  Darken the color a given amount, from 0 to 100.  Providing 100 will always return black.</p>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"#f00"</span>).darken().toString(); <span class="hljs-comment">// "#cc0000"</span>
+tinycolor(<span class="hljs-string">"#f00"</span>).darken(<span class="hljs-number">100</span>).toString(); <span class="hljs-comment">// "#000000"</span></pre>
+<h3>desaturate</h3>
+<p><code>desaturate: function(amount = 10) -> TinyColor</code>.  Desaturate the color a given amount, from 0 to 100.  Providing 100 will is the same as calling <code>greyscale</code>.</p>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"#f00"</span>).desaturate().toString(); <span class="hljs-comment">// "#f20d0d"</span>
+tinycolor(<span class="hljs-string">"#f00"</span>).desaturate(<span class="hljs-number">100</span>).toString(); <span class="hljs-comment">// "#808080"</span></pre>
+<h3>saturate</h3>
+<p><code>saturate: function(amount = 10) -> TinyColor</code>.  Saturate the color a given amount, from 0 to 100.</p>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"hsl(0, 10%, 50%)"</span>).saturate().toString(); <span class="hljs-comment">// "hsl(0, 20%, 50%)"</span></pre>
+<h3>greyscale</h3>
+<p><code>greyscale: function() -> TinyColor</code>.  Completely desaturates a color into greyscale.  Same as calling <code>desaturate(100)</code>.</p>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"#f00"</span>).greyscale().toString(); <span class="hljs-comment">// "#808080"</span></pre>
+<h3>spin</h3>
+<p><code>spin: function(amount = 0) -> TinyColor</code>.  Spin the hue a given amount, from -360 to 360.  Calling with 0, 360, or -360 will do nothing (since it sets the hue back to what it was before).</p>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"#f00"</span>).spin(<span class="hljs-number">180</span>).toString(); <span class="hljs-comment">// "#00ffff"</span>
+tinycolor(<span class="hljs-string">"#f00"</span>).spin(<span class="hljs-number">-90</span>).toString(); <span class="hljs-comment">// "#7f00ff"</span>
+tinycolor(<span class="hljs-string">"#f00"</span>).spin(<span class="hljs-number">90</span>).toString(); <span class="hljs-comment">// "#80ff00"</span>
+
+<span class="hljs-comment">// spin(0) and spin(360) do nothing</span>
+tinycolor(<span class="hljs-string">"#f00"</span>).spin(<span class="hljs-number">0</span>).toString(); <span class="hljs-comment">// "#ff0000"</span>
+tinycolor(<span class="hljs-string">"#f00"</span>).spin(<span class="hljs-number">360</span>).toString(); <span class="hljs-comment">// "#ff0000"</span></pre>
+<h3>Color Combinations</h3>
+<p>Combination functions return an array of TinyColor objects unless otherwise noted.</p>
+<h3>analogous</h3>
+<p><code>analogous: function(, results = 6, slices = 30) -> array&#x3C;TinyColor></code>.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> colors = tinycolor(<span class="hljs-string">"#f00"</span>).analogous();
+
+colors.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t</span>) </span>{ <span class="hljs-keyword">return</span> t.toHexString(); }); <span class="hljs-comment">// [ "#ff0000", "#ff0066", "#ff0033", "#ff0000", "#ff3300", "#ff6600" ]</span></pre>
+<h3>monochromatic</h3>
+<p><code>monochromatic: function(, results = 6) -> array&#x3C;TinyColor></code>.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> colors = tinycolor(<span class="hljs-string">"#f00"</span>).monochromatic();
+
+colors.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t</span>) </span>{ <span class="hljs-keyword">return</span> t.toHexString(); }); <span class="hljs-comment">// [ "#ff0000", "#2a0000", "#550000", "#800000", "#aa0000", "#d40000" ]</span></pre>
+<h3>splitcomplement</h3>
+<p><code>splitcomplement: function() -> array&#x3C;TinyColor></code>.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> colors = tinycolor(<span class="hljs-string">"#f00"</span>).splitcomplement();
+
+colors.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t</span>) </span>{ <span class="hljs-keyword">return</span> t.toHexString(); }); <span class="hljs-comment">// [ "#ff0000", "#ccff00", "#0066ff" ]</span></pre>
+<h3>triad</h3>
+<p><code>triad: function() -> array&#x3C;TinyColor></code>.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> colors = tinycolor(<span class="hljs-string">"#f00"</span>).triad();
+
+colors.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t</span>) </span>{ <span class="hljs-keyword">return</span> t.toHexString(); }); <span class="hljs-comment">// [ "#ff0000", "#00ff00", "#0000ff" ]</span></pre>
+<h3>tetrad</h3>
+<p><code>tetrad: function() -> array&#x3C;TinyColor></code>.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> colors = tinycolor(<span class="hljs-string">"#f00"</span>).tetrad();
+
+colors.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t</span>) </span>{ <span class="hljs-keyword">return</span> t.toHexString(); }); <span class="hljs-comment">// [ "#ff0000", "#80ff00", "#00ffff", "#7f00ff" ]</span></pre>
+<h3>complement</h3>
+<p><code>complement: function() -> TinyColor</code>.</p>
+<pre class='hljs'>tinycolor(<span class="hljs-string">"#f00"</span>).complement().toHexString(); <span class="hljs-comment">// "#00ffff"</span></pre>
+<h2>Color Utilities</h2>
+<pre class='hljs'>tinycolor.equals(color1, color2)
+tinycolor.mix(color1, color2, amount = 50)</pre>
+<h3>random</h3>
+<p>Returns a random color.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color = tinycolor.random();
+color.toRgb(); <span class="hljs-comment">// "{r: 145, g: 40, b: 198, a: 1}"</span></pre>
+<h3>Readability</h3>
+<p>TinyColor assesses readability based on the <a href="http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef">Web Content Accessibility Guidelines (Version 2.0)</a>.</p>
+<h4>readability</h4>
+<p><code>readability: function(TinyColor, TinyColor) -> Object</code>.
+Returns the contrast ratio between two colors.</p>
+<pre class='hljs'>tinycolor.readability(<span class="hljs-string">"#000"</span>, <span class="hljs-string">"#000"</span>); <span class="hljs-comment">// 1</span>
+tinycolor.readability(<span class="hljs-string">"#000"</span>, <span class="hljs-string">"#111"</span>); <span class="hljs-comment">// 1.1121078324840545</span>
+tinycolor.readability(<span class="hljs-string">"#000"</span>, <span class="hljs-string">"#fff"</span>); <span class="hljs-comment">// 21</span></pre>
+<p>Use the values in your own calculations, or use one of the convenience functions below.</p>
+<h4>isReadable</h4>
+<p><code>isReadable: function(TinyColor, TinyColor, Object) -> Boolean</code>.  Ensure that foreground and background color combinations meet WCAG guidelines. <code>Object</code> is optional, defaulting to <code>{level: "AA",size: "small"}</code>.  <code>level</code> can be <code>"AA"</code> or "AAA" and <code>size</code> can be <code>"small"</code> or <code>"large"</code>.</p>
+<p>Here are links to read more about the <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">AA</a> and <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast7.html">AAA</a> requirements.</p>
+<pre class='hljs'>tinycolor.isReadable(<span class="hljs-string">"#000"</span>, <span class="hljs-string">"#111"</span>, {}); <span class="hljs-comment">// false</span>
+tinycolor.isReadable(<span class="hljs-string">"#ff0088"</span>, <span class="hljs-string">"#5c1a72"</span>,{<span class="hljs-attr">level</span>:<span class="hljs-string">"AA"</span>,<span class="hljs-attr">size</span>:<span class="hljs-string">"small"</span>}); <span class="hljs-comment">//false</span>
+tinycolor.isReadable(<span class="hljs-string">"#ff0088"</span>, <span class="hljs-string">"#5c1a72"</span>,{<span class="hljs-attr">level</span>:<span class="hljs-string">"AA"</span>,<span class="hljs-attr">size</span>:<span class="hljs-string">"large"</span>}), <span class="hljs-comment">//true</span></pre>
+<h4>mostReadable</h4>
+<p><code>mostReadable: function(TinyColor, [TinyColor, Tinycolor ...], Object) -> Boolean</code>.
+Given a base color and a list of possible foreground or background colors for that base, returns the most readable color.
+If none of the colors in the list is readable, <code>mostReadable</code> will return the better of black or white if <code>includeFallbackColors:true</code>.</p>
+<pre class='hljs'>tinycolor.mostReadable(<span class="hljs-string">"#000"</span>, [<span class="hljs-string">"#f00"</span>, <span class="hljs-string">"#0f0"</span>, <span class="hljs-string">"#00f"</span>]).toHexString(); <span class="hljs-comment">// "#00ff00"</span>
+tinycolor.mostReadable(tinycolor.mostReadable(<span class="hljs-string">"#123"</span>, [<span class="hljs-string">"#124"</span>, <span class="hljs-string">"#125"</span>],{<span class="hljs-attr">includeFallbackColors</span>:<span class="hljs-literal">false</span>}).toHexString(); <span class="hljs-comment">// "#112255"</span>
+tinycolor.mostReadable(tinycolor.mostReadable(<span class="hljs-string">"#123"</span>, [<span class="hljs-string">"#124"</span>, <span class="hljs-string">"#125"</span>],{<span class="hljs-attr">includeFallbackColors</span>:<span class="hljs-literal">true</span>}).toHexString();  <span class="hljs-comment">// "#ffffff"</span>
+tinycolor.mostReadable(<span class="hljs-string">"#ff0088"</span>, [<span class="hljs-string">"#2e0c3a"</span>],{<span class="hljs-attr">includeFallbackColors</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">level</span>:<span class="hljs-string">"AAA"</span>,<span class="hljs-attr">size</span>:<span class="hljs-string">"large"</span>}).toHexString()   <span class="hljs-comment">// "#2e0c3a",</span>
+tinycolor.mostReadable(<span class="hljs-string">"#ff0088"</span>, [<span class="hljs-string">"#2e0c3a"</span>],{<span class="hljs-attr">includeFallbackColors</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">level</span>:<span class="hljs-string">"AAA"</span>,<span class="hljs-attr">size</span>:<span class="hljs-string">"small"</span>}).toHexString()   <span class="hljs-comment">// "#000000",</span></pre>
+<p>See <a href="https://github.com/bgrins/TinyColor/blob/master/index.html">index.html</a> in the project for a demo.</p>
+<h2>Common operations</h2>
+<h3>clone</h3>
+<p><code>clone: function() -> TinyColor</code>.
+Instantiate a new TinyColor object with the same color.  Any changes to the new one won't affect the old one.</p>
+<pre class='hljs'><span class="hljs-keyword">var</span> color1 = tinycolor(<span class="hljs-string">"#F00"</span>);
+<span class="hljs-keyword">var</span> color2 = color1.clone();
+color2.setAlpha(<span class="hljs-number">.5</span>);
+
+color1.toString(); <span class="hljs-comment">// "#ff0000"</span>
+color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></pre>
+
+	
+</section>
+</div>
+        
+      
+        
+          <div class="keyline-top-not py1"><section class="py0 px3 clearfix note">
+	<h2 id="api" class="m0">
+		API
+	</h2>
+	
+		
+
+	
+	
+</section>
+</div>
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='constructor'>
+      constructor
+      
+      <span> → TinyColor</span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/classes/tinycolor.js#L26-L46'>
+      <span>src/lib/classes/tinycolor.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Create a new TinyColor instance</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>constructor(color: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>), opts: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>) → TinyColor</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>color</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>))</code>
+      Notation describing a color
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>opts</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+            = <code>{}</code>)</code>
+      Options object (see below)
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>TinyColor</code>:
+        An instance representing the color
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='convertdecimaltohex'>
+      convertDecimalToHex
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/converters.js#L13-L13'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Converts a decimal to a hex value</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertDecimalToHex</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>d</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+      Decimal input value
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        Hexadecimal string
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='converthextoint'>
+      convertHexToInt
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/converters.js#L20-L20'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Converts a base-16 hex value into a base-10 integer</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertHexToInt</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>val</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+      Hexadecimal input value
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>:
+        Integer value
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='converthextodecimal'>
+      convertHexToDecimal
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/converters.js#L27-L27'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Converts a hex value to a decimal</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertHexToDecimal</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>h</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+      Hexadecimal input value
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>:
+        Decimal value
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='converttopercentage'>
+      convertToPercentage
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/converters.js#L34-L34'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Replace a decimal with it's percentage value</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertToPercentage</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>n</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+      Decimal input value
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        Percentage string
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='rawtorgba'>
+      rawToRgba
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/converters.js#L42-L45'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Handle conversion of internal precise values to exportable values. Should be
+able to accept a tinycolour instance 'this' value.</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>rawToRgba</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>raw</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+      { _r, _g, _b, _a } with _r, _g, _b in 
+[0.0, 255.0]
+ and _a in 
+[0, 1]
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        { r, g, b } in 
+[0, 255]
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='rawtodeeprgba'>
+      rawToDeepRgba
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/converters.js#L54-L54'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Handle conversion of internal precise values to exportable values,
+maintaining deep precision. Should be able to accept a tinycolour instance
+'this' value.</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>rawToDeepRgba</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>raw</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+      { _r, _g, _b, _a } with _r, _g, _b in 
+[0.0, 255.0]
+ and _a in 
+[0, 1]
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        { r, g, b, a } in 
+[0.0, 255.0]
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='conformrgba'>
+      conformRgba
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/converters.js#L62-L65'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Handle bounds / percentage checking to conform to CSS color spec</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>conformRgba</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>rgba</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+      { r, g, b, a } in 
+[0, 255]
+ or 
+[0, 1]
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        { r, g, b } in 
+[0, 255]
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='modify'>
+      modify
+      
+      <span> → TinyColor</span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/modifiers.js#L16-L25'>
+      <span>src/lib/modifiers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Apply a modification conditionally</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>modify(action: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, args: arguments) → TinyColor</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>action</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+      The modification function to apply
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>args</span> <code class='quiet'>(arguments)</code>
+      Arguments passed to specified function
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>TinyColor</code>:
+        The modified color
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='desaturate'>
+      desaturate
+      
+      <span> → TinyColor</span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/modifiers.js#L33-L39'>
+      <span>src/lib/modifiers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Desaturate Color</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>desaturate(color: TinyColor, amount: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>) → TinyColor</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>color</span> <code class='quiet'>(TinyColor)</code>
+      The color to modify
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>amount</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+      The amount to desaturate &#x3C;= 100
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>TinyColor</code>:
+        The modified color
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='saturate'>
+      saturate
+      
+      <span> → TinyColor</span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/modifiers.js#L47-L53'>
+      <span>src/lib/modifiers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Saturate color</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>saturate(color: TinyColor, amount: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>) → TinyColor</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>color</span> <code class='quiet'>(TinyColor)</code>
+      The color to modify
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>amount</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+      The amount to saturate &#x3C;= 100
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>TinyColor</code>:
+        The modified color
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='greyscale'>
+      greyscale
+      
+      <span> → TinyColor</span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/modifiers.js#L60-L62'>
+      <span>src/lib/modifiers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Remove all chroma, leaving luminence</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>greyscale(color: TinyColor) → TinyColor</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>color</span> <code class='quiet'>(TinyColor)</code>
+      The color to modify
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>TinyColor</code>:
+        The modified color
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='lighten'>
+      lighten
+      
+      <span> → TinyColor</span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/modifiers.js#L70-L76'>
+      <span>src/lib/modifiers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Lighten a color</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>lighten(color: TinyColor, amount: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>) → TinyColor</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>color</span> <code class='quiet'>(TinyColor)</code>
+      The color to modify
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>amount</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+      The amount to ligten by &#x3C;= 100
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>TinyColor</code>:
+        The modified color
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='brighten'>
+      brighten
+      
+      <span> → TinyColor</span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/modifiers.js#L84-L91'>
+      <span>src/lib/modifiers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Brighten a color</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>brighten(color: TinyColor, amount: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>) → TinyColor</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>color</span> <code class='quiet'>(TinyColor)</code>
+      The color to modify
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>amount</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+      The amount to brighten by &#x3C;= 100
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>TinyColor</code>:
+        The modified color
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='darken'>
+      darken
+      
+      <span> → TinyColor</span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/modifiers.js#L99-L105'>
+      <span>src/lib/modifiers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Darken a color</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>darken(color: TinyColor, amount: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>) → TinyColor</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>color</span> <code class='quiet'>(TinyColor)</code>
+      The color to modify
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>amount</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+      The amount to brighten by &#x3C;= 100
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>TinyColor</code>:
+        The modified color
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='spin'>
+      spin
+      
+      <span> → TinyColor</span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/MarkGriffiths/es-tinycolor/blob/f6b20cd40ae0a823db28b013c400db72690f1031/src/lib/modifiers.js#L114-L119'>
+      <span>src/lib/modifiers.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Spin takes a positive or negative amount within [-360, 360] indicating the
+change of hue. Values outside of this range will be wrapped into this range.</p>
+
+
+  
+    <div class='pre p1 bg-darken-1 mt0 rounded signature'>spin(color: TinyColor, amount: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>) → TinyColor</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>color</span> <code class='quiet'>(TinyColor)</code>
+      The color to modify
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>amount</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+      Degrees to rotate hue by
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>TinyColor</code>:
+        The modified color
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+    </div>
+  </div>
+  <script src="assets/js/anchor.min.js"></script>
+  <script src="assets/js/split.min.js"></script>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

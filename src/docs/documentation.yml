@@ -1,0 +1,12 @@
+toc:
+  - name: "Installation"
+    description: |
+      ```
+        npm install @thebespokepixel/es-tinycolor
+      ```
+  - name: "Usage"
+    example: "src/docs/example.md"
+  - name: "API"
+    description: |
+
+
