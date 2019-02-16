@@ -8,14 +8,12 @@
 > [![Known Vulnerabilities][snyk-badge]][snyk]
 > [![npm Status][npm-badge]][npm]
 > [![Chat on Gitter][gitter-badge]][gitter]  
-> ![Project status][project-badge]
 > [![devDependency Status][david-dev-badge]][david-dev]
 > [![Coverage][coverage-badge]][coverage]
 > [![Inline docs][inch-badge]][inch]
 > [![Greenkeeper badge](https://badges.greenkeeper.io/MarkGriffiths/es-tinycolor.svg)](https://greenkeeper.io/)
 
 [gitter-badge]: https://img.shields.io/gitter/room/MarkGriffiths/help.svg?style=flat
-[project-badge]: http://img.shields.io/badge/status-beta-blue.svg?style=flat
 [build-badge]: http://img.shields.io/travis/MarkGriffiths/es-tinycolor.svg?branch=master&style=flat
 [david-badge]: http://img.shields.io/david/MarkGriffiths/es-tinycolor.svg?branch=master&style=flat
 [david-dev-badge]: http://img.shields.io/david/dev/MarkGriffiths/es-tinycolor.svg?branch=master&style=flat
