@@ -16,4 +16,4 @@ ${usage}
 Full documentation can be found at [https://markgriffiths.github.io/es-tinycolor/][2]
 
 [1]: https://github.com/bgrins/TinyColor
-[2]: https://markgriffiths.github.io/oco-colorvalue-ex/
+[2]: https://markgriffiths.github.io/es-tinycolor/

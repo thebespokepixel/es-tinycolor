@@ -45,7 +45,7 @@ If you call `tinycolor.fromRatio`, RGB and Hue input can also accept 0-1.
 
 Here are some examples of string input:
 
-### Hex, 8-digit (RGBA) Hex
+#### Hex, 8-digit (RGBA) Hex
 
 ```js
 tinycolor("#000");
@@ -58,7 +58,7 @@ tinycolor("#f0f0f688");
 tinycolor("f0f0f688");
 ```
 
-### RGB, RGBA
+#### RGB, RGBA
 
 ```js
 tinycolor("rgb (255, 0, 0)");
@@ -69,7 +69,7 @@ tinycolor.fromRatio({ r: 1, g: 0, b: 0 });
 tinycolor.fromRatio({ r: .5, g: .5, b: .5 });
 ```
 
-### HSL, HSLA
+#### HSL, HSLA
 
 ```js
 tinycolor("hsl(0, 100%, 50%)");
@@ -81,7 +81,7 @@ tinycolor.fromRatio({ h: 1, s: 0, l: 0 });
 tinycolor.fromRatio({ h: .5, s: .5, l: .5 });
 ```
 
-### HSV, HSVA
+#### HSV, HSVA
 
 ```js
 tinycolor("hsv(0, 100%, 100%)");
@@ -93,7 +93,7 @@ tinycolor.fromRatio({ h: 1, s: 0, v: 0 });
 tinycolor.fromRatio({ h: .5, s: .5, v: .5 });
 ```
 
-### Named
+#### Named
 
 ```js
 tinycolor("RED");
@@ -568,4 +568,4 @@ Full documentation can be found at [https://markgriffiths.github.io/es-tinycolor
 
 [1]: https://github.com/bgrins/TinyColor
 
-[2]: https://markgriffiths.github.io/oco-colorvalue-ex/
+[2]: https://markgriffiths.github.io/es-tinycolor/
