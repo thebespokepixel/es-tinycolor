@@ -45,14 +45,15 @@
     "node": ">=8.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.3",
-    "@babel/preset-env": "^7.3.1",
-    "ava": "^1.2.1",
-    "documentation-theme-bespoke": "^0.5.2",
-    "gulp": "^4.0.0",
-    "gulp-better-rollup": "^3.4.0",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "ava": "^2.1.0",
+    "documentation-theme-bespoke": "^0.5.6",
+    "gulp": "^4.0.2",
+    "gulp-better-rollup": "^4.0.1",
     "gulp-rename": "^1.4.0",
-    "nyc": "^13.3.0",
+    "nyc": "^14.1.1",
+    "rollup": "^1.15.3",
     "rollup-plugin-babel": "^4.3.2",
     "xo": "^0.24.0"
   },

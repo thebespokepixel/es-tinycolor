@@ -1450,4 +1450,4 @@ tinycolor.isReadable = TinyColor.isReadable;
 tinycolor.mostReadable = TinyColor.mostReadable;
 tinycolor.names = names;
 
-export { TinyColor, tinycolor, names };
+export { TinyColor, names, tinycolor };
