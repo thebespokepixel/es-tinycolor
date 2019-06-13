@@ -1455,5 +1455,5 @@ tinycolor.mostReadable = TinyColor.mostReadable;
 tinycolor.names = names;
 
 exports.TinyColor = TinyColor;
-exports.tinycolor = tinycolor;
 exports.names = names;
+exports.tinycolor = tinycolor;

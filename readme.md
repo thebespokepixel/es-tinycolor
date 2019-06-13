@@ -24,7 +24,7 @@
 ## Usage
 
 ```js
-import estinycolor from '@thebespokepixel/es-tinycolor'
+import {tinycolor} from '@thebespokepixel/es-tinycolor'
 
 const color = tinycolor("red")
 
