@@ -13,7 +13,7 @@
 
 ##### Help
 
-[![Inch](https://inch-ci.org/github/thebespokepixel/es-tinycolor.svg?branch=master&style=shields)](https://inch-ci.org/github/thebespokepixel/es-tinycolor "Inch") [![Gitter](https://img.shields.io/gitter/room/thebespokepixel/help.svg?style=flat)](https://gitter.im/thebespokepixel/help?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge "Gitter")   
+[![Inch](https://inch-ci.org/github/thebespokepixel/es-tinycolor.svg?branch=master&style=shields)](https://inch-ci.org/github/thebespokepixel/es-tinycolor "Inch")   
 
 
 ## Installation
