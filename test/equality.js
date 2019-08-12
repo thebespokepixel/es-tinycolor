@@ -1,8 +1,9 @@
 import test from 'ava'
-import {tinycolor} from '..'
 
 import conversions from './_conversions'
 import {colorValid, colorEquals} from './_macros'
+
+import {tinycolor} from '..'
 
 conversions.forEach(c => {
 	const tiny = tinycolor(c.hex)

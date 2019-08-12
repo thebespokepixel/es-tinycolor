@@ -13,7 +13,7 @@ ${badges}
 ${usage}
 
 ## Documentation
-Full documentation can be found at [https://markgriffiths.github.io/es-tinycolor/][2]
+Full documentation can be found at [https://thebespokepixel.github.io/es-tinycolor/][2]
 
 [1]: https://github.com/bgrins/TinyColor
-[2]: https://markgriffiths.github.io/es-tinycolor/
+[2]: https://thebespokepixel.github.io/es-tinycolor/
