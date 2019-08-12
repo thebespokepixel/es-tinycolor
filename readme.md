@@ -5,7 +5,7 @@
 ##### Status
 
 [![npm](https://img.shields.io/npm/v/@thebespokepixel/es-tinycolor.svg?style=flat&logo=npm)](https://www.npmjs.com/package/@thebespokepixel/es-tinycolor "npm") [![Travis](https://img.shields.io/travis/thebespokepixel/es-tinycolor.svg?branch=master&style=flat&logo=travis)](https://travis-ci.org/thebespokepixel/es-tinycolor "Travis") [![David](https://img.shields.io/david/thebespokepixel/es-tinycolor.svg?branch=master&style=flat)](https://david-dm.org/thebespokepixel/es-tinycolor/master "David")  
- [![Code-climate](https://api.codeclimate.com/v1/badges/fbe4afd7bf57c41a0e06/maintainability?style=flat)](https://codeclimate.com/github/thebespokepixel/es-tinycolor/maintainability "Code-climate") [![Coverage](https://api.codeclimate.com/v1/badges/fbe4afd7bf57c41a0e06/test_coverage?style=flat)](https://codeclimate.com/github/thebespokepixel/es-tinycolor/test_coverage "Coverage") [![Snyk](https://img.shields.io/snyk/vulnerabilities/github/thebespokepixel/es-tinycolor.svg?style=flat&logo=npm)](https://snyk.io/test/github/thebespokepixel/es-tinycolor "Snyk")   
+ [![Code-climate](https://api.codeclimate.com/v1/badges/b2bcb75bd517034aa609/maintainability?style=flat)](https://codeclimate.com/github/thebespokepixel/es-tinycolor/maintainability "Code-climate") [![Coverage](https://api.codeclimate.com/v1/badges/b2bcb75bd517034aa609/test_coverage?style=flat)](https://codeclimate.com/github/thebespokepixel/es-tinycolor/test_coverage "Coverage") [![Snyk](https://img.shields.io/snyk/vulnerabilities/github/thebespokepixel/es-tinycolor.svg?style=flat&logo=npm)](https://snyk.io/test/github/thebespokepixel/es-tinycolor "Snyk")   
 
 ##### Developer
 
