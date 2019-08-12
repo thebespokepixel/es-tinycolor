@@ -57,20 +57,35 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-function _objectSpread(target) {
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
-    var ownKeys = Object.keys(source);
 
-    if (typeof Object.getOwnPropertySymbols === 'function') {
-      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-      }));
+    if (i % 2) {
+      ownKeys(source, true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(source).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
     }
-
-    ownKeys.forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    });
   }
 
   return target;
@@ -118,7 +133,7 @@ const rgbaToHex = (rgba, allowShort) => {
   const hex = rgbaToArray(rgba).map(n => n.toString(16)).map(pad2);
   return allowShort && hex.every(h => h.charAt(0) === h.charAt(1)) ? hex.map(h => h.charAt(0)).join('') : hex.join('');
 };
-const rgbToHex = (rgba, allowShort) => rgbaToHex(_objectSpread({}, rgba, {
+const rgbToHex = (rgba, allowShort) => rgbaToHex(_objectSpread2({}, rgba, {
   a: 1
 }), allowShort);
 
@@ -478,7 +493,7 @@ class TinyColorExtensionAPI {
   }
 
   add(id, opts) {
-    this.colorspaces[id] = new TinyColorExtension(this, id, _objectSpread({}, this.opts, opts));
+    this.colorspaces[id] = new TinyColorExtension(this, id, _objectSpread2({}, this.opts, {}, opts));
 
     if (opts.alias) {
       opts.alias.forEach(id_ => {
@@ -490,7 +505,7 @@ class TinyColorExtensionAPI {
   }
 
   find(input) {
-    const color = _objectSpread({}, _template);
+    const color = _objectSpread2({}, _template);
 
     input = typeof input === 'string' ? input.trim().toLowerCase() : input;
 

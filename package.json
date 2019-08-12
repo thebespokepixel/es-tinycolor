@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MarkGriffiths/es-tinycolor.git"
+    "url": "git+https://github.com/thebespokepixel/es-tinycolor.git"
   },
   "keywords": [
     "color",
@@ -31,9 +31,9 @@
   "main": "index.js",
   "module": "index.mjs",
   "bugs": {
-    "url": "https://github.com/MarkGriffiths/es-tinycolor"
+    "url": "https://github.com/thebespokepixel/es-tinycolor"
   },
-  "homepage": "https://github.com/MarkGriffiths/es-tinycolor",
+  "homepage": "https://github.com/thebespokepixel/es-tinycolor",
   "files": [
     "index.js",
     "index.mjs"
@@ -45,16 +45,16 @@
     "node": ">=8.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "ava": "^2.1.0",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "ava": "^2.2.0",
     "documentation-theme-bespoke": "^0.5.6",
     "gulp": "^4.0.2",
     "gulp-better-rollup": "^4.0.1",
     "gulp-rename": "^1.4.0",
     "nyc": "^14.1.1",
-    "rollup": "^1.15.3",
-    "rollup-plugin-babel": "^4.3.2",
+    "rollup": "^1.19.4",
+    "rollup-plugin-babel": "^4.3.3",
     "xo": "^0.24.0"
   },
   "ava": {
@@ -82,7 +82,7 @@
     }
   },
   "badges": {
-    "github": "MarkGriffiths",
+    "github": "thebespokepixel",
     "npm": "thebespokepixel",
     "name": "es-tinycolor",
     "codeclimate": "fbe4afd7bf57c41a0e06",
@@ -91,7 +91,7 @@
         "title": "github",
         "text": "source",
         "color": "4E73B6",
-        "link": "https://github.com/MarkGriffiths/es-tinycolor"
+        "link": "https://github.com/thebespokepixel/es-tinycolor"
       }
     },
     "readme": {
