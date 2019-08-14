@@ -48,7 +48,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "ava": "^2.2.0",
-    "documentation-theme-bespoke": "^0.5.6",
+    "documentation-theme-bespoke": "^1.0.0",
     "gulp": "^4.0.2",
     "gulp-better-rollup": "^4.0.1",
     "gulp-rename": "^1.4.0",
@@ -95,25 +95,34 @@
       }
     },
     "readme": {
-      "Status": [
+      "Publishing Status": [
         [
           "npm",
-          "travis",
           "david"
         ],
         [
-          "code-climate",
-          "code-climate-coverage",
-          "snyk"
+          "travis-com",
+          "rollup"
         ]
       ],
-      "Developer": [
-        "greenkeeper",
-        "david-dev",
-        "rollup"
+      "Development Status": [
+        [
+          "greenkeeper",
+          "travis-com-dev"
+        ],
+        [
+          "david-dev",
+          "david-devdeps-dev"
+        ],
+        [
+          "snyk",
+          "code-climate",
+          "code-climate-coverage"
+        ]
       ],
-      "Help": [
-        "inch"
+      "Documentation/Help": [
+        "inch",
+        "twitter"
       ]
     },
     "docs": [
@@ -126,6 +135,7 @@
         "code-climate-coverage"
       ],
       [
+        "snyk",
         "david"
       ]
     ]
