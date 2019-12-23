@@ -52,7 +52,7 @@
     "gulp": "^4.0.2",
     "gulp-better-rollup": "^4.0.1",
     "gulp-rename": "^1.4.0",
-    "nyc": "^14.1.1",
+    "nyc": "^15.0.0",
     "rollup": "^1.19.4",
     "rollup-plugin-babel": "^4.3.3",
     "xo": "^0.24.0"
