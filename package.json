@@ -47,7 +47,7 @@
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "ava": "^2.2.0",
+    "ava": "^3.0.0",
     "documentation-theme-bespoke": "^1.0.0",
     "gulp": "^4.0.2",
     "gulp-better-rollup": "^4.0.1",
