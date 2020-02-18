@@ -12,11 +12,11 @@ node_js:
   - 11
   - 10
   - 9
-  - 8
 env:
   global:
     - CC_TEST_REPORTER_ID=ae5b3038c9b109619fb496da8ec68e1ae9273e7d58ecb75e7ae675f0ab265f3d
 before_install:
+  - npm i -g npm
   - npm install -g greenkeeper-lockfile
 install: npm ci > /dev/null
 before_script:
