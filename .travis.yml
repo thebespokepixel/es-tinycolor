@@ -3,8 +3,8 @@ branches:
   only:
     - master
     - develop
-    - "/^greenkeeper/.*$/"
-    - "/^feature/.*$/"
+    - /^greenkeeper/.*$/
+    - /^feature/.*$/
 language: node_js
 node_js:
   - stable
@@ -17,14 +17,13 @@ env:
   global:
     - CC_TEST_REPORTER_ID=ae5b3038c9b109619fb496da8ec68e1ae9273e7d58ecb75e7ae675f0ab265f3d
 before_install:
-  - "[[ $(node -v) =~ ^v12.*$ ]] || npm install -g npm@latest"
   - npm install -g greenkeeper-lockfile
-install: npm install --no-optional
+install: npm ci
 before_script:
   - greenkeeper-lockfile-update
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
-  - "./cc-test-reporter before-build"
+  - ./cc-test-reporter before-build
 after_script:
   - greenkeeper-lockfile-upload
   - "[ $TRAVIS_NODE_VERSION = stable ] && nyc report --reporter=lcov && ./cc-test-reporter
