@@ -11,14 +11,13 @@ node_js:
   - 12
   - 11
   - 10
-  - 9
 env:
   global:
     - CC_TEST_REPORTER_ID=ae5b3038c9b109619fb496da8ec68e1ae9273e7d58ecb75e7ae675f0ab265f3d
 before_install:
   - npm i -g npm
   - npm install -g greenkeeper-lockfile
-install: npm ci > /dev/null
+install: npm ci --no-optional
 before_script:
   - greenkeeper-lockfile-update
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -31,3 +30,6 @@ after_script:
 notifications:
   slack:
     secure: eomxLOINzHHrYx5EcgUv3Z/Sh7YdrMOxFfLCoBCbeOLbjCj5E7me4E1K3llMaS9i18+8LFUSfuwIwUB7+iR7/lT2Mvpfjg8eEbph8eny3LvqERePf0MOmMDKLMlqBHpMuZ2H1GBFpXgyLrq0ApCGQj5ieWo5YAjriNbeNJ6DwljBIDJUMjH3DXhRD1E3rS2qaWzWsl1/1ehLJ5UllTRbRN06tWFLk6O8VaXjC+wXPVmXoqp/eOGavICEgIF/XvDfMPOnMz6QdQZFuYoNKJIjcgKbZRR0Qno+2yDr/CfxAf4w066qkp7tozDRnOiQFXyf7+DPz/TL+/SsKqSWZuiOeTrvhtpE7P1YhGOZgdLCNjP9nfrRiHZLvQarRU0wdY+RQpyY/K9P1DWRL/Z0StX5oQh9Z0/c35cC8acP+0U62VAIUPQs6yRcDXypDHsrq+uPvh1CV7xuDBmLGpNT1fbGNpBtIJlSedPX2PZnBM/oLRCboy2MthHneHBSygkihme9WYnUlRVCPvE/BW3+LKISBYIIhpP7te6Xlpg+BA3gRQ8RXkBZIsjEMa2tqar/OFYjKHa9B4Z0yfFqJWTm0KPy14BbWLQzdK2DhTc/wyw0PDg2V8CDgxVpBnnkAXK2WFNn4QV3i8jEaghSZU9bPlSwYqH0ykSITI5OzSF91NUUa4o=
+cache:
+  directories:
+    - "$HOME/.npm"
