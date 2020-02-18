@@ -1,8 +1,8 @@
 const mathRound = Math.round;
 const mathMin = Math.min;
 const mathMax = Math.max;
-const isOnePointZero = n => typeof n === 'string' && n.indexOf('.') !== -1 && parseFloat(n) === 1;
-const isPercentage = n => typeof n === 'string' && n.indexOf('%') !== -1;
+const isOnePointZero = n => typeof n === 'string' && n.includes('.') && parseFloat(n) === 1;
+const isPercentage = n => typeof n === 'string' && n.includes('%');
 const roundIf01 = n => n < 1 ? mathRound(n) : n;
 const roundAlpha = a => mathRound(100 * a) / 100;
 const boundAlpha = a => {
@@ -72,13 +72,13 @@ function _objectSpread2(target) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys(source, true).forEach(function (key) {
+      ownKeys(Object(source), true).forEach(function (key) {
         _defineProperty(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys(source).forEach(function (key) {
+      ownKeys(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
