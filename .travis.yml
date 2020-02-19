@@ -17,7 +17,7 @@ env:
 before_install:
   - npm i -g npm
   - npm install -g greenkeeper-lockfile
-install: npm install --no-optional
+install: npm ci > /dev/null
 before_script:
   - greenkeeper-lockfile-update
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
