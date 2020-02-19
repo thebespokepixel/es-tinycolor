@@ -51,8 +51,8 @@ test('isReadable', t => {
 test('readability', t => {
 	// Check return values from readability function. See isReadable above for standards tests.
 	t.is(tinycolor.readability('#000', '#000'), 1, 'Readability function test 0')
-	t.deepEqual(tinycolor.readability('#000', '#111'), 1.1121078324840545, 'Readability function test 1')
-	t.deepEqual(tinycolor.readability('#000', '#fff'), 21, 'Readability function test 2')
+	t.is(tinycolor.readability('#000', '#111'), 1.1121078324840545, 'Readability function test 1')
+	t.is(tinycolor.readability('#000', '#fff'), 21, 'Readability function test 2')
 })
 
 test('mostReadable', t => {

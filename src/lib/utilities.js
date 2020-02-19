@@ -9,10 +9,10 @@ export const mathRandom = Math.random
 
 // Need to handle 1.0 as 100%, since once it is a number, there is no difference between it and 1
 // <http://stackoverflow.com/questions/7422072/javascript-how-to-detect-number-as-a-decimal-including-1-0>
-export const isOnePointZero = n => typeof n === 'string' && n.indexOf('.') !== -1 && parseFloat(n) === 1
+export const isOnePointZero = n => typeof n === 'string' && n.includes('.') && parseFloat(n) === 1
 
 // Check to see if string passed in is a percentage
-export const isPercentage = n => typeof n === 'string' && n.indexOf('%') !== -1
+export const isPercentage = n => typeof n === 'string' && n.includes('%')
 
 // Don't let the range of [0,255] come back in [0,1].
 // Potentially lose a little bit of precision here, but will fix issues where
