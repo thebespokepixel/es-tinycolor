@@ -4,10 +4,10 @@
  */
 
 export default class TinyColorExtension {
-	constructor(api, id, opts = {}) {
+	constructor(api, id, options = {}) {
 		this.api = api
 		this.id = id
-		this.opts = opts
+		this.options = options
 	}
 
 	use(specified) {
@@ -16,7 +16,7 @@ export default class TinyColorExtension {
 	}
 
 	parse(input) {
-		const result = this.api.find(input)
+		const result = this.api.findColor(input)
 		return {
 			as: format => Object.assign(result, {format}),
 			rgba: {

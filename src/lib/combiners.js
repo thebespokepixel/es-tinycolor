@@ -55,27 +55,27 @@ export function analogous(color, results, slices) {
 
 	const hsl = new TinyColor(color).toHsl()
 	const part = 360 / slices
-	const ret = [new TinyColor(color)]
+	const returnValue = [new TinyColor(color)]
 
 	for (hsl.h = ((hsl.h - (part * results >> 1)) + 720) % 360; --results;) {
 		hsl.h = (hsl.h + part) % 360
-		ret.push(new TinyColor(hsl))
+		returnValue.push(new TinyColor(hsl))
 	}
 
-	return ret
+	return returnValue
 }
 
 export function monochromatic(color, results) {
 	results = results || 6
 	const hsv = new TinyColor(color).toHsv()
 	let {h, s, v} = hsv
-	const ret = []
+	const returnValue = []
 	const modification = 1 / results
 
 	while (results--) {
-		ret.push(new TinyColor({h, s, v}))
+		returnValue.push(new TinyColor({h, s, v}))
 		v = (v + modification) % 1
 	}
 
-	return ret
+	return returnValue
 }

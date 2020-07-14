@@ -9,8 +9,7 @@
 
 ##### Development Status
 
-[![Greenkeeper](https://badges.greenkeeper.io/thebespokepixel/es-tinycolor.svg)](https://greenkeeper.io/ "Greenkeeper") [![Travis](https://img.shields.io/travis/com/thebespokepixel/es-tinycolor/develop?logo=travis)](https://travis-ci.com/thebespokepixel/es-tinycolor "Travis")  
- [![David](https://david-dm.org/thebespokepixel/es-tinycolor/develop/status.svg)](https://david-dm.org/thebespokepixel/es-tinycolor/develop "David") [![David-developer](https://david-dm.org/thebespokepixel/es-tinycolor/develop/dev-status.svg)](https://david-dm.org/thebespokepixel/es-tinycolor/develop?type=dev "David-developer")  
+[![Travis](https://img.shields.io/travis/com/thebespokepixel/es-tinycolor/develop?logo=travis)](https://travis-ci.com/thebespokepixel/es-tinycolor "Travis") [![David](https://david-dm.org/thebespokepixel/es-tinycolor/develop/status.svg)](https://david-dm.org/thebespokepixel/es-tinycolor/develop "David") [![David-developer](https://david-dm.org/thebespokepixel/es-tinycolor/develop/dev-status.svg)](https://david-dm.org/thebespokepixel/es-tinycolor/develop?type=dev "David-developer")  
  [![Snyk](https://snyk.io/test/github/thebespokepixel/es-tinycolor/badge.svg)](https://snyk.io/test/github/thebespokepixel/es-tinycolor "Snyk") [![Code-climate](https://api.codeclimate.com/v1/badges/b2bcb75bd517034aa609/maintainability)](https://codeclimate.com/github/thebespokepixel/es-tinycolor/maintainability "Code-climate") [![Coverage](https://api.codeclimate.com/v1/badges/b2bcb75bd517034aa609/test_coverage)](https://codeclimate.com/github/thebespokepixel/es-tinycolor/test_coverage "Coverage")   
 
 ##### Documentation/Help
@@ -398,6 +397,14 @@ tinycolor("#f00").desaturate(100).toString(); // "#808080"
 
 ```js
 tinycolor("hsl(0, 10%, 50%)").saturate().toString(); // "hsl(0, 20%, 50%)"
+```
+
+### invert
+
+`invert: function() -> TinyColor`.  Inverts the color in RBG colorspace.
+
+```js
+tinycolor("#f00").invert().toString(); // "#00ffff"
 ```
 
 ### greyscale

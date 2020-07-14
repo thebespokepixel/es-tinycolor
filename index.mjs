@@ -1,16 +1,16 @@
 const mathRound = Math.round;
 const mathMin = Math.min;
 const mathMax = Math.max;
-const isOnePointZero = n => typeof n === 'string' && n.includes('.') && parseFloat(n) === 1;
+const isOnePointZero = n => typeof n === 'string' && n.includes('.') && Number.parseFloat(n) === 1;
 const isPercentage = n => typeof n === 'string' && n.includes('%');
 const roundIf01 = n => n < 1 ? mathRound(n) : n;
 const roundAlpha = a => mathRound(100 * a) / 100;
 const boundAlpha = a => {
-  a = parseFloat(a);
-  return isNaN(a) || a < 0 || a > 1 ? 1 : a;
+  a = Number.parseFloat(a);
+  return Number.isNaN(a) || a < 0 || a > 1 ? 1 : a;
 };
 const hasAlpha = rgba => rgba.a < 1 && rgba.a >= 0;
-const clamp01 = val => mathMin(1, mathMax(0, val));
+const clamp01 = value => mathMin(1, mathMax(0, value));
 const pad2 = c => c.length === 1 ? `0${c}` : `${c}`;
 const CSS_INTEGER = '[-\\+]?\\d+%?';
 const CSS_NUMBER = '[-\\+]?\\d*\\.\\d+%?';
@@ -25,17 +25,17 @@ function bound01(n, max) {
   }
 
   const processPercent = isPercentage(n);
-  n = mathMin(max, mathMax(0, parseFloat(n)));
+  n = mathMin(max, mathMax(0, Number.parseFloat(n)));
 
   if (processPercent) {
-    n = parseInt(n * max, 10) / 100;
+    n = Number.parseInt(n * max, 10) / 100;
   }
 
   if (Math.abs(n - max) < 0.000001) {
     return 1;
   }
 
-  return n % max / parseFloat(max);
+  return n % max / Number.parseFloat(max);
 }
 
 function _defineProperty(obj, key, value) {
@@ -87,11 +87,11 @@ function _objectSpread2(target) {
   return target;
 }
 
-const convertHexToInt = val => parseInt(val, 16);
+const convertHexToInt = value => Number.parseInt(value, 16);
 const convertHexToDecimal = h => convertHexToInt(h) / 255;
 const convertToPercentage = n => n <= 1 ? `${n * 100}%` : n;
 const rawToRgba = raw => {
-  const [r, g, b] = [raw._r, raw._g, raw._b].map(mathRound);
+  const [r, g, b] = [raw._r, raw._g, raw._b].map(value => mathRound(value));
   return {
     r,
     g,
@@ -126,10 +126,10 @@ const rgbaToPercentageRgba = rgba => {
 const rgbaToString = rgba => rgba.a === 1 ? `rgb(${rgba.r}, ${rgba.g}, ${rgba.b})` : `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
 const rgbaToArray = rgba => rgba.a === 1 ? [rgba.r, rgba.g, rgba.b] : [rgba.r, rgba.g, rgba.b, mathRound(rgba.a * 255)];
 const rgbaToHex = (rgba, allowShort) => {
-  const hex = rgbaToArray(rgba).map(n => n.toString(16)).map(pad2);
+  const hex = rgbaToArray(rgba).map(n => n.toString(16)).map(value => pad2(value));
   return allowShort && hex.every(h => h.charAt(0) === h.charAt(1)) ? hex.map(h => h.charAt(0)).join('') : hex.join('');
 };
-const rgbToHex = (rgba, allowShort) => rgbaToHex(_objectSpread2({}, rgba, {
+const rgbToHex = (rgba, allowShort) => rgbaToHex(_objectSpread2(_objectSpread2({}, rgba), {}, {
   a: 1
 }), allowShort);
 
@@ -324,14 +324,14 @@ function analogous(color, results, slices) {
   slices = slices || 30;
   const hsl = new TinyColor(color).toHsl();
   const part = 360 / slices;
-  const ret = [new TinyColor(color)];
+  const returnValue = [new TinyColor(color)];
 
   for (hsl.h = (hsl.h - (part * results >> 1) + 720) % 360; --results;) {
     hsl.h = (hsl.h + part) % 360;
-    ret.push(new TinyColor(hsl));
+    returnValue.push(new TinyColor(hsl));
   }
 
-  return ret;
+  return returnValue;
 }
 function monochromatic(color, results) {
   results = results || 6;
@@ -341,11 +341,11 @@ function monochromatic(color, results) {
     s,
     v
   } = hsv;
-  const ret = [];
+  const returnValue = [];
   const modification = 1 / results;
 
   while (results--) {
-    ret.push(new TinyColor({
+    returnValue.push(new TinyColor({
       h,
       s,
       v
@@ -353,11 +353,12 @@ function monochromatic(color, results) {
     v = (v + modification) % 1;
   }
 
-  return ret;
+  return returnValue;
 }
 
 function modify(action, args) {
   const actions = {
+    invert,
     desaturate,
     saturate,
     greyscale,
@@ -373,6 +374,13 @@ function modify(action, args) {
   source._b = color._b;
   source.setAlpha(color._a);
   return source;
+}
+function invert(color) {
+  const rgb = new TinyColor(color).toRgb();
+  rgb.r = mathMax(0, mathMin(255, 255 - rgb.r));
+  rgb.g = mathMax(0, mathMin(255, 255 - rgb.g));
+  rgb.b = mathMax(0, mathMin(255, 255 - rgb.b));
+  return new TinyColor(rgb);
 }
 function desaturate(color, amount) {
   amount = amount === 0 ? 0 : amount || 10;
@@ -421,10 +429,10 @@ function spin(color, amount) {
 }
 
 class TinyColorExtension {
-  constructor(api, id, opts = {}) {
+  constructor(api, id, options = {}) {
     this.api = api;
     this.id = id;
-    this.opts = opts;
+    this.options = options;
   }
 
   use(specified) {
@@ -433,7 +441,7 @@ class TinyColorExtension {
   }
 
   parse(input) {
-    const result = this.api.find(input);
+    const result = this.api.findColor(input);
     return {
       as: format => Object.assign(result, {
         format
@@ -471,28 +479,28 @@ const _template = {
 class TinyColorExtensionAPI {
   constructor() {
     this.colorspaces = {};
-    this.opts = {
+    this.options = {
       alphaFormat: 'rgb',
       shortHex: false,
       upperCaseHex: false
     };
   }
 
-  set(opts) {
-    Object.assign(this.opts, opts);
+  set(options) {
+    Object.assign(this.options, options);
 
     for (const id in this.colorspaces) {
       if ({}.hasOwnProperty.call(this.colorspaces, id)) {
-        Object.assign(this.colorspaces[id].opts, opts);
+        Object.assign(this.colorspaces[id].options, options);
       }
     }
   }
 
-  add(id, opts) {
-    this.colorspaces[id] = new TinyColorExtension(this, id, _objectSpread2({}, this.opts, {}, opts));
+  add(id, options) {
+    this.colorspaces[id] = new TinyColorExtension(this, id, _objectSpread2(_objectSpread2({}, this.options), options));
 
-    if (opts.alias) {
-      opts.alias.forEach(id_ => {
+    if (options.alias) {
+      options.alias.forEach(id_ => {
         this.colorspaces[id_] = this.colorspaces[id];
       });
     }
@@ -500,7 +508,7 @@ class TinyColorExtensionAPI {
     return this.colorspaces[id];
   }
 
-  find(input) {
+  findColor(input) {
     const color = _objectSpread2({}, _template);
 
     input = typeof input === 'string' ? input.trim().toLowerCase() : input;
@@ -548,33 +556,33 @@ class TinyColorExtensionAPI {
 let tinyCounter = 0;
 const extensionApi = new TinyColorExtensionAPI();
 class TinyColor {
-  constructor(color, opts = {}) {
+  constructor(color, options = {}) {
     color = color || '';
 
     if (color instanceof TinyColor) {
       return color;
     }
 
-    const rgba = extensionApi.find(color);
+    const rgba = extensionApi.findColor(color);
     this._originalInput = color;
     this._r = roundIf01(rgba.r);
     this._g = roundIf01(rgba.g);
     this._b = roundIf01(rgba.b);
     this._a = rgba.a;
     this._roundA = roundAlpha(this._a);
-    this._format = opts.format || rgba.format;
-    this._gradientType = opts.gradientType;
+    this._format = options.format || rgba.format;
+    this._gradientType = options.gradientType;
     this._ok = rgba.ok;
     this._tc_id = TinyColor.newId();
-    extensionApi.set(opts);
+    extensionApi.set(options);
   }
 
   static newId() {
     return tinyCounter++;
   }
 
-  static registerFormat(id, opts = {}) {
-    return extensionApi.add(id, opts);
+  static registerFormat(id, options = {}) {
+    return extensionApi.add(id, options);
   }
 
   static equals(color1, color2) {
@@ -585,7 +593,7 @@ class TinyColor {
     return new TinyColor(color1).toRgbString() === new TinyColor(color2).toRgbString();
   }
 
-  static fromRatio(color, opts) {
+  static fromRatio(color, options) {
     if (typeof color === 'object') {
       const newColor = {};
 
@@ -602,7 +610,7 @@ class TinyColor {
       color = newColor;
     }
 
-    return new TinyColor(color, opts);
+    return new TinyColor(color, options);
   }
 
   static readability(color1, color2) {
@@ -747,6 +755,10 @@ class TinyColor {
     return modify('greyscale', [this, ...args]);
   }
 
+  invert(...args) {
+    return modify('invert', [this, ...args]);
+  }
+
   spin(...args) {
     return modify('spin', [this, ...args]);
   }
@@ -842,8 +854,8 @@ const api$2 = TinyColor.registerFormat('hex', {
 
 const matchers$1 = function () {
   return {
-    hex3: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
-    hex6: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+    hex3: /^#?([\da-fA-F])([\da-fA-F])([\da-fA-F])$/,
+    hex6: /^#?([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})$/
   };
 }();
 
@@ -851,7 +863,7 @@ function hexToRgba(color) {
   let match;
 
   if (match = matchers$1.hex3.exec(color)) {
-    const [r, g, b] = match.splice(1, 3).map(h => `${h}${h}`).map(convertHexToInt);
+    const [r, g, b] = match.splice(1, 3).map(h => `${h}${h}`).map(value => convertHexToInt(value));
     return {
       r,
       g,
@@ -861,7 +873,7 @@ function hexToRgba(color) {
   }
 
   if (match = matchers$1.hex6.exec(color)) {
-    const [r, g, b] = match.splice(1, 3).map(convertHexToInt);
+    const [r, g, b] = match.splice(1, 3).map(value => convertHexToInt(value));
     return {
       r,
       g,
@@ -873,7 +885,7 @@ function hexToRgba(color) {
   return false;
 }
 
-const hexToString = (rgba, short = api$2.opts.shortHex) => `#${api$2.opts.upperCaseHex ? rgbToHex(rgba, short).toUpperCase() : rgbToHex(rgba, short)}`;
+const hexToString = (rgba, short = api$2.options.shortHex) => `#${api$2.options.upperCaseHex ? rgbToHex(rgba, short).toUpperCase() : rgbToHex(rgba, short)}`;
 
 api$2.shouldHandleInput = input => matchers$1.hex6.test(input) || matchers$1.hex3.test(input);
 
@@ -891,7 +903,7 @@ api$2.toString = rgba => {
   }
 
   if (hasAlpha(rgba)) {
-    return api$2.opts.alphaFormat === 'hex' ? hexToString(rgba) : api$2.print(api$2.opts.alphaFormat, rgba);
+    return api$2.options.alphaFormat === 'hex' ? hexToString(rgba) : api$2.print(api$2.options.alphaFormat, rgba);
   }
 
   return hexToString(rgba);
@@ -903,8 +915,8 @@ const api$3 = TinyColor.registerFormat('hex8', {
 
 const matchers$2 = function () {
   return {
-    hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
-    hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+    hex4: /^#?([\da-fA-F])([\da-fA-F])([\da-fA-F])([\da-fA-F])$/,
+    hex8: /^#?([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})$/
   };
 }();
 
@@ -913,7 +925,7 @@ function hexToRgba$1(color) {
 
   if (match = matchers$2.hex4.exec(color)) {
     const a = convertHexToDecimal(`${match[4]}${match[4]}`);
-    const [r, g, b] = match.splice(1, 3).map(h => `${h}${h}`).map(convertHexToInt);
+    const [r, g, b] = match.splice(1, 3).map(h => `${h}${h}`).map(value => convertHexToInt(value));
     return {
       r,
       g,
@@ -924,7 +936,7 @@ function hexToRgba$1(color) {
 
   if (match = matchers$2.hex8.exec(color)) {
     const a = convertHexToDecimal(match[4]);
-    const [r, g, b] = match.splice(1, 3).map(convertHexToInt);
+    const [r, g, b] = match.splice(1, 3).map(value => convertHexToInt(value));
     return {
       r,
       g,
@@ -936,7 +948,7 @@ function hexToRgba$1(color) {
   return false;
 }
 
-const hexToString$1 = (rgba, short = api$3.opts.shortHex) => `#${api$3.opts.upperCaseHex ? rgbaToHex(rgba, short).toUpperCase() : rgbaToHex(rgba, short)}`;
+const hexToString$1 = (rgba, short = api$3.options.shortHex) => `#${api$3.options.upperCaseHex ? rgbaToHex(rgba, short).toUpperCase() : rgbaToHex(rgba, short)}`;
 
 api$3.shouldHandleInput = input => matchers$2.hex8.test(input) || matchers$2.hex4.test(input);
 
@@ -954,7 +966,7 @@ api$3.toString = rgba => {
   }
 
   if (hasAlpha(rgba)) {
-    return api$3.opts.alphaFormat === 'hex' ? hexToString$1(rgba) : api$3.print(api$3.opts.alphaFormat, rgba);
+    return api$3.options.alphaFormat === 'hex' ? hexToString$1(rgba) : api$3.print(api$3.options.alphaFormat, rgba);
   }
 
   return hexToString$1(rgba);
@@ -1446,14 +1458,14 @@ api$6.toString = rgba => {
   }
 
   if (hasAlpha(rgba)) {
-    return api$6.print(api$6.opts.alphaFormat, rgba);
+    return api$6.print(api$6.options.alphaFormat, rgba);
   }
 
   return hexNames[rgbToHex(rgba, true)] || false;
 };
 
-function tinycolor(color, opts) {
-  return new TinyColor(color, opts);
+function tinycolor(color, options) {
+  return new TinyColor(color, options);
 }
 
 tinycolor.equals = TinyColor.equals;

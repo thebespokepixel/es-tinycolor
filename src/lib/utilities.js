@@ -9,7 +9,7 @@ export const mathRandom = Math.random
 
 // Need to handle 1.0 as 100%, since once it is a number, there is no difference between it and 1
 // <http://stackoverflow.com/questions/7422072/javascript-how-to-detect-number-as-a-decimal-including-1-0>
-export const isOnePointZero = n => typeof n === 'string' && n.includes('.') && parseFloat(n) === 1
+export const isOnePointZero = n => typeof n === 'string' && n.includes('.') && Number.parseFloat(n) === 1
 
 // Check to see if string passed in is a percentage
 export const isPercentage = n => typeof n === 'string' && n.includes('%')
@@ -23,14 +23,14 @@ export const roundIf01 = n => n < 1 ? mathRound(n) : n
 export const roundAlpha = a => mathRound(100 * a) / 100
 
 export const boundAlpha = a => {
-	a = parseFloat(a)
-	return (isNaN(a) || a < 0 || a > 1) ? 1 : a
+	a = Number.parseFloat(a)
+	return (Number.isNaN(a) || a < 0 || a > 1) ? 1 : a
 }
 
 export const hasAlpha = rgba => rgba.a < 1 && rgba.a >= 0
 
 // Force a number between 0 and 1
-export const clamp01 = val => mathMin(1, mathMax(0, val))
+export const clamp01 = value => mathMin(1, mathMax(0, value))
 
 // Force a hex value to have 2 characters
 export const pad2 = c => c.length === 1 ? `0${c}` : `${c}`
@@ -65,11 +65,11 @@ export function bound01(n, max) {
 	}
 
 	const processPercent = isPercentage(n)
-	n = mathMin(max, mathMax(0, parseFloat(n)))
+	n = mathMin(max, mathMax(0, Number.parseFloat(n)))
 
 	// Automatically convert percentage into number
 	if (processPercent) {
-		n = parseInt(n * max, 10) / 100
+		n = Number.parseInt(n * max, 10) / 100
 	}
 
 	// Handle floating point rounding errors
@@ -78,5 +78,5 @@ export function bound01(n, max) {
 	}
 
 	// Convert into [0, 1] range if it isn't already
-	return (n % max) / parseFloat(max)
+	return (n % max) / Number.parseFloat(max)
 }

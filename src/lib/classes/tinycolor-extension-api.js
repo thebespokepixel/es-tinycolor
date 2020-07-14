@@ -17,26 +17,26 @@ const _template = {
 export default class TinyColorExtensionAPI {
 	constructor() {
 		this.colorspaces = {}
-		this.opts = {
+		this.options = {
 			alphaFormat: 'rgb',
 			shortHex: false,
 			upperCaseHex: false
 		}
 	}
 
-	set(opts) {
-		Object.assign(this.opts, opts)
+	set(options) {
+		Object.assign(this.options, options)
 		for (const id in this.colorspaces) {
 			if ({}.hasOwnProperty.call(this.colorspaces, id)) {
-				Object.assign(this.colorspaces[id].opts, opts)
+				Object.assign(this.colorspaces[id].options, options)
 			}
 		}
 	}
 
-	add(id, opts) {
-		this.colorspaces[id] = new TinyColorExtension(this, id, {...this.opts, ...opts})
-		if (opts.alias) {
-			opts.alias.forEach(id_ => {
+	add(id, options) {
+		this.colorspaces[id] = new TinyColorExtension(this, id, {...this.options, ...options})
+		if (options.alias) {
+			options.alias.forEach(id_ => {
 				this.colorspaces[id_] = this.colorspaces[id]
 			})
 		}
@@ -44,7 +44,7 @@ export default class TinyColorExtensionAPI {
 		return this.colorspaces[id]
 	}
 
-	find(input) {
+	findColor(input) {
 		const color = {..._template}
 		input = typeof input === 'string' ? input.trim().toLowerCase() : input
 		if (input) {

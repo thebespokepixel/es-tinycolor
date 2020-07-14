@@ -22,37 +22,37 @@ export default class TinyColor {
 	/**
 	 * Create a new TinyColor instance
 	 * @param  {String|Array|Object} color Notation describing a color
-	 * @param  {Object} opts               Options object (see below)
-	 * @return {TinyColor} An instance representing the color
+	 * @param  {Object} options            Options object (see below)
+	 * @return {TinyColor}                 An instance representing the color
 	 */
-	constructor(color, opts = {}) {
+	constructor(color, options = {}) {
 		color = color || ''
 		// If input is already a tinycolor, return itself
 		if (color instanceof TinyColor) {
 			return color
 		}
 
-		const rgba = extensionApi.find(color)
+		const rgba = extensionApi.findColor(color)
 		this._originalInput = color
 		this._r = roundIf01(rgba.r)
 		this._g = roundIf01(rgba.g)
 		this._b = roundIf01(rgba.b)
 		this._a = rgba.a
 		this._roundA = roundAlpha(this._a)
-		this._format = opts.format || rgba.format
-		this._gradientType = opts.gradientType
+		this._format = options.format || rgba.format
+		this._gradientType = options.gradientType
 
 		this._ok = rgba.ok
 		this._tc_id = TinyColor.newId()
-		extensionApi.set(opts)
+		extensionApi.set(options)
 	}
 
 	static newId() {
 		return tinyCounter++
 	}
 
-	static registerFormat(id, opts = {}) {
-		return extensionApi.add(id, opts)
+	static registerFormat(id, options = {}) {
+		return extensionApi.add(id, options)
 	}
 
 	static equals(color1, color2) {
@@ -63,7 +63,7 @@ export default class TinyColor {
 		return new TinyColor(color1).toRgbString() === new TinyColor(color2).toRgbString()
 	}
 
-	static fromRatio(color, opts) {
+	static fromRatio(color, options) {
 		if (typeof color === 'object') {
 			const newColor = {}
 			for (const i in color) {
@@ -79,7 +79,7 @@ export default class TinyColor {
 			color = newColor
 		}
 
-		return new TinyColor(color, opts)
+		return new TinyColor(color, options)
 	}
 
 	static readability(color1, color2) {
@@ -222,6 +222,10 @@ export default class TinyColor {
 
 	greyscale(...args) {
 		return modify('greyscale', [this, ...args])
+	}
+
+	invert(...args) {
+		return modify('invert', [this, ...args])
 	}
 
 	spin(...args) {

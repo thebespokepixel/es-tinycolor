@@ -307,6 +307,12 @@ tinycolor("#f00").desaturate(100).toString(); // "#808080"
 ```js
 tinycolor("hsl(0, 10%, 50%)").saturate().toString(); // "hsl(0, 20%, 50%)"
 ```
+### invert
+
+`invert: function() -> TinyColor`.  Inverts the color in RBG colorspace.
+```js
+tinycolor("#f00").invert().toString(); // "#00ffff"
+```
 ### greyscale
 
 `greyscale: function() -> TinyColor`.  Completely desaturates a color into greyscale.  Same as calling `desaturate(100)`.
