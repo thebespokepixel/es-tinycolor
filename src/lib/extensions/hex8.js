@@ -12,8 +12,8 @@ const api = TinyColor.registerFormat('hex8', {
 
 const matchers = (function () {
 	return {
-		hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
-		hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+		hex4: /^#?([\da-fA-F])([\da-fA-F])([\da-fA-F])([\da-fA-F])$/,
+		hex8: /^#?([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})$/
 	}
 })()
 
@@ -21,20 +21,20 @@ function hexToRgba(color) {
 	let match
 	if ((match = matchers.hex4.exec(color))) {
 		const a = convertHexToDecimal(`${match[4]}${match[4]}`)
-		const [r, g, b] = match.splice(1, 3).map(h => `${h}${h}`).map(convertHexToInt)
+		const [r, g, b] = match.splice(1, 3).map(h => `${h}${h}`).map(value => convertHexToInt(value))
 		return {r, g, b, a}
 	}
 
 	if ((match = matchers.hex8.exec(color))) {
 		const a = convertHexToDecimal(match[4])
-		const [r, g, b] = match.splice(1, 3).map(convertHexToInt)
+		const [r, g, b] = match.splice(1, 3).map(value => convertHexToInt(value))
 		return {r, g, b, a}
 	}
 
 	return false
 }
 
-const hexToString = (rgba, short = api.opts.shortHex) => `#${api.opts.upperCaseHex ?
+const hexToString = (rgba, short = api.options.shortHex) => `#${api.options.upperCaseHex ?
 	rgbaToHex(rgba, short).toUpperCase() :
 	rgbaToHex(rgba, short)}`
 
@@ -51,8 +51,8 @@ api.toString = rgba => {
 	}
 
 	if (hasAlpha(rgba)) {
-		return api.opts.alphaFormat === 'hex' ?
-			hexToString(rgba) : api.print(api.opts.alphaFormat, rgba)
+		return api.options.alphaFormat === 'hex' ?
+			hexToString(rgba) : api.print(api.options.alphaFormat, rgba)
 	}
 
 	return hexToString(rgba)

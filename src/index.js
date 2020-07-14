@@ -15,8 +15,8 @@ import './lib/extensions/hsl'
 import './lib/extensions/hsv'
 import {names} from './lib/extensions/name'
 
-function tinycolor(color, opts) {
-	return new TinyColor(color, opts)
+function tinycolor(color, options) {
+	return new TinyColor(color, options)
 }
 
 // Expose static methods if called from function.

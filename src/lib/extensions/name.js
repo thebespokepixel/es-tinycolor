@@ -198,7 +198,7 @@ api.toString = rgba => {
 	}
 
 	if (hasAlpha(rgba)) {
-		return api.print(api.opts.alphaFormat, rgba)
+		return api.print(api.options.alphaFormat, rgba)
 	}
 
 	return hexNames[rgbToHex(rgba, true)] || false

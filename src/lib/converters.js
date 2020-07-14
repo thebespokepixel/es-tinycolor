@@ -10,14 +10,14 @@ import {bound01, boundAlpha, mathRound, pad2} from './utilities'
  * @param  {Number} d Decimal input value
  * @return {String}   Hexadecimal string
  */
-export const convertDecimalToHex = d => mathRound(parseFloat(d) * 255).toString(16)
+export const convertDecimalToHex = d => mathRound(Number.parseFloat(d) * 255).toString(16)
 
 /**
  * Converts a base-16 hex value into a base-10 integer
  * @param  {String} val Hexadecimal input value
  * @return {Number}     Integer value
  */
-export const convertHexToInt = val => parseInt(val, 16)
+export const convertHexToInt = value => Number.parseInt(value, 16)
 
 /**
  * Converts a hex value to a decimal
@@ -40,7 +40,7 @@ export const convertToPercentage = n => n <= 1 ? `${n * 100}%` : n
  * @return {Object}     { r, g, b } in [0, 255]
  */
 export const rawToRgba = raw => {
-	const [r, g, b] = [raw._r, raw._g, raw._b].map(mathRound)
+	const [r, g, b] = [raw._r, raw._g, raw._b].map(value => mathRound(value))
 	return {r, g, b, a: raw._roundA}
 }
 
@@ -80,7 +80,7 @@ export const rgbaToArray = rgba => (rgba.a === 1) ? [rgba.r, rgba.g, rgba.b] : [
 // Assumes r, g, b are contained in the set [0, 255] and
 // a in [0, 1]. Returns a 3, 4, 6 or 8 character rgba hex
 export const rgbaToHex = (rgba, allowShort) => {
-	const hex = rgbaToArray(rgba).map(n => n.toString(16)).map(pad2)
+	const hex = rgbaToArray(rgba).map(n => n.toString(16)).map(value => pad2(value))
 	return allowShort && hex.every(h => h.charAt(0) === h.charAt(1)) ? hex.map(h => h.charAt(0)).join('') : hex.join('')
 }
 

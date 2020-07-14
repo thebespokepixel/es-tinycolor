@@ -1,8 +1,8 @@
 const util = require('util')
 const {tinycolor} = require('..')
 
-function pretty(obj) {
-	return util.inspect(obj, {depth: 1, colors: true})
+function pretty(object) {
+	return util.inspect(object, {depth: 1, colors: true})
 }
 
 function colorValid(t, tiny) {

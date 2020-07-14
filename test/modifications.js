@@ -90,7 +90,7 @@ const DARKENS = [
 ]
 
 test('Modifications', t => {
-	t.plan(506)
+	t.plan(509)
 	for (let i = 0; i <= 100; i++) {
 		t.is(tinycolor('red').desaturate(i).toHex(), DESATURATIONS[i], `Desaturation ${i} works`)
 	}
@@ -110,6 +110,10 @@ test('Modifications', t => {
 	for (let i = 0; i <= 100; i++) {
 		t.is(tinycolor('red').darken(i).toHex(), DARKENS[i], `Darken ${i} works`)
 	}
+
+	t.is(tinycolor('red').invert().toHex(), '00ffff', 'Invert `red` works')
+	t.is(tinycolor('#808080').invert().toHex(), '7f7f7f', 'Invert `#808080` works')
+	t.is(tinycolor('hsl(36, 10, 10)').invert().toHex(), 'e3e5e8', 'Invert `hsl(36, 10, 10)` works')
 
 	t.is(tinycolor('red').greyscale().toHex(), '808080', 'Greyscale works')
 })

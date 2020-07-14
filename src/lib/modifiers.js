@@ -14,7 +14,7 @@ import {mathRound, clamp01, mathMax, mathMin} from './utilities'
  * @return {TinyColor}        The modified color
  */
 export function modify(action, args) {
-	const actions = {desaturate, saturate, greyscale, lighten, brighten, darken, spin}
+	const actions = {invert, desaturate, saturate, greyscale, lighten, brighten, darken, spin}
 	const color = actions[action](...args)
 	const [source] = args
 	source._r = color._r
@@ -22,6 +22,19 @@ export function modify(action, args) {
 	source._b = color._b
 	source.setAlpha(color._a)
 	return source
+}
+
+/**
+ * Invert Color
+ * @param  {TinyColor} color  The color to invert
+ * @return {TinyColor}        The inverted color
+ */
+export function invert(color) {
+	const rgb = new TinyColor(color).toRgb()
+	rgb.r = mathMax(0, mathMin(255, 255 - rgb.r))
+	rgb.g = mathMax(0, mathMin(255, 255 - rgb.g))
+	rgb.b = mathMax(0, mathMin(255, 255 - rgb.b))
+	return new TinyColor(rgb)
 }
 
 /**
