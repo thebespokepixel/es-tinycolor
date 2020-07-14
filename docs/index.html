@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>@thebespokepixel/es-tinycolor 2.0.1 | Documentation</title>
+  <title>@thebespokepixel/es-tinycolor 2.1.0 | Documentation</title>
   <meta name='description' content='Fast Color Parsing and Manipulation in es2015+, based on TinyColor2'>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="assets/css/ace.min.css" rel="stylesheet">
@@ -15,7 +15,7 @@
     <div id='split-left' class='overflow-auto fs0 height-viewport-100 sidebar'>
       <div class='py1 px2'>
         <h3 class="m0 no-anchor">@thebespokepixel/es-tinycolor</h3>
-        <div class="mb1"><code>2.0.1</code></div>
+        <div class="mb1"><code>2.1.0</code></div>
         <input
           placeholder="Filter"
           id="filter-input"
@@ -59,6 +59,76 @@
                 href="#constructor"
                 class="">
                 constructor
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#convertdecimaltohex"
+                class="">
+                convertDecimalToHex
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#converthextoint"
+                class="">
+                convertHexToInt
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#converthextodecimal"
+                class="">
+                convertHexToDecimal
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#converttopercentage"
+                class="">
+                convertToPercentage
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#rawtorgba"
+                class="">
+                rawToRgba
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#rawtodeeprgba"
+                class="">
+                rawToDeepRgba
+                
+              </a>
+              
+              </li>
+            
+              
+              <li><a
+                href="#conformrgba"
+                class="">
+                conformRgba
                 
               </a>
               
@@ -149,76 +219,6 @@
                 href="#spin"
                 class="">
                 spin
-                
-              </a>
-              
-              </li>
-            
-              
-              <li><a
-                href="#convertdecimaltohex"
-                class="">
-                convertDecimalToHex
-                
-              </a>
-              
-              </li>
-            
-              
-              <li><a
-                href="#converthextoint"
-                class="">
-                convertHexToInt
-                
-              </a>
-              
-              </li>
-            
-              
-              <li><a
-                href="#converthextodecimal"
-                class="">
-                convertHexToDecimal
-                
-              </a>
-              
-              </li>
-            
-              
-              <li><a
-                href="#converttopercentage"
-                class="">
-                convertToPercentage
-                
-              </a>
-              
-              </li>
-            
-              
-              <li><a
-                href="#rawtorgba"
-                class="">
-                rawToRgba
-                
-              </a>
-              
-              </li>
-            
-              
-              <li><a
-                href="#rawtodeeprgba"
-                class="">
-                rawToDeepRgba
-                
-              </a>
-              
-              </li>
-            
-              
-              <li><a
-                href="#conformrgba"
-                class="">
-                conformRgba
                 
               </a>
               
@@ -594,7 +594,7 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
     </h3>
     
     
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/classes/tinycolor.js#L28-L48'>
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/classes/tinycolor.js#L28-L48'>
       <span>src/lib/classes/tinycolor.js</span>
       </a>
     
@@ -672,6 +672,561 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
   
   <div class='clearfix'>
     
+    <h3 class='left m0 panel-title' id='convertdecimaltohex'>
+      convertDecimalToHex
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/converters.js#L13-L13'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Converts a decimal to a hex value</p>
+
+
+  <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertDecimalToHex</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>d</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+      Decimal input value
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        Hexadecimal string
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='converthextoint'>
+      convertHexToInt
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/converters.js#L20-L20'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Converts a base-16 hex value into a base-10 integer</p>
+
+
+  <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertHexToInt</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
+      
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>val</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+      Hexadecimal input value
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>:
+        Integer value
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='converthextodecimal'>
+      convertHexToDecimal
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/converters.js#L27-L27'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Converts a hex value to a decimal</p>
+
+
+  <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertHexToDecimal</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>h</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+      Hexadecimal input value
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>:
+        Decimal value
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='converttopercentage'>
+      convertToPercentage
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/converters.js#L34-L34'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Replace a decimal with it's percentage value</p>
+
+
+  <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertToPercentage</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>n</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+      Decimal input value
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        Percentage string
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='rawtorgba'>
+      rawToRgba
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/converters.js#L42-L45'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Handle conversion of internal precise values to exportable values. Should be
+able to accept a tinycolour instance 'this' value.</p>
+
+
+  <div class='pre p1 bg-darken-1 mt0 rounded signature'>rawToRgba</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>raw</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+      { _r, _g, _b, _a } with _r, _g, _b in 
+[0.0, 255.0]
+ and _a in 
+[0, 1]
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        { r, g, b } in 
+[0, 255]
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='rawtodeeprgba'>
+      rawToDeepRgba
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/converters.js#L54-L54'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Handle conversion of internal precise values to exportable values,
+maintaining deep precision. Should be able to accept a tinycolour instance
+'this' value.</p>
+
+
+  <div class='pre p1 bg-darken-1 mt0 rounded signature'>rawToDeepRgba</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>raw</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+      { _r, _g, _b, _a } with _r, _g, _b in 
+[0.0, 255.0]
+ and _a in 
+[0, 1]
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        { r, g, b, a } in 
+[0.0, 255.0]
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='left m0 panel-title' id='conformrgba'>
+      conformRgba
+      
+      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>
+      
+    </h3>
+    
+    
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/converters.js#L62-L65'>
+      <span>src/lib/converters.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Handle bounds / percentage checking to conform to CSS color spec</p>
+
+
+  <div class='pre p1 bg-darken-1 mt0 rounded signature'>conformRgba</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>rgba</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+      { r, g, b, a } in 
+[0, 255]
+ or 
+[0, 1]
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        { r, g, b } in 
+[0, 255]
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      
+        
+          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='left m0 panel-title' id='modify'>
       modify
       
@@ -680,7 +1235,7 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
     </h3>
     
     
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/modifiers.js#L16-L25'>
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/modifiers.js#L16-L25'>
       <span>src/lib/modifiers.js</span>
       </a>
     
@@ -765,7 +1320,7 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
     </h3>
     
     
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/modifiers.js#L32-L38'>
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/modifiers.js#L32-L38'>
       <span>src/lib/modifiers.js</span>
       </a>
     
@@ -841,7 +1396,7 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
     </h3>
     
     
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/modifiers.js#L46-L52'>
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/modifiers.js#L46-L52'>
       <span>src/lib/modifiers.js</span>
       </a>
     
@@ -926,7 +1481,7 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
     </h3>
     
     
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/modifiers.js#L60-L66'>
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/modifiers.js#L60-L66'>
       <span>src/lib/modifiers.js</span>
       </a>
     
@@ -1011,7 +1566,7 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
     </h3>
     
     
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/modifiers.js#L73-L75'>
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/modifiers.js#L73-L75'>
       <span>src/lib/modifiers.js</span>
       </a>
     
@@ -1087,7 +1642,7 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
     </h3>
     
     
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/modifiers.js#L83-L89'>
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/modifiers.js#L83-L89'>
       <span>src/lib/modifiers.js</span>
       </a>
     
@@ -1172,7 +1727,7 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
     </h3>
     
     
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/modifiers.js#L97-L104'>
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/modifiers.js#L97-L104'>
       <span>src/lib/modifiers.js</span>
       </a>
     
@@ -1257,7 +1812,7 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
     </h3>
     
     
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/modifiers.js#L112-L118'>
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/modifiers.js#L112-L118'>
       <span>src/lib/modifiers.js</span>
       </a>
     
@@ -1342,7 +1897,7 @@ color2.toString(); <span class="hljs-comment">// "rgba(255, 0, 0, 0.5)"</span></
     </h3>
     
     
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/modifiers.js#L127-L132'>
+      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/d5cb12264d61e6c985d878983985bd2f08fc8b7c/src/lib/modifiers.js#L127-L132'>
       <span>src/lib/modifiers.js</span>
       </a>
     
@@ -1396,561 +1951,6 @@ change of hue. Values outside of this range will be wrapped into this range.</p>
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code>TinyColor</code>:
         The modified color
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-      
-        
-          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='left m0 panel-title' id='convertdecimaltohex'>
-      convertDecimalToHex
-      
-      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>
-      
-    </h3>
-    
-    
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/converters.js#L13-L13'>
-      <span>src/lib/converters.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Converts a decimal to a hex value</p>
-
-
-  <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertDecimalToHex</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>d</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-      Decimal input value
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
-        Hexadecimal string
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-      
-        
-          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='left m0 panel-title' id='converthextoint'>
-      convertHexToInt
-      
-      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span>
-      
-    </h3>
-    
-    
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/converters.js#L20-L20'>
-      <span>src/lib/converters.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Converts a base-16 hex value into a base-10 integer</p>
-
-
-  <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertHexToInt</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
-      
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>val</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-      Hexadecimal input value
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>:
-        Integer value
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-      
-        
-          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='left m0 panel-title' id='converthextodecimal'>
-      convertHexToDecimal
-      
-      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span>
-      
-    </h3>
-    
-    
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/converters.js#L27-L27'>
-      <span>src/lib/converters.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Converts a hex value to a decimal</p>
-
-
-  <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertHexToDecimal</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>h</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-      Hexadecimal input value
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>:
-        Decimal value
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-      
-        
-          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='left m0 panel-title' id='converttopercentage'>
-      convertToPercentage
-      
-      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>
-      
-    </h3>
-    
-    
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/converters.js#L34-L34'>
-      <span>src/lib/converters.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Replace a decimal with it's percentage value</p>
-
-
-  <div class='pre p1 bg-darken-1 mt0 rounded signature'>convertToPercentage</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>n</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-      Decimal input value
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
-        Percentage string
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-      
-        
-          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='left m0 panel-title' id='rawtorgba'>
-      rawToRgba
-      
-      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>
-      
-    </h3>
-    
-    
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/converters.js#L42-L45'>
-      <span>src/lib/converters.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Handle conversion of internal precise values to exportable values. Should be
-able to accept a tinycolour instance 'this' value.</p>
-
-
-  <div class='pre p1 bg-darken-1 mt0 rounded signature'>rawToRgba</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>raw</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-      { _r, _g, _b, _a } with _r, _g, _b in 
-[0.0, 255.0]
- and _a in 
-[0, 1]
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
-        { r, g, b } in 
-[0, 255]
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-      
-        
-          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='left m0 panel-title' id='rawtodeeprgba'>
-      rawToDeepRgba
-      
-      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>
-      
-    </h3>
-    
-    
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/converters.js#L54-L54'>
-      <span>src/lib/converters.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Handle conversion of internal precise values to exportable values,
-maintaining deep precision. Should be able to accept a tinycolour instance
-'this' value.</p>
-
-
-  <div class='pre p1 bg-darken-1 mt0 rounded signature'>rawToDeepRgba</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>raw</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-      { _r, _g, _b, _a } with _r, _g, _b in 
-[0.0, 255.0]
- and _a in 
-[0, 1]
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
-        { r, g, b, a } in 
-[0.0, 255.0]
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-      
-        
-          <section class='p2 pl3 mb2 ml2 mr2 clearfix bg-white rounded minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='left m0 panel-title' id='conformrgba'>
-      conformRgba
-      
-      <span> → <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>
-      
-    </h3>
-    
-    
-      <a class='pl3 pr1 right rounded github' href='https://MarkGriffiths@github.com/thebespokepixel/es-tinycolor/blob/8f930cf5d24c86d72047d5bb88839675e0e6fcfb/src/lib/converters.js#L62-L65'>
-      <span>src/lib/converters.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Handle bounds / percentage checking to conform to CSS color spec</p>
-
-
-  <div class='pre p1 bg-darken-1 mt0 rounded signature'>conformRgba</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>rgba</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-      { r, g, b, a } in 
-[0, 255]
- or 
-[0, 1]
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
-        { r, g, b } in 
-[0, 255]
 
       
     
