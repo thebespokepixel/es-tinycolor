@@ -1,11 +1,10 @@
 import test from 'ava'
 
-import conversions from './_conversions'
-import {colorObjectMatch, colorStringLimitDiff} from './_macros'
+import {tinycolor} from '../index.js'
+import conversions from './_conversions.js'
+import {colorObjectMatch, colorStringLimitDiff} from './_macros.js'
 
-import {tinycolor} from '..'
-
-conversions.forEach(c => {
+for (const c of conversions) {
 	const tiny = tinycolor(c.hex)
 	test('HSL Object', colorObjectMatch, tiny, tiny.toHsl())
 	test('HSV Object', colorObjectMatch, tiny, tiny.toHsv())
@@ -16,4 +15,4 @@ conversions.forEach(c => {
 	test('RGB String', colorObjectMatch, tiny, tiny.toRgbString())
 	test('PRGB String', colorStringLimitDiff, tiny, tiny.toPercentageRgbString(), 2)
 	test('Object', colorObjectMatch, tiny, tiny)
-})
+}

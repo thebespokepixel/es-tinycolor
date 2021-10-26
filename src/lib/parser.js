@@ -2,12 +2,12 @@
  *  ES-TinyColor : RGB String Parsing
  *  ────────────────────────────────────────────────────────────────────────────
  */
-import {PERMISSIVE_MATCH3, PERMISSIVE_MATCH4} from './utilities'
+import {PERMISSIVE_MATCH3, PERMISSIVE_MATCH4} from './utilities.js'
 
 const matchers = (function () {
 	return {
 		rgb: new RegExp(`rgb${PERMISSIVE_MATCH3}`),
-		rgba: new RegExp(`rgba${PERMISSIVE_MATCH4}`)
+		rgba: new RegExp(`rgba${PERMISSIVE_MATCH4}`),
 	}
 })()
 

@@ -1,7 +1,7 @@
 /* eslint array-element-newline:0 */
 
 import test from 'ava'
-import {tinycolor} from '..'
+import {tinycolor} from '../index.js'
 
 /* Originally generated with:
 const results = []
@@ -22,7 +22,7 @@ const DESATURATIONS = [
 	'a35c5c', 'a25d5d', 'a15e5e', '9f6060', '9e6161', '9d6262', '9c6363', '9a6565',
 	'996666', '986767', '966969', '956a6a', '946b6b', '936c6c', '916e6e', '906f6f',
 	'8f7070', '8e7171', '8c7373', '8b7474', '8a7575', '887777', '877878', '867979',
-	'857a7a', '837c7c', '827d7d', '817e7e', '808080'
+	'857a7a', '837c7c', '827d7d', '817e7e', '808080',
 ]
 
 const SATURATIONS = [
@@ -38,7 +38,7 @@ const SATURATIONS = [
 	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000',
 	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000',
 	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000',
-	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000'
+	'ff0000', 'ff0000', 'ff0000', 'ff0000', 'ff0000',
 ]
 
 const LIGHTENS = [
@@ -54,7 +54,7 @@ const LIGHTENS = [
 	'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff',
 	'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff',
 	'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff',
-	'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff'
+	'ffffff', 'ffffff', 'ffffff', 'ffffff', 'ffffff',
 ]
 
 const BRIGHTENS = [
@@ -70,7 +70,7 @@ const BRIGHTENS = [
 	'ffb8b8', 'ffbaba', 'ffbdbd', 'ffbfbf', 'ffc2c2', 'ffc4c4', 'ffc7c7', 'ffc9c9',
 	'ffcccc', 'ffcfcf', 'ffd1d1', 'ffd4d4', 'ffd6d6', 'ffd9d9', 'ffdbdb', 'ffdede',
 	'ffe0e0', 'ffe3e3', 'ffe5e5', 'ffe8e8', 'ffebeb', 'ffeded', 'fff0f0', 'fff2f2',
-	'fff5f5', 'fff7f7', 'fffafa', 'fffcfc', 'ffffff'
+	'fff5f5', 'fff7f7', 'fffafa', 'fffcfc', 'ffffff',
 ]
 
 const DARKENS = [
@@ -86,7 +86,7 @@ const DARKENS = [
 	'000000', '000000', '000000', '000000', '000000', '000000', '000000', '000000',
 	'000000', '000000', '000000', '000000', '000000', '000000', '000000', '000000',
 	'000000', '000000', '000000', '000000', '000000', '000000', '000000', '000000',
-	'000000', '000000', '000000', '000000', '000000'
+	'000000', '000000', '000000', '000000', '000000',
 ]
 
 test('Modifications', t => {
@@ -126,13 +126,13 @@ test('Spin', t => {
 	t.is(Math.round(tinycolor('#f00').spin(0).toHsl().h), 0, 'Spinning 0 works')
 	t.is(Math.round(tinycolor('#f00').spin(10).toHsl().h), 10, 'Spinning 10 works')
 	t.is(Math.round(tinycolor('#f00').spin(360).toHsl().h), 0, 'Spinning 360 works')
-	t.is(Math.round(tinycolor('#f00').spin(2345).toHsl().h), 185, 'Spinning 2345 works');
+	t.is(Math.round(tinycolor('#f00').spin(2345).toHsl().h), 185, 'Spinning 2345 works')
 
-	[-360, 0, 360].forEach(delta => {
-		Object.keys(tinycolor.names).forEach(name => {
+	for (const delta of [-360, 0, 360]) {
+		for (const name of Object.keys(tinycolor.names)) {
 			t.is(tinycolor(name).toHex(), tinycolor(name).spin(delta).toHex(), `Spinning ${delta.toString()} has no effect`)
-		})
-	})
+		}
+	}
 })
 
 test('Mix', t => {

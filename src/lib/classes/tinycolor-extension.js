@@ -23,9 +23,9 @@ export default class TinyColorExtension {
 				r: result.r,
 				g: result.g,
 				b: result.b,
-				a: result.a
+				a: result.a,
 			},
-			valueOf: () => result
+			valueOf: () => result,
 		}
 	}
 

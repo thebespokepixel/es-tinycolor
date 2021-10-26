@@ -1,5 +1,5 @@
 // Taken from convertWikipediaColors.html
-module.exports = [
+const conversions = [
 	{hex: '#FFFFFF', hex8: '#FFFFFFFF', rgb: {r: '100.0%', g: '100.0%', b: '100.0%'}, hsv: {h: 0, s: 0, v: 1}, hsl: {h: 0, s: 0, l: 1}},
 	{hex: '#808080', hex8: '#808080FF', rgb: {r: '050.0%', g: '050.0%', b: '050.0%'}, hsv: {h: 0, s: 0, v: 0.5}, hsl: {h: 0, s: 0, l: 0.5}},
 	{hex: '#000000', hex8: '#000000FF', rgb: {r: '000.0%', g: '000.0%', b: '000.0%'}, hsv: {h: 0, s: 0, v: 0}, hsl: {h: 0, s: 0, l: 0}},
@@ -15,5 +15,7 @@ module.exports = [
 	{hex: '#FEF888', hex8: '#FEF888FF', rgb: {r: '099.8%', g: '097.4%', b: '053.2%'}, hsv: {h: 56.9, s: 0.467, v: 0.998}, hsl: {h: 56.9, s: 0.991, l: 0.765}},
 	{hex: '#19CB97', hex8: '#19CB97FF', rgb: {r: '009.9%', g: '079.5%', b: '059.1%'}, hsv: {h: 162.4, s: 0.875, v: 0.795}, hsl: {h: 162.4, s: 0.779, l: 0.447}},
 	{hex: '#362698', hex8: '#362698FF', rgb: {r: '021.1%', g: '014.9%', b: '059.7%'}, hsv: {h: 248.3, s: 0.75, v: 0.597}, hsl: {h: 248.3, s: 0.601, l: 0.373}},
-	{hex: '#7E7EB8', hex8: '#7E7EB8FF', rgb: {r: '049.5%', g: '049.3%', b: '072.1%'}, hsv: {h: 240.5, s: 0.316, v: 0.721}, hsl: {h: 240.5, s: 0.29, l: 0.607}}
+	{hex: '#7E7EB8', hex8: '#7E7EB8FF', rgb: {r: '049.5%', g: '049.3%', b: '072.1%'}, hsv: {h: 240.5, s: 0.316, v: 0.721}, hsl: {h: 240.5, s: 0.29, l: 0.607}},
 ]
+
+export default conversions

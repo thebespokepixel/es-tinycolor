@@ -4,8 +4,9 @@
  *  Thanks to jQuery xColor for some of the ideas behind these
  *  <https://github.com/infusion/jQuery-xcolor/blob/master/jquery.xcolor.js>
  */
+/* eslint no-bitwise: 0 */
 
-import TinyColor from './classes/tinycolor'
+import TinyColor from './classes/tinycolor.js'
 
 export function combine(action, args) {
 	const actions = {monochromatic, analogous, complement, splitcomplement, triad, tetrad}
@@ -24,7 +25,7 @@ export function triad(color) {
 	return [
 		new TinyColor(color),
 		new TinyColor({h: (h + 120) % 360, s: hsl.s, l: hsl.l}),
-		new TinyColor({h: (h + 240) % 360, s: hsl.s, l: hsl.l})
+		new TinyColor({h: (h + 240) % 360, s: hsl.s, l: hsl.l}),
 	]
 }
 
@@ -35,7 +36,7 @@ export function tetrad(color) {
 		new TinyColor(color),
 		new TinyColor({h: (h + 90) % 360, s: hsl.s, l: hsl.l}),
 		new TinyColor({h: (h + 180) % 360, s: hsl.s, l: hsl.l}),
-		new TinyColor({h: (h + 270) % 360, s: hsl.s, l: hsl.l})
+		new TinyColor({h: (h + 270) % 360, s: hsl.s, l: hsl.l}),
 	]
 }
 
@@ -45,14 +46,11 @@ export function splitcomplement(color) {
 	return [
 		new TinyColor(color),
 		new TinyColor({h: (h + 72) % 360, s: hsl.s, l: hsl.l}),
-		new TinyColor({h: (h + 216) % 360, s: hsl.s, l: hsl.l})
+		new TinyColor({h: (h + 216) % 360, s: hsl.s, l: hsl.l}),
 	]
 }
 
-export function analogous(color, results, slices) {
-	results = results || 6
-	slices = slices || 30
-
+export function analogous(color, results = 6, slices = 30) {
 	const hsl = new TinyColor(color).toHsl()
 	const part = 360 / slices
 	const returnValue = [new TinyColor(color)]
@@ -65,8 +63,7 @@ export function analogous(color, results, slices) {
 	return returnValue
 }
 
-export function monochromatic(color, results) {
-	results = results || 6
+export function monochromatic(color, results = 6) {
 	const hsv = new TinyColor(color).toHsv()
 	let {h, s, v} = hsv
 	const returnValue = []

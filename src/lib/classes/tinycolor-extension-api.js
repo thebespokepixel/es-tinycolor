@@ -3,7 +3,7 @@
  *  ────────────────────────────────────────────────────────────────────────────
  */
 
-import TinyColorExtension from './tinycolor-extension'
+import TinyColorExtension from './tinycolor-extension.js'
 
 const _template = {
 	format: false,
@@ -11,7 +11,7 @@ const _template = {
 	r: 0,
 	g: 0,
 	b: 0,
-	a: 1
+	a: 1,
 }
 
 export default class TinyColorExtensionAPI {
@@ -20,14 +20,14 @@ export default class TinyColorExtensionAPI {
 		this.options = {
 			alphaFormat: 'rgb',
 			shortHex: false,
-			upperCaseHex: false
+			upperCaseHex: false,
 		}
 	}
 
 	set(options) {
 		Object.assign(this.options, options)
 		for (const id in this.colorspaces) {
-			if ({}.hasOwnProperty.call(this.colorspaces, id)) {
+			if (Object.prototype.hasOwnProperty.call(this.colorspaces, id)) {
 				Object.assign(this.colorspaces[id].options, options)
 			}
 		}
@@ -36,9 +36,9 @@ export default class TinyColorExtensionAPI {
 	add(id, options) {
 		this.colorspaces[id] = new TinyColorExtension(this, id, {...this.options, ...options})
 		if (options.alias) {
-			options.alias.forEach(id_ => {
+			for (const id_ of options.alias) {
 				this.colorspaces[id_] = this.colorspaces[id]
-			})
+			}
 		}
 
 		return this.colorspaces[id]

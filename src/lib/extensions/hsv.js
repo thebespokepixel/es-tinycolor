@@ -2,16 +2,16 @@
  * # ES-TinyColor : HSV colors
  * ─────────────────────────────────────────────────────────────────────────────
  */
-import TinyColor from '../classes/tinycolor'
-import {bound01, mathMax, mathMin, mathRound, isValidCSSUnit, PERMISSIVE_MATCH3, PERMISSIVE_MATCH4} from '../utilities'
-import {convertToPercentage} from '../converters'
+import TinyColor from '../classes/tinycolor.js'
+import {bound01, mathMax, mathMin, mathRound, isValidCSSUnit, PERMISSIVE_MATCH3, PERMISSIVE_MATCH4} from '../utilities.js'
+import {convertToPercentage} from '../converters.js'
 
 const api = TinyColor.registerFormat('hsv')
 
 const matchers = (function () {
 	return {
 		hsv: new RegExp(`hsv${PERMISSIVE_MATCH3}`),
-		hsva: new RegExp(`hsva${PERMISSIVE_MATCH4}`)
+		hsva: new RegExp(`hsva${PERMISSIVE_MATCH4}`),
 	}
 })()
 
@@ -104,9 +104,9 @@ function hsvaToString(hsva) {
 	h = mathRound(h * 360)
 	s = mathRound(s * 100)
 	v = mathRound(v * 100)
-	return (a === 1) ?
-		`hsv(${h}, ${s}%, ${v}%)` :
-		`hsva(${h}, ${s}%, ${v}%, ${a})`
+	return (a === 1)
+		? `hsv(${h}, ${s}%, ${v}%)`
+		: `hsva(${h}, ${s}%, ${v}%, ${a})`
 }
 
 function hsvaToRaw(hsla) {

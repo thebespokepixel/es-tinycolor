@@ -2,16 +2,16 @@
  * # ES-TinyColor : HSL colors
  * ─────────────────────────────────────────────────────────────────────────────
  */
-import TinyColor from '../classes/tinycolor'
-import {bound01, mathMax, mathMin, mathRound, isValidCSSUnit, PERMISSIVE_MATCH3, PERMISSIVE_MATCH4} from '../utilities'
-import {convertToPercentage} from '../converters'
+import TinyColor from '../classes/tinycolor.js'
+import {bound01, mathMax, mathMin, mathRound, isValidCSSUnit, PERMISSIVE_MATCH3, PERMISSIVE_MATCH4} from '../utilities.js'
+import {convertToPercentage} from '../converters.js'
 
 const api = TinyColor.registerFormat('hsl')
 
 const matchers = (function () {
 	return {
 		hsl: new RegExp(`hsl${PERMISSIVE_MATCH3}`),
-		hsla: new RegExp(`hsla${PERMISSIVE_MATCH4}`)
+		hsla: new RegExp(`hsla${PERMISSIVE_MATCH4}`),
 	}
 })()
 
@@ -126,9 +126,9 @@ function hslaToString(hsla) {
 	h = mathRound(h * 360)
 	s = mathRound(s * 100)
 	l = mathRound(l * 100)
-	return (a === 1) ?
-		`hsl(${h}, ${s}%, ${l}%)` :
-		`hsla(${h}, ${s}%, ${l}%, ${a})`
+	return (a === 1)
+		? `hsl(${h}, ${s}%, ${l}%)`
+		: `hsla(${h}, ${s}%, ${l}%, ${a})`
 }
 
 function hslaToRaw(hsla) {

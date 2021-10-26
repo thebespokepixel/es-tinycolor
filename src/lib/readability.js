@@ -5,17 +5,18 @@
  */
 /* eslint capitalized-comments: [0] */
 
-import TinyColor from './classes/tinycolor'
+import TinyColor from './classes/tinycolor.js'
 
 // `validateWCAG2Parms`
 // Return valid WCAG2 parms for isReadable.
 // If input parms are invalid, return {"level":"AA", "size":"small"}
+/* eslint unicorn/explicit-length-check: 0 */
 function validateWCAG2Parms(parms) {
 	let level
 	let size
 	parms = parms || {
 		level: 'AA',
-		size: 'small'
+		size: 'small',
 	}
 	level = (parms.level || 'AA').toUpperCase()
 	size = (parms.size || 'small').toLowerCase()
@@ -83,13 +84,13 @@ export function mostReadable(baseColor, colorList, args = {}) {
 	let bestColor = null
 	let bestScore = 0
 
-	colorList.forEach(color => {
+	for (const color of colorList) {
 		readable = readability(baseColor, color)
 		if (readable > bestScore) {
 			bestScore = readable
 			bestColor = new TinyColor(color)
 		}
-	})
+	}
 
 	if (isReadable(baseColor, bestColor, {level, size}) || !includeFallbackColors) {
 		return bestColor

@@ -2,18 +2,18 @@
  * # ES-TinyColor : HEX8 colors
  *────────────────────────────────────────────────────────────────────────────
  */
-import TinyColor from '../classes/tinycolor'
-import {convertHexToInt, convertHexToDecimal, rgbaToHex} from '../converters'
-import {hasAlpha} from '../utilities'
+import TinyColor from '../classes/tinycolor.js'
+import {convertHexToInt, convertHexToDecimal, rgbaToHex} from '../converters.js'
+import {hasAlpha} from '../utilities.js'
 
 const api = TinyColor.registerFormat('hex8', {
-	alias: ['hex4']
+	alias: ['hex4'],
 })
 
 const matchers = (function () {
 	return {
 		hex4: /^#?([\da-fA-F])([\da-fA-F])([\da-fA-F])([\da-fA-F])$/,
-		hex8: /^#?([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})$/
+		hex8: /^#?([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})$/,
 	}
 })()
 
@@ -34,9 +34,9 @@ function hexToRgba(color) {
 	return false
 }
 
-const hexToString = (rgba, short = api.options.shortHex) => `#${api.options.upperCaseHex ?
-	rgbaToHex(rgba, short).toUpperCase() :
-	rgbaToHex(rgba, short)}`
+const hexToString = (rgba, short = api.options.shortHex) => `#${api.options.upperCaseHex
+	? rgbaToHex(rgba, short).toUpperCase()
+	: rgbaToHex(rgba, short)}`
 
 api.shouldHandleInput = input => matchers.hex8.test(input) || matchers.hex4.test(input)
 api.toRgb = input => hexToRgba(input)
@@ -51,8 +51,8 @@ api.toString = rgba => {
 	}
 
 	if (hasAlpha(rgba)) {
-		return api.options.alphaFormat === 'hex' ?
-			hexToString(rgba) : api.print(api.options.alphaFormat, rgba)
+		return api.options.alphaFormat === 'hex'
+			? hexToString(rgba) : api.print(api.options.alphaFormat, rgba)
 	}
 
 	return hexToString(rgba)
