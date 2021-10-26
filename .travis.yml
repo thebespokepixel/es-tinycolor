@@ -18,7 +18,7 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 after_script:
-  - "[ $TRAVIS_NODE_VERSION = stable ] && c8 reporter --reporter=lcov --report-dir test/coverage && ./cc-test-reporter
+  - "[ $TRAVIS_NODE_VERSION = stable ] && c8 reporter --reporter=lcov && ./cc-test-reporter
     after-build --debug -t lcov --exit-code $TRAVIS_TEST_RESULT || echo 'Coverage skipped'"
 notifications:
   slack:
