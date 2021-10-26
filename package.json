@@ -4,11 +4,10 @@
   "description": "Fast Color Parsing and Manipulation in es2015+, based on TinyColor2",
   "scripts": {
     "build": "rollup -c",
-    "test": "xo && ava",
+    "test": "xo && c8 --reporter=lcov --reporter=text --report-dir test/coverage ava",
     "doc-serve": "documentation serve --watch --theme node_modules/documentation-theme-bespoke --github --config src/docs/documentation.yml --project-name $npm_package_name  --project-version $npm_package_version src/index.js",
     "doc-build": "documentation build --format html --output docs --theme node_modules/documentation-theme-bespoke --github --config src/docs/documentation.yml --project-name $npm_package_name  --project-version $npm_package_version src/index.js",
     "readme": "compile-readme -u src/docs/example.md src/docs/readme.md > readme.md",
-    "coverage-old": "nyc ava && nyc report --reporter=lcov --report-dir test/coverage; open test/coverage/lcov-report/index.html",
     "coverage": "c8 --reporter=lcov --reporter=text --report-dir test/coverage ava",
     "generate-types": "npx -p typescript tsc index.js --declaration --allowJs --emitDeclarationOnly"
   },
