@@ -1,5 +1,5 @@
 import test from 'ava'
-import {tinycolor} from '..'
+import {tinycolor} from '../index.js'
 
 test('RGB Text Parsing', t => {
 	t.is(tinycolor('rgb 255 0 0').toHexString(), '#ff0000', 'spaced input')
@@ -79,35 +79,35 @@ test('HSV Parsing', t => {
 test('Invalid Parsing', t => {
 	let invalidColor = tinycolor('this is not a color')
 	t.is(invalidColor.toHexString(), '#000000')
-	t.is(false, invalidColor.isValid())
+	t.is(invalidColor.isValid(), false)
 
 	invalidColor = tinycolor('#red')
 	t.is(invalidColor.toHexString(), '#000000')
-	t.is(false, invalidColor.isValid())
+	t.is(invalidColor.isValid(), false)
 
 	invalidColor = tinycolor('  #red')
 	t.is(invalidColor.toHexString(), '#000000')
-	t.is(false, invalidColor.isValid())
+	t.is(invalidColor.isValid(), false)
 
 	invalidColor = tinycolor('##123456')
 	t.is(invalidColor.toHexString(), '#000000')
-	t.is(false, invalidColor.isValid())
+	t.is(invalidColor.isValid(), false)
 
 	invalidColor = tinycolor('  ##123456')
 	t.is(invalidColor.toHexString(), '#000000')
-	t.is(false, invalidColor.isValid())
+	t.is(invalidColor.isValid(), false)
 
 	invalidColor = tinycolor({r: 'invalid', g: 'invalid', b: 'invalid'})
 	t.is(invalidColor.toHexString(), '#000000')
-	t.is(false, invalidColor.isValid())
+	t.is(invalidColor.isValid(), false)
 
 	invalidColor = tinycolor({h: 'invalid', s: 'invalid', l: 'invalid'})
 	t.is(invalidColor.toHexString(), '#000000')
-	t.is(false, invalidColor.isValid())
+	t.is(invalidColor.isValid(), false)
 
 	invalidColor = tinycolor({h: 'invalid', s: 'invalid', v: 'invalid'})
 	t.is(invalidColor.toHexString(), '#000000')
-	t.is(false, invalidColor.isValid())
+	t.is(invalidColor.isValid(), false)
 })
 
 test('Named colors', t => {

@@ -2,10 +2,10 @@
  * # ES-TinyColor : RGB (Percentage) colors
  *────────────────────────────────────────────────────────────────────────────
  */
-import TinyColor from '../classes/tinycolor'
-import {isValidCSSUnitRGB, isPercentage} from '../utilities'
-import rgbStringToObject from '../parser'
-import {conformRgba, rgbaToPercentageRgba, rgbaToString} from '../converters'
+import TinyColor from '../classes/tinycolor.js'
+import {isValidCSSUnitRGB, isPercentage} from '../utilities.js'
+import rgbStringToObject from '../parser.js'
+import {conformRgba, rgbaToPercentageRgba, rgbaToString} from '../converters.js'
 
 const api = TinyColor.registerFormat('prgb')
 

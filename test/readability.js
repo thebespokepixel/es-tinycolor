@@ -1,5 +1,5 @@
 import test from 'ava'
-import {tinycolor} from '..'
+import {tinycolor} from '../index.js'
 
 test('Color equality', t => {
 	t.true(tinycolor.equals('#ff0000', '#ff0000'), 'Same hex')
@@ -51,7 +51,7 @@ test('isReadable', t => {
 test('readability', t => {
 	// Check return values from readability function. See isReadable above for standards tests.
 	t.is(tinycolor.readability('#000', '#000'), 1, 'Readability function test 0')
-	t.is(tinycolor.readability('#000', '#111'), 1.1121078324840545, 'Readability function test 1')
+	t.is(tinycolor.readability('#000', '#111'), 1.112_107_832_484_054_5, 'Readability function test 1')
 	t.is(tinycolor.readability('#000', '#fff'), 21, 'Readability function test 2')
 })
 

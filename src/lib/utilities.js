@@ -73,7 +73,7 @@ export function bound01(n, max) {
 	}
 
 	// Handle floating point rounding errors
-	if ((Math.abs(n - max) < 0.000001)) {
+	if ((Math.abs(n - max) < 0.000_001)) {
 		return 1
 	}
 

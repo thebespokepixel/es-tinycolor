@@ -2,18 +2,18 @@
  * # ES-TinyColor : CSS named colors
  *────────────────────────────────────────────────────────────────────────────
  */
-import TinyColor from '../classes/tinycolor'
-import {rgbToHex} from '../converters'
-import {hasAlpha} from '../utilities'
+import TinyColor from '../classes/tinycolor.js'
+import {rgbToHex} from '../converters.js'
+import {hasAlpha} from '../utilities.js'
 
 const api = TinyColor.registerFormat('name', {
-	alias: ['toName']
+	alias: ['toName'],
 })
 
 function flip(o) {
 	const flipped = {}
 	for (const i in o) {
-		if ({}.hasOwnProperty.call(o, i)) {
+		if (Object.prototype.hasOwnProperty.call(o, i)) {
 			flipped[o[i]] = i
 		}
 	}
@@ -171,7 +171,7 @@ export const names = {
 	white: 'fff',
 	whitesmoke: 'f5f5f5',
 	yellow: 'ff0',
-	yellowgreen: '9acd32'
+	yellowgreen: '9acd32',
 }
 
 names.transparent = '00000000'

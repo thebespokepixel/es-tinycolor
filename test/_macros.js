@@ -1,8 +1,8 @@
-const util = require('util')
-const {tinycolor} = require('..')
+import {inspect} from 'node:util'
+import {tinycolor} from '../index.js'
 
 function pretty(object) {
-	return util.inspect(object, {depth: 1, colors: true})
+	return inspect(object, {depth: 1, colors: true})
 }
 
 function colorValid(t, tiny) {
@@ -41,4 +41,4 @@ function colorStringMatch(t, color, string) {
 
 colorStringMatch.title = (title, color, string) => `${title}: (${tinycolor(color).toRgbString()} = ${string})`
 
-module.exports = {colorValid, colorEquals, colorObjectMatch, colorStringLimitDiff, colorStringMatch}
+export {colorValid, colorEquals, colorObjectMatch, colorStringLimitDiff, colorStringMatch}

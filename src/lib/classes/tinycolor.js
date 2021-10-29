@@ -7,13 +7,13 @@
  *  Based on TinyColor © Brian Grinstead
  */
 
-import {mathRound, boundAlpha, roundAlpha, roundIf01} from '../utilities'
-import {rawToDeepRgba, rawToRgba, rgbaToHex, rgbToHex, rgbaToArray, rgbaToString, convertToPercentage, rgbaToPercentageRgba} from '../converters'
-import {calcMix, calcBrightness, calcLuminance} from '../calculations'
-import {readability as readabilityWCAG, isReadable as isWCAGReadable, mostReadable as mostWCAGReadable} from '../readability'
-import {combine} from '../combiners'
-import {modify} from '../modifiers'
-import TinyColorExtensionAPI from './tinycolor-extension-api'
+import {mathRound, boundAlpha, roundAlpha, roundIf01} from '../utilities.js'
+import {rawToDeepRgba, rawToRgba, rgbaToHex, rgbToHex, rgbaToArray, rgbaToString, convertToPercentage, rgbaToPercentageRgba} from '../converters.js'
+import {calcMix, calcBrightness, calcLuminance} from '../calculations.js'
+import {readability as readabilityWCAG, isReadable as isWCAGReadable, mostReadable as mostWCAGReadable} from '../readability.js'
+import {combine} from '../combiners.js'
+import {modify} from '../modifiers.js'
+import TinyColorExtensionAPI from './tinycolor-extension-api.js'
 
 let tinyCounter = 0
 const extensionApi = new TinyColorExtensionAPI()
@@ -67,7 +67,7 @@ export default class TinyColor {
 		if (typeof color === 'object') {
 			const newColor = {}
 			for (const i in color) {
-				if ({}.hasOwnProperty.call(color, i)) {
+				if (Object.prototype.hasOwnProperty.call(color, i)) {
 					if (i === 'a') {
 						newColor[i] = color[i]
 					} else {

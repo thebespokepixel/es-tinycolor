@@ -1,5 +1,5 @@
 import test from 'ava'
-import {tinycolor} from '..'
+import {tinycolor} from '../index.js'
 
 test('getBrightness', t => {
 	t.is(tinycolor('#000').getBrightness(), 0, 'returns 0 for #000')

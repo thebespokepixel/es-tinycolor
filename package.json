@@ -1,13 +1,15 @@
 {
-  "version": "2.1.1",
+  "version": "3.0.0",
   "name": "@thebespokepixel/es-tinycolor",
   "description": "Fast Color Parsing and Manipulation in es2015+, based on TinyColor2",
   "scripts": {
-    "test": "xo && nyc ava",
+    "build": "rollup -c",
+    "test": "xo && c8 --reporter=lcov --reporter=text ava",
     "doc-serve": "documentation serve --watch --theme node_modules/documentation-theme-bespoke --github --config src/docs/documentation.yml --project-name $npm_package_name  --project-version $npm_package_version src/index.js",
     "doc-build": "documentation build --format html --output docs --theme node_modules/documentation-theme-bespoke --github --config src/docs/documentation.yml --project-name $npm_package_name  --project-version $npm_package_version src/index.js",
     "readme": "compile-readme -u src/docs/example.md src/docs/readme.md > readme.md",
-    "coverage": "nyc ava && nyc report --reporter=lcov --report-dir test/coverage; open test/coverage/lcov-report/index.html"
+    "coverage": "c8 --reporter=lcov --reporter=text ava",
+    "prepublishOnly": "npx -p typescript tsc index.js --declaration --allowJs --emitDeclarationOnly"
   },
   "license": "MIT",
   "repository": {
@@ -22,55 +24,46 @@
   ],
   "author": "Mark Griffiths <mark@thebespokepixel.com> (http://thebespokepixel.com/)",
   "copyright": {
-    "year": "2020",
+    "year": "2021",
     "owner": "The Bespoke Pixel"
   },
   "contributors": [
     "Brian Grinstead <briangrinstead@gmail.com> (http://briangrinstead.com)"
   ],
   "main": "index.js",
-  "module": "index.mjs",
+  "type": "module",
+  "types": "index.d.ts",
   "bugs": {
     "url": "https://github.com/thebespokepixel/es-tinycolor"
   },
   "homepage": "https://github.com/thebespokepixel/es-tinycolor",
   "files": [
     "index.js",
-    "index.mjs"
+    "index.d.ts"
   ],
   "directories": {
     "test": "test"
   },
   "engines": {
-    "node": ">=10.0"
+    "node": ">=14.0"
   },
   "devDependencies": {
-    "@ava/babel": "^1.0.1",
-    "@babel/core": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
-    "ava": "^3.10.1",
-    "documentation-theme-bespoke": "^1.1.6",
-    "gulp": "^4.0.2",
-    "gulp-better-rollup": "^4.0.1",
-    "gulp-rename": "^2.0.0",
-    "nyc": "^15.1.0",
-    "rollup": "^2.21.0",
-    "rollup-plugin-babel": "^4.4.0",
-    "xo": "^0.32.1"
-  },
-  "ava": {
-    "babel": true,
-    "files": [
-      "test/*.js"
-    ]
+    "ava": "4.0.0-alpha.2",
+    "c8": "^7.10.0",
+    "documentation": "^13.2.5",
+    "documentation-theme-bespoke": "^2.0.9",
+    "rollup": "^2.58.3",
+    "xo": "^0.46.3"
   },
   "xo": {
     "semicolon": false,
-    "esnext": true,
     "ignores": [
-      "index*.js",
+      "gulpfile.js",
+      "index.js",
+      "index.d.ts",
       "lib/**",
-      "docs/**"
+      "docs/**",
+      "coverage/**"
     ],
     "rules": {
       "camelcase": [
@@ -87,6 +80,7 @@
     "github": "thebespokepixel",
     "npm": "thebespokepixel",
     "name": "es-tinycolor",
+    "libraries-io": "TheBespokePixel",
     "codeclimate": "b2bcb75bd517034aa609",
     "providers": {
       "aux1": {
@@ -100,7 +94,7 @@
       "Publishing Status": [
         [
           "npm",
-          "david"
+          "libraries-io-npm"
         ],
         [
           "travis-com",
@@ -110,8 +104,7 @@
       "Development Status": [
         [
           "travis-com-dev",
-          "david-dev",
-          "david-devdeps-dev"
+          "libraries-io-github"
         ],
         [
           "snyk",
@@ -135,7 +128,7 @@
       ],
       [
         "snyk",
-        "david"
+        "libraries-io-npm"
       ]
     ]
   }

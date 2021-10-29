@@ -3,7 +3,7 @@
  *  ────────────────────────────────────────────────────────────────────────────
  */
 
-import {bound01, boundAlpha, mathRound, pad2} from './utilities'
+import {bound01, boundAlpha, mathRound, pad2} from './utilities.js'
 
 /**
  * Converts a decimal to a hex value
@@ -69,9 +69,9 @@ export const rgbaToPercentageRgba = rgba => {
 	return {r, g, b, a: rgba.a}
 }
 
-export const rgbaToString = rgba => (rgba.a === 1) ?
-	`rgb(${rgba.r}, ${rgba.g}, ${rgba.b})` :
-	`rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
+export const rgbaToString = rgba => (rgba.a === 1)
+	? `rgb(${rgba.r}, ${rgba.g}, ${rgba.b})`
+	: `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
 
 export const rgbaToArray = rgba => (rgba.a === 1) ? [rgba.r, rgba.g, rgba.b] : [rgba.r, rgba.g, rgba.b, mathRound(rgba.a * 255)]
 

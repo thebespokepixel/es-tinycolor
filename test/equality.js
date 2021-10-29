@@ -1,11 +1,10 @@
 import test from 'ava'
 
-import conversions from './_conversions'
-import {colorValid, colorEquals} from './_macros'
+import {tinycolor} from '../index.js'
+import conversions from './_conversions.js'
+import {colorValid, colorEquals} from './_macros.js'
 
-import {tinycolor} from '..'
-
-conversions.forEach(c => {
+for (const c of conversions) {
 	const tiny = tinycolor(c.hex)
 	test(`Testing ${c.hex}`, colorValid, tiny)
 	test(`${c.hex}: RGB = HEX`, colorEquals, c.rgb, c.hex)
@@ -18,4 +17,4 @@ conversions.forEach(c => {
 	test(`${c.hex}: HEX = HSL`, colorEquals, c.hex, c.hsl)
 	test(`${c.hex}: HEX = HSV`, colorEquals, c.hex, c.hsv)
 	test(`${c.hex}: HSL = HSV`, colorEquals, c.hsl, c.hsv)
-})
+}

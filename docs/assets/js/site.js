@@ -1,1 +1,154 @@
-!function(){"use strict";function u(e){return function(e){if(Array.isArray(e))return r(e)}(e)||function(e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e))return Array.from(e)}(e)||s(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function s(e,t){if(e){if("string"==typeof e)return r(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);return"Object"===n&&e.constructor&&(n=e.constructor.name),"Map"===n||"Set"===n?Array.from(e):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?r(e,t):void 0}}function r(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,r=new Array(t);n<t;n++)r[n]=e[n];return r}function f(e,t){var n;if("undefined"==typeof Symbol||null==e[Symbol.iterator]){if(Array.isArray(e)||(n=s(e))||t&&e&&"number"==typeof e.length){n&&(e=n);var r=0,o=function(){};return{s:o,n:function(){return r>=e.length?{done:!0}:{done:!1,value:e[r++]}},e:function(e){throw e},f:o}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var i,l=!0,a=!1;return{s:function(){n=e[Symbol.iterator]()},n:function(){var e=n.next();return l=e.done,e},e:function(e){a=!0,i=e},f:function(){try{l||null==n.return||n.return()}finally{if(a)throw i}}}}anchors.options.placement="left",anchors.add("h3").remove(".no-anchor");var d=document.querySelector("#toc").querySelectorAll("li");document.querySelector("#filter-input").addEventListener("keyup",function(e){if("Enter"===e.key){var t,n=f(d);try{for(n.s();!(t=n.n()).done;){var r=t.value;if(!r.classList.contains("display-none"))return location.replace(r.firstChild.href),e.preventDefault()}}catch(e){n.e(e)}finally{n.f()}}var o=function(){return!0},i=document.querySelector("#filter-input").value.toLowerCase();i.match(/^\s*$/)||(o=function(e){return e.firstChild.innerHTML&&e.firstChild.innerHTML.toLowerCase().includes(i)});var l,a=f(d);try{for(a.s();!(l=a.n()).done;){var s=l.value,c=u(s.querySelectorAll("li"));o(s)||c.some(function(e){return o(e)})?s.classList.remove("display-none"):s.classList.add("display-none")}}catch(e){a.e(e)}finally{a.f()}});var e,t=f(document.querySelectorAll(".toggle-sibling"));try{for(t.s();!(e=t.n()).done;){e.value.addEventListener("click",n)}}catch(e){t.e(e)}finally{t.f()}function n(){var e=this.parentNode.querySelectorAll(".toggle-target")[0],t=this.querySelectorAll(".icon")[0],n="display-none";e.classList.contains(n)?(e.classList.remove(n),t.innerHTML="▾"):(e.classList.add(n),t.innerHTML="▸")}function o(e){var t=document.getElementById(e);t&&0===t.offsetHeight&&t.parentNode.parentNode.classList.contains("display-none")&&t.parentNode.parentNode.classList.remove("display-none")}window.addEventListener("hashchange",function(){o(location.hash.slice(1))}),o(location.hash.slice(1));var i,l=f(document.querySelectorAll(".pre-open"));try{for(l.s();!(i=l.n()).done;){i.value.addEventListener("mousedown",a,!1)}}catch(e){l.e(e)}finally{l.f()}function a(){o(this.hash.slice(1))}var c=document.querySelector("#split-left"),y=document.querySelector("#split-right");function p(){history.replaceState({leftTop:c.scrollTop,rightTop:y.scrollTop},document.title)}function h(e){e&&history.replaceState(e.state,document.title),history.state&&(c.scrollTop=history.state.leftTop,y.scrollTop=history.state.rightTop)}c.style.overflow="hidden",c.style.overflow="",Split(["#split-left","#split-right"],{elementStyle:function(e,t,n){return{"flex-basis":"calc("+t+"% - "+n+"px)"}},gutterStyle:function(e,t){return{"flex-basis":t+"px"}},gutterSize:20,sizes:[20,80]}),window.addEventListener("load",function(){setTimeout(function(){h(),p(),c.addEventListener("scroll",p),y.addEventListener("scroll",p)},1)}),window.addEventListener("popstate",h)}();
+(function () {
+	'use strict';
+
+	/* eslint-env browser */
+	/* eslint new-cap:0,no-undef:0,unicorn/prefer-query-selector:0 */
+	/* global anchors */
+
+	// add anchor links to headers
+	anchors.options.placement = 'left';
+	anchors.add('h3').remove('.no-anchor');
+
+	// Filter UI
+	const tocElements = document.querySelector('#toc').querySelectorAll('li');
+
+	document.querySelector('#filter-input').addEventListener('keyup', event_ => {
+		// Enter key
+		if (event_.key === 'Enter') {
+			// Go to the first displayed item in the toc
+			for (const element of tocElements) {
+				if (!element.classList.contains('display-none')) {
+					location.replace(element.firstChild.href);
+					return event_.preventDefault()
+				}
+			}
+		}
+
+		let match = () => true;
+
+		const value = document.querySelector('#filter-input').value.toLowerCase();
+
+		if (!/^\s*$/.test(value)) {
+			match = element =>
+				element.firstChild.innerHTML
+				&& element.firstChild.innerHTML.toLowerCase().includes(value);
+		}
+
+		for (const element of tocElements) {
+			const children = [...element.querySelectorAll('li')];
+			if (match(element) || children.some(child => match(child))) {
+				element.classList.remove('display-none');
+			} else {
+				element.classList.add('display-none');
+			}
+		}
+	});
+
+	const toggles = document.querySelectorAll('.toggle-sibling');
+
+	for (const toggle of toggles) {
+		toggle.addEventListener('click', toggleSibling);
+	}
+
+	function toggleSibling() {
+		const stepSibling = this.parentNode.querySelectorAll('.toggle-target')[0];
+		const icon = this.querySelectorAll('.icon')[0];
+		const klass = 'display-none';
+		if (stepSibling.classList.contains(klass)) {
+			stepSibling.classList.remove(klass);
+			icon.innerHTML = '▾';
+		} else {
+			stepSibling.classList.add(klass);
+			icon.innerHTML = '▸';
+		}
+	}
+
+	function showHashTarget(targetId) {
+		const hashTarget = document.getElementById(targetId);
+		// New target is hidden
+		if (hashTarget && hashTarget.offsetHeight === 0
+			&& hashTarget.parentNode.parentNode.classList.contains('display-none')) {
+			hashTarget.parentNode.parentNode.classList.remove('display-none');
+		}
+	}
+
+	window.addEventListener('hashchange', () => {
+		showHashTarget(location.hash.slice(1));
+	});
+
+	showHashTarget(location.hash.slice(1));
+
+	const toclinks = document.querySelectorAll('.pre-open');
+
+	for (const toclink of toclinks) {
+		toclink.addEventListener('mousedown', preOpen, false);
+	}
+
+	function preOpen() {
+		showHashTarget(this.hash.slice(1));
+	}
+
+	const splitLeft = document.querySelector('#split-left');
+	const splitRight = document.querySelector('#split-right');
+	// TODO const splitParent = splitLeft.parentNode
+	// TODO const cwWithSb = splitLeft.clientWidth
+	splitLeft.style.overflow = 'hidden';
+	// TODO const cwWithoutSb = splitLeft.clientWidth
+	splitLeft.style.overflow = '';
+
+	Split(['#split-left', '#split-right'], {
+		elementStyle(dimension, size, gutterSize) {
+			return {
+				'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)',
+			}
+		},
+		gutterStyle(dimension, gutterSize) {
+			return {
+				'flex-basis': gutterSize + 'px',
+			}
+		},
+		gutterSize: 20,
+		sizes: [20, 80],
+	});
+
+	// Chrome doesn't remember scroll position properly so do it ourselves.
+	// Also works on Firefox and Edge.
+
+	function updateState() {
+		history.replaceState(
+			{
+				leftTop: splitLeft.scrollTop,
+				rightTop: splitRight.scrollTop,
+			},
+			document.title,
+		);
+	}
+
+	function loadState(ev) {
+		if (ev) {
+			// Edge doesn't replace change history.state on popstate.
+			history.replaceState(ev.state, document.title);
+		}
+
+		if (history.state) {
+			splitLeft.scrollTop = history.state.leftTop;
+			splitRight.scrollTop = history.state.rightTop;
+		}
+	}
+
+	window.addEventListener('load', () => {
+		// Restore after Firefox scrolls to hash.
+		setTimeout(() => {
+			loadState();
+			// Update with initial scroll position.
+			updateState();
+			// Update scroll positions only after we've loaded because Firefox
+			// emits an initial scroll event with 0.
+			splitLeft.addEventListener('scroll', updateState);
+			splitRight.addEventListener('scroll', updateState);
+		}, 1);
+	});
+
+	window.addEventListener('popstate', loadState);
+
+})();

@@ -4,8 +4,8 @@
  *  Thanks to less.js for some of the basics here
  *  <https://github.com/cloudhead/less.js/blob/master/lib/less/functions.js>
  */
-import TinyColor from './classes/tinycolor'
-import {mathRound, clamp01, mathMax, mathMin} from './utilities'
+import TinyColor from './classes/tinycolor.js'
+import {mathRound, clamp01, mathMax, mathMin} from './utilities.js'
 
 /**
  * Apply a modification conditionally

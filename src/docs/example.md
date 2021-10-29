@@ -309,7 +309,7 @@ tinycolor("hsl(0, 10%, 50%)").saturate().toString(); // "hsl(0, 20%, 50%)"
 ```
 ### invert
 
-`invert: function() -> TinyColor`.  Inverts the color in RBG colorspace.
+`invert: function() -> TinyColor`.  Inverts the color, in RGB colorspace (as opposed to `complement()`, which rotates the hue).
 ```js
 tinycolor("#f00").invert().toString(); // "#00ffff"
 ```
