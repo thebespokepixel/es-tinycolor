@@ -9,7 +9,7 @@
     "doc-build": "documentation build --format html --output docs --theme node_modules/documentation-theme-bespoke --github --config src/docs/documentation.yml --project-name $npm_package_name  --project-version $npm_package_version src/index.js",
     "readme": "compile-readme -u src/docs/example.md src/docs/readme.md > readme.md",
     "coverage": "c8 --reporter=lcov --reporter=text ava",
-    "generate-types": "npx -p typescript tsc index.js --declaration --allowJs --emitDeclarationOnly"
+    "prepublishOnly": "npx -p typescript tsc index.js --declaration --allowJs --emitDeclarationOnly"
   },
   "license": "MIT",
   "repository": {
@@ -32,12 +32,14 @@
   ],
   "main": "index.js",
   "type": "module",
+  "types": "index.d.ts",
   "bugs": {
     "url": "https://github.com/thebespokepixel/es-tinycolor"
   },
   "homepage": "https://github.com/thebespokepixel/es-tinycolor",
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "directories": {
     "test": "test"
@@ -48,12 +50,13 @@
   "devDependencies": {
     "ava": "4.0.0-alpha.2",
     "c8": "^7.10.0",
+    "documentation": "^13.2.5",
+    "documentation-theme-bespoke": "^2.0.9",
     "rollup": "^2.58.3",
-    "xo": "^0.45.0"
+    "xo": "^0.46.3"
   },
   "xo": {
     "semicolon": false,
-    "esnext": true,
     "ignores": [
       "gulpfile.js",
       "index.js",
@@ -77,6 +80,7 @@
     "github": "thebespokepixel",
     "npm": "thebespokepixel",
     "name": "es-tinycolor",
+    "libraries-io": "TheBespokePixel",
     "codeclimate": "b2bcb75bd517034aa609",
     "providers": {
       "aux1": {
@@ -90,7 +94,7 @@
       "Publishing Status": [
         [
           "npm",
-          "david"
+          "libraries-io-npm"
         ],
         [
           "travis-com",
@@ -100,8 +104,7 @@
       "Development Status": [
         [
           "travis-com-dev",
-          "david-dev",
-          "david-devdeps-dev"
+          "libraries-io-github"
         ],
         [
           "snyk",
@@ -125,7 +128,7 @@
       ],
       [
         "snyk",
-        "david"
+        "libraries-io-npm"
       ]
     ]
   }

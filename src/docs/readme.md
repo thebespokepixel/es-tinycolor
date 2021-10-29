@@ -12,6 +12,12 @@ ${badges}
 
 ${usage}
 
+## Typescript
+
+Type definitions have been added `index.d.ts`
+
+${usage}
+
 ## Documentation
 Full documentation can be found at [https://thebespokepixel.github.io/es-tinycolor/][2]
 
