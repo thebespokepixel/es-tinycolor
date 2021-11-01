@@ -7,13 +7,7 @@ export class TinyColor {
     static isReadable(color1: any, color2: any, wcag2: any): boolean;
     static mostReadable(baseColor: any, colorList: any, args: any): any;
     static mix(color1: any, color2: any, amount: any): TinyColor;
-    /**
-     * Create a new TinyColor instance
-     * @param  {String|Array|Object} color Notation describing a color
-     * @param  {Object} options            Options object (see below)
-     * @return {TinyColor}                 An instance representing the color
-     */
-    constructor(color: string | any[] | any, options?: any);
+    constructor(color: any, options?: {});
     _originalInput: any;
     _r: any;
     _g: any;
@@ -34,7 +28,12 @@ export class TinyColor {
     getLuminance(): number;
     toString(format: any): any;
     toName(): any;
-    toRgb(): any;
+    toRgb(): {
+        r: any;
+        g: any;
+        b: any;
+        a: any;
+    };
     toRgbString(): string;
     toRgbArray(): any[];
     toPercentageRgb(): {
@@ -54,14 +53,14 @@ export class TinyColor {
     toHslString(): any;
     setAlpha(value: any): TinyColor;
     clone(): TinyColor;
-    lighten(...args: any[]): TinyColor;
-    brighten(...args: any[]): TinyColor;
-    darken(...args: any[]): TinyColor;
-    desaturate(...args: any[]): TinyColor;
-    saturate(...args: any[]): TinyColor;
-    greyscale(...args: any[]): TinyColor;
-    invert(...args: any[]): TinyColor;
-    spin(...args: any[]): TinyColor;
+    lighten(...args: any[]): any;
+    brighten(...args: any[]): any;
+    darken(...args: any[]): any;
+    desaturate(...args: any[]): any;
+    saturate(...args: any[]): any;
+    greyscale(...args: any[]): any;
+    invert(...args: any[]): any;
+    spin(...args: any[]): any;
     analogous(...args: any[]): any;
     complement(...args: any[]): any;
     monochromatic(...args: any[]): any;
