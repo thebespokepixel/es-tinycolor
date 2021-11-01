@@ -4,15 +4,28 @@
  */
 import TinyColor from './classes/tinycolor.js'
 
-// http://www.w3.org/TR/AERT#color-contrast
+/**
+ * Calculates the brightness.
+ * http://www.w3.org/TR/AERT#color-contrast
+ *
+ * @alias calculations.calcBrightness
+ * @param      {object}  rgb     The rgb
+ * @return     {number}  The brightness.
+ */
 export const calcBrightness = rgb => ((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000
 
-export function calcLuminance(rgb, deepRgb) {
-	// http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
-
-	const RsRGB = deepRgb.r / 255
-	const GsRGB = deepRgb.g / 255
-	const BsRGB = deepRgb.b / 255
+/**
+ * Calculates the luminance.
+ * http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+ *
+ * @alias calculations.calcLuminance
+ * @param  {TinyColor} rgb The rgb color
+ * @return {number}    The luminance.
+ */
+export function calcLuminance(rgb) {
+	const RsRGB = rgb.r / 255
+	const GsRGB = rgb.g / 255
+	const BsRGB = rgb.b / 255
 
 	const R = RsRGB <= 0.039_28 ? RsRGB / 12.92 : ((RsRGB + 0.055) / 1.055) ** 2.4
 
@@ -23,6 +36,15 @@ export function calcLuminance(rgb, deepRgb) {
 	return (0.2126 * R) + (0.7152 * G) + (0.0722 * B)
 }
 
+/**
+ * Calculates the mix of two colors.
+ *
+ * @alias calculations.calcMix
+ * @param      {TinyColor}  color1  The first color
+ * @param      {TinyColor}  color2  The second color
+ * @param      {number}     amount  The amount to mix
+ * @return     {TinyColor}  The mixed color.
+ */
 export function calcMix(color1, color2, amount) {
 	amount = (amount === 0) ? 0 : (amount || 50)
 	const rgb1 = new TinyColor(color1).toRgb()
