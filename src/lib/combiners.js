@@ -13,12 +13,24 @@ export function combine(action, args) {
 	return actions[action](...args)
 }
 
+/**
+ * Find the complementary color.
+ *
+ * @param      {TinyColor}     color   The color
+ * @return     {TinyColor}  The new complementary Tinycolor.
+ */
 export function complement(color) {
 	const hsl = new TinyColor(color).toHsl()
 	hsl.h = (hsl.h + 180) % 360
 	return new TinyColor(hsl)
 }
 
+/**
+ * Find the color triad colors.
+ *
+ * @param      {TinyColor}    color   The color
+ * @return     {[TinyColor]}  An array of 3 triad TinyColors.
+ */
 export function triad(color) {
 	const hsl = new TinyColor(color).toHsl()
 	const {h} = hsl
@@ -29,6 +41,12 @@ export function triad(color) {
 	]
 }
 
+/**
+ * Find the color tetrad colors.
+ *
+ * @param      {TinyColor}   color   The color
+ * @return     {[TinyColor]} An array of 4 tetrad TinyColors.
+ */
 export function tetrad(color) {
 	const hsl = new TinyColor(color).toHsl()
 	const {h} = hsl
@@ -40,6 +58,12 @@ export function tetrad(color) {
 	]
 }
 
+/**
+ * Find the split complementary colors.
+ *
+ * @param      {TinyColor}    color   The color
+ * @return     {[TinyColor]}  An array of 3 split complementary TinyColors.
+ */
 export function splitcomplement(color) {
 	const hsl = new TinyColor(color).toHsl()
 	const {h} = hsl
@@ -50,6 +74,12 @@ export function splitcomplement(color) {
 	]
 }
 
+/**
+ * Find the analogous colors.
+ *
+ * @param      {TinyColor}    color   The color
+ * @return     {[TinyColor]}  The new analogous Tinycolors.
+ */
 export function analogous(color, results = 6, slices = 30) {
 	const hsl = new TinyColor(color).toHsl()
 	const part = 360 / slices
@@ -63,6 +93,12 @@ export function analogous(color, results = 6, slices = 30) {
 	return returnValue
 }
 
+/**
+ * Find the monochromatic color.
+ *
+ * @param      {TinyColor}    color   The color
+ * @return     {TinyColor}  The new monochromatic Tinycolor.
+ */
 export function monochromatic(color, results = 6) {
 	const hsv = new TinyColor(color).toHsv()
 	let {h, s, v} = hsv

@@ -34,14 +34,60 @@ function bound01(n, max) {
 	return (n % max) / Number.parseFloat(max)
 }
 
+/**
+ * Converts a base-16 hex value into a base-10 integer
+ *
+ * @alias converters.convertHexToInt
+ * @param  {string} val Hexadecimal input value
+ * @return {number}     Integer value
+ */
 const convertHexToInt = value => Number.parseInt(value, 16);
+/**
+ * Converts a hex value to a decimal
+ *
+ * @alias converters.convertHexToDecimal
+ * @param  {string} h Hexadecimal input value
+ * @return {number}   Decimal value
+ */
 const convertHexToDecimal = h => convertHexToInt(h) / 255;
+/**
+ * Replace a decimal with it's percentage value
+ *
+ * @alias converters.convertToPercentage
+ * @param  {number} n Decimal input value
+ * @return {string}   Percentage string
+ */
 const convertToPercentage = n => n <= 1 ? `${n * 100}%` : n;
+/**
+ * Handle conversion of internal precise values to exportable values. Should be
+ * able to accept a tinycolour instance 'this' value.
+ *
+ * @alias converters.rawToRgba
+ * @param  {object} raw { _r, _g, _b, _a } with _r, _g, _b in [0.0, 255.0] and _a in [0, 1]
+ * @return {object}     { r, g, b } in [0, 255]
+ */
 const rawToRgba = raw => {
 	const [r, g, b] = [raw._r, raw._g, raw._b].map(value => mathRound(value));
 	return {r, g, b, a: raw._roundA}
 };
+/**
+ * Handle conversion of internal precise values to exportable values,
+ * maintaining deep precision. Should be able to accept a tinycolour instance
+ * 'this' value.
+ *
+ * @alias converters.rawToDeepRgba
+ * @param  {object} raw { _r, _g, _b, _a } with _r, _g, _b in [0.0, 255.0] and _a in [0, 1]
+ * @return {object}     { r, g, b, a } in [0.0, 255.0]
+ */
 const rawToDeepRgba = raw => ({r: raw._r, g: raw._g, b: raw._b, a: raw._a});
+/**
+ * Handle bounds / percentage checking to conform to CSS color spec
+ * @link{http://www.w3.org/TR/css3-color/|www.w3.org/TR/css3-color}
+ *
+ * @alias converters.conformRgba
+ * @param  {object} rgba { r, g, b, a } in [0, 255] or [0, 1]
+ * @return {object}      { r, g, b } in [0, 255]
+ */
 const conformRgba = rgba => {
 	const [r, g, b] = [rgba.r, rgba.g, rgba.b].map(n => bound01(n, 255) * 255);
 	return {r, g, b, a: boundAlpha(rgba.a)}
@@ -54,22 +100,70 @@ const rgbaToString = rgba => (rgba.a === 1)
 	? `rgb(${rgba.r}, ${rgba.g}, ${rgba.b})`
 	: `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
 const rgbaToArray = rgba => (rgba.a === 1) ? [rgba.r, rgba.g, rgba.b] : [rgba.r, rgba.g, rgba.b, mathRound(rgba.a * 255)];
+/**
+ * Convert RGBA to hexadecimal
+ *
+ * Converts an RGBA color plus alpha transparency to hex
+ * Assumes r, g, b are contained in the set [0, 255] and
+ * a in [0, 1]. Returns a 4 or 8 character rgba hex
+ *
+ * @alias converters.rgbaToHex
+ * @param      {object}    rgba        The rgba object.
+ * @param      {boolean}   allowShort  Allow short hex output
+ * @return     {string}    The hex output.
+ */
 const rgbaToHex = (rgba, allowShort) => {
 	const hex = rgbaToArray(rgba).map(n => n.toString(16)).map(value => pad2(value));
 	return allowShort && hex.every(h => h.charAt(0) === h.charAt(1)) ? hex.map(h => h.charAt(0)).join('') : hex.join('')
 };
+/**
+ * Convert RGB to hexadecimal
+ *
+ * Converts an RGBA color plus alpha transparency to hex
+ * Assumes r, g, b are contained in the set [0, 255]. Returns a 3 or 6 character rgba hex
+ *
+ * @alias converters.rgbToHex
+ * @param      {object}    rgb        The rgb object.
+ * @param      {boolean}   allowShort  Allow short hex output
+ * @return     {string}    The hex output.
+ */
 const rgbToHex = (rgba, allowShort) => rgbaToHex({...rgba, a: 1}, allowShort);
 
+/**
+ * Calculates the brightness.
+ * http://www.w3.org/TR/AERT#color-contrast
+ *
+ * @alias calculations.calcBrightness
+ * @param      {object}  rgb     The rgb
+ * @return     {number}  The brightness.
+ */
 const calcBrightness = rgb => ((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000;
-function calcLuminance(rgb, deepRgb) {
-	const RsRGB = deepRgb.r / 255;
-	const GsRGB = deepRgb.g / 255;
-	const BsRGB = deepRgb.b / 255;
+/**
+ * Calculates the luminance.
+ * http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+ *
+ * @alias calculations.calcLuminance
+ * @param  {TinyColor} rgb The rgb color
+ * @return {number}    The luminance.
+ */
+function calcLuminance(rgb) {
+	const RsRGB = rgb.r / 255;
+	const GsRGB = rgb.g / 255;
+	const BsRGB = rgb.b / 255;
 	const R = RsRGB <= 0.039_28 ? RsRGB / 12.92 : ((RsRGB + 0.055) / 1.055) ** 2.4;
 	const G = GsRGB <= 0.039_28 ? GsRGB / 12.92 : ((GsRGB + 0.055) / 1.055) ** 2.4;
 	const B = BsRGB <= 0.039_28 ? BsRGB / 12.92 : ((BsRGB + 0.055) / 1.055) ** 2.4;
 	return (0.2126 * R) + (0.7152 * G) + (0.0722 * B)
 }
+/**
+ * Calculates the mix of two colors.
+ *
+ * @alias calculations.calcMix
+ * @param      {TinyColor}  color1  The first color
+ * @param      {TinyColor}  color2  The second color
+ * @param      {number}     amount  The amount to mix
+ * @return     {TinyColor}  The mixed color.
+ */
 function calcMix(color1, color2, amount) {
 	amount = (amount === 0) ? 0 : (amount || 50);
 	const rgb1 = new TinyColor(color1).toRgb();
@@ -84,6 +178,15 @@ function calcMix(color1, color2, amount) {
 	return new TinyColor(rgba)
 }
 
+/**
+ * Return valid WCAG2 parameters for isReadable.
+ *
+ * @alias readability.validateWCAG2Parms
+ * @param      {object}  parms       The parameters
+ * @param      {object}  parms.level The level to test "AA" or "AAA" (default "AA")
+ * @param      {object}  parms.size  The content size to test "large" or "small" (default "small")
+ * @return     {object}  sanitized parameters
+ */
 function validateWCAG2Parms(parms) {
 	let level;
 	let size;
@@ -101,11 +204,30 @@ function validateWCAG2Parms(parms) {
 	}
 	return {level, size}
 }
+/**
+ * Analyze the 2 colors and returns the color contrast defined by (WCAG Version 2)
+ *
+ * @param      {TinyColor}  color1  The first color
+ * @param      {TinyColor}  color2  The second color
+ * @return     {number}             The color contrast defined by (WCAG Version 2)
+ */
 function readability(color1, color2) {
 	const c1 = new TinyColor(color1);
 	const c2 = new TinyColor(color2);
 	return (Math.max(c1.getLuminance(), c2.getLuminance()) + 0.05) / (Math.min(c1.getLuminance(), c2.getLuminance()) + 0.05)
 }
+/**
+ * Ensure that foreground and background color combinations meet WCAG2 guidelines.
+ *
+ * @param   {TinyColor}        color1        The first color
+ * @param   {TinyColor}        color2        The second color
+ * @param   {object}           wcag2         The WCAG2 properties to test
+ * @param   {object}           wcag2.level   The level to test "AA" or "AAA" (default "AA")
+ * @param   {object}           wcag2.size    The content size to test "large" or "small" (default "small")
+ * @example Tinycolor.isReadable("#000", "#111") → false
+ * @example Tinycolor.isReadable("#000", "#111", {level:"AA",size:"large"}) → false
+ * @return  {(boolean|number)} True if readable, False otherwise.
+ */
 function isReadable(color1, color2, wcag2) {
 	const readable = readability(color1, color2);
 	const wcag2Parms = validateWCAG2Parms(wcag2);
@@ -122,6 +244,24 @@ function isReadable(color1, color2, wcag2) {
 	}
 	return out
 }
+/**
+ * Given a base color and a list of possible foreground or background colors for that
+ * base, returns the most readable color.
+ *
+ * Optionally returns Black or White if the most readable color is unreadable.
+ *
+ * @param   {TinyColor}    baseColor                     The base color
+ * @param   {[TinyColor]}  colorList                     An array of TinyColors
+ * @param   {object}       [args={}]                     The arguments
+ * @param   {boolean}      args.includeFallbackColors    Include fallback colors?
+ * @param   {object}       args.level                    The level to test "AA" or "AAA" (default "AA")
+ * @param   {object}       args.size                     The content size to test "large" or "small" (default "small")
+ * @example Tinycolor.mostReadable(tinycolor.mostReadable("#123", ["#124", "#125"], {includeFallbackColors:false}).toHexString(); // "#112255"
+ * @example Tinycolor.mostReadable(tinycolor.mostReadable("#123", ["#124", "#125"], {includeFallbackColors:true}).toHexString();  // "#ffffff"
+ * @example Tinycolor.mostReadable("#a8015a", ["#faf3f3"], {includeFallbackColors:true, level:"AAA", size:"large"}).toHexString(); // "#faf3f3"
+ * @example Tinycolor.mostReadable("#a8015a", ["#faf3f3"], {includeFallbackColors:true, level:"AAA", size:"small"}).toHexString(); // "#ffffff"
+ * @return  {TinyColor}    A TinyColor instance of the msot readable color.
+ */
 function mostReadable(baseColor, colorList, args = {}) {
 	const {includeFallbackColors, level, size} = args;
 	let readable;
@@ -145,11 +285,23 @@ function combine(action, args) {
 	const actions = {monochromatic, analogous, complement, splitcomplement, triad, tetrad};
 	return actions[action](...args)
 }
+/**
+ * Find the complementary color.
+ *
+ * @param      {TinyColor}     color   The color
+ * @return     {TinyColor}  The new complementary Tinycolor.
+ */
 function complement(color) {
 	const hsl = new TinyColor(color).toHsl();
 	hsl.h = (hsl.h + 180) % 360;
 	return new TinyColor(hsl)
 }
+/**
+ * Find the color triad colors.
+ *
+ * @param      {TinyColor}    color   The color
+ * @return     {[TinyColor]}  An array of 3 triad TinyColors.
+ */
 function triad(color) {
 	const hsl = new TinyColor(color).toHsl();
 	const {h} = hsl;
@@ -159,6 +311,12 @@ function triad(color) {
 		new TinyColor({h: (h + 240) % 360, s: hsl.s, l: hsl.l}),
 	]
 }
+/**
+ * Find the color tetrad colors.
+ *
+ * @param      {TinyColor}   color   The color
+ * @return     {[TinyColor]} An array of 4 tetrad TinyColors.
+ */
 function tetrad(color) {
 	const hsl = new TinyColor(color).toHsl();
 	const {h} = hsl;
@@ -169,6 +327,12 @@ function tetrad(color) {
 		new TinyColor({h: (h + 270) % 360, s: hsl.s, l: hsl.l}),
 	]
 }
+/**
+ * Find the split complementary colors.
+ *
+ * @param      {TinyColor}    color   The color
+ * @return     {[TinyColor]}  An array of 3 split complementary TinyColors.
+ */
 function splitcomplement(color) {
 	const hsl = new TinyColor(color).toHsl();
 	const {h} = hsl;
@@ -178,6 +342,12 @@ function splitcomplement(color) {
 		new TinyColor({h: (h + 216) % 360, s: hsl.s, l: hsl.l}),
 	]
 }
+/**
+ * Find the analogous colors.
+ *
+ * @param      {TinyColor}    color   The color
+ * @return     {[TinyColor]}  The new analogous Tinycolors.
+ */
 function analogous(color, results = 6, slices = 30) {
 	const hsl = new TinyColor(color).toHsl();
 	const part = 360 / slices;
@@ -188,6 +358,12 @@ function analogous(color, results = 6, slices = 30) {
 	}
 	return returnValue
 }
+/**
+ * Find the monochromatic color.
+ *
+ * @param      {TinyColor}    color   The color
+ * @return     {TinyColor}  The new monochromatic Tinycolor.
+ */
 function monochromatic(color, results = 6) {
 	const hsv = new TinyColor(color).toHsv();
 	let {h, s, v} = hsv;
@@ -200,6 +376,12 @@ function monochromatic(color, results = 6) {
 	return returnValue
 }
 
+/**
+ * Apply a modification conditionally
+ * @param  {Function}  action The modification function to apply
+ * @param  {arguments} args   Arguments passed to specified function
+ * @return {TinyColor}        The modified color
+ */
 function modify(action, args) {
 	const actions = {invert, desaturate, saturate, greyscale, lighten, brighten, darken, spin};
 	const color = actions[action](...args);
@@ -210,6 +392,11 @@ function modify(action, args) {
 	source.setAlpha(color._a);
 	return source
 }
+/**
+ * Invert Color
+ * @param  {TinyColor} color  The color to invert
+ * @return {TinyColor}        The inverted color
+ */
 function invert(color) {
 	const rgb = new TinyColor(color).toRgb();
 	rgb.r = mathMax(0, mathMin(255, 255 - rgb.r));
@@ -217,6 +404,12 @@ function invert(color) {
 	rgb.b = mathMax(0, mathMin(255, 255 - rgb.b));
 	return new TinyColor(rgb)
 }
+/**
+ * Desaturate Color
+ * @param  {TinyColor} color  The color to modify
+ * @param  {Number}    amount The amount to desaturate <= 100
+ * @return {TinyColor}        The modified color
+ */
 function desaturate(color, amount) {
 	amount = (amount === 0) ? 0 : (amount || 10);
 	const hsl = new TinyColor(color).toHsl();
@@ -224,6 +417,12 @@ function desaturate(color, amount) {
 	hsl.s = clamp01(hsl.s);
 	return new TinyColor(hsl)
 }
+/**
+ * Saturate color
+ * @param  {TinyColor} color  The color to modify
+ * @param  {Number}    amount The amount to saturate <= 100
+ * @return {TinyColor}        The modified color
+ */
 function saturate(color, amount) {
 	amount = (amount === 0) ? 0 : (amount || 10);
 	const hsl = new TinyColor(color).toHsl();
@@ -231,9 +430,20 @@ function saturate(color, amount) {
 	hsl.s = clamp01(hsl.s);
 	return new TinyColor(hsl)
 }
+/**
+ * Remove all chroma, leaving luminence
+ * @param  {TinyColor} color The color to modify
+ * @return {TinyColor}       The modified color
+ */
 function greyscale(color) {
 	return new TinyColor(color).desaturate(100)
 }
+/**
+ * Lighten a color
+ * @param  {TinyColor} color  The color to modify
+ * @param  {Number}    amount The amount to ligten by <= 100
+ * @return {TinyColor}        The modified color
+ */
 function lighten(color, amount) {
 	amount = (amount === 0) ? 0 : (amount || 10);
 	const hsl = new TinyColor(color).toHsl();
@@ -241,6 +451,12 @@ function lighten(color, amount) {
 	hsl.l = clamp01(hsl.l);
 	return new TinyColor(hsl)
 }
+/**
+ * Brighten a color
+ * @param  {TinyColor} color  The color to modify
+ * @param  {Number}    amount The amount to brighten by <= 100
+ * @return {TinyColor}        The modified color
+ */
 function brighten(color, amount) {
 	amount = (amount === 0) ? 0 : (amount || 10);
 	const rgb = new TinyColor(color).toRgb();
@@ -249,6 +465,12 @@ function brighten(color, amount) {
 	rgb.b = mathMax(0, mathMin(255, rgb.b - mathRound(255 * -(amount / 100))));
 	return new TinyColor(rgb)
 }
+/**
+ * Darken a color
+ * @param  {TinyColor} color  The color to modify
+ * @param  {Number}    amount The amount to brighten by <= 100
+ * @return {TinyColor}        The modified color
+ */
 function darken(color, amount) {
 	amount = (amount === 0) ? 0 : (amount || 10);
 	const hsl = new TinyColor(color).toHsl();
@@ -256,6 +478,13 @@ function darken(color, amount) {
 	hsl.l = clamp01(hsl.l);
 	return new TinyColor(hsl)
 }
+/**
+ * Spin takes a positive or negative amount within [-360, 360] indicating the
+ * change of hue. Values outside of this range will be wrapped into this range.
+ * @param  {TinyColor} color  The color to modify
+ * @param  {Number}    amount Degrees to rotate hue by
+ * @return {TinyColor}        The modified color
+ */
 function spin(color, amount) {
 	const hsl = new TinyColor(color).toHsl();
 	const hue = (hsl.h + amount) % 360;
@@ -364,6 +593,12 @@ class TinyColorExtensionAPI {
 let tinyCounter = 0;
 const extensionApi = new TinyColorExtensionAPI();
 class TinyColor {
+	/**
+	 * Create a new TinyColor instance
+	 * @param  {string|array|object} color Notation describing a color
+	 * @param  {object} options            Options object (see below)
+	 * @return {TinyColor}                 An instance representing the color
+	 */
 	constructor(color, options = {}) {
 		color = color || '';
 		if (color instanceof TinyColor) {
@@ -382,18 +617,46 @@ class TinyColor {
 		this._tc_id = TinyColor.newId();
 		extensionApi.set(options);
 	}
+	/**
+	 * Create a new ID
+	 *
+	 * @return     {number}  Incremented ID counter
+	 */
 	static newId() {
 		return tinyCounter++
 	}
+	/**
+	 * Register a TinyColor extension
+	 * @param   {string}  id                   The plugin identifier
+	 * @param   {object}  [options={}]         Plugin options
+	 * @param   {string}  options.alphaFormat  rgb|hex
+	 * @param   {boolean} options.shortHex     Short hex codes #ABC, if possible
+	 * @param   {boolean} options.upperCaseHex User UPPER case hex
+	 * @return  {TinyColorExtension}           The TinyColor extension
+	 */
 	static registerFormat(id, options = {}) {
 		return extensionApi.add(id, options)
 	}
+	/**
+	 * Are two TinyColor colours equivalent?
+	 *
+	 * @param      {TinyColor}  color1  The first color
+	 * @param      {TinyColor}  color2  The second color
+	 * @return     {boolean}  Equivalent or not?
+	 */
 	static equals(color1, color2) {
 		if (!color1 || !color2) {
 			return false
 		}
 		return new TinyColor(color1).toRgbString() === new TinyColor(color2).toRgbString()
 	}
+	/**
+	 * Create a new TinyColor from values from 0..1
+	 *
+	 * @param      {Object}     color    The color
+	 * @param      {<type>}     options  The options
+	 * @return     {TinyColor}  The tiny color.
+	 */
 	static fromRatio(color, options) {
 		if (typeof color === 'object') {
 			const newColor = {};
@@ -410,92 +673,268 @@ class TinyColor {
 		}
 		return new TinyColor(color, options)
 	}
+	/**
+	 * Analyze the 2 colors and returns the color contrast defined by (WCAG Version 2)
+	 *
+	 * @param      {TinyColor}  color1  The first color
+	 * @param      {TinyColor}  color2  The second color
+	 * @return     {number}             The color contrast defined by (WCAG Version 2)
+	 */
 	static readability(color1, color2) {
 		return readability(color1, color2)
 	}
+	/**
+	 * Ensure that foreground and background color combinations meet WCAG2 guidelines.
+	 *
+	 * @param   {TinyColor}        color1        The first color
+	 * @param   {TinyColor}        color2        The second color
+	 * @param   {object}           wcag2         The WCAG2 properties to test
+	 * @param   {object}           wcag2.level   The level to test "AA" or "AAA" (default "AA")
+	 * @param   {object}           wcag2.size    The content size to test "large" or "small" (default "small")
+	 * @example Tinycolor.isReadable("#000", "#111") → false
+	 * @example Tinycolor.isReadable("#000", "#111", {level:"AA",size:"large"}) → false
+	 * @return  {(boolean|number)} True if readable, False otherwise.
+	 */
 	static isReadable(color1, color2, wcag2) {
 		return isReadable(color1, color2, wcag2)
 	}
+	/**
+	 * Given a base color and a list of possible foreground or background colors for that
+	 * base, returns the most readable color.
+	 *
+	 * Optionally returns Black or White if the most readable color is unreadable.
+	 *
+	 * @param   {TinyColor}    baseColor                     The base color
+	 * @param   {[TinyColor]}  colorList                     An array of TinyColors
+	 * @param   {object}       [args={}]                     The arguments
+	 * @param   {boolean}      args.includeFallbackColors    Include fallback colors?
+	 * @param   {object}       args.level                    The level to test "AA" or "AAA" (default "AA")
+	 * @param   {object}       args.size                     The content size to test "large" or "small" (default "small")
+	 * @example Tinycolor.mostReadable(tinycolor.mostReadable("#123", ["#124", "#125"], {includeFallbackColors:false}).toHexString(); // "#112255"
+	 * @example Tinycolor.mostReadable(tinycolor.mostReadable("#123", ["#124", "#125"], {includeFallbackColors:true}).toHexString();  // "#ffffff"
+	 * @example Tinycolor.mostReadable("#a8015a", ["#faf3f3"], {includeFallbackColors:true, level:"AAA", size:"large"}).toHexString(); // "#faf3f3"
+	 * @example Tinycolor.mostReadable("#a8015a", ["#faf3f3"], {includeFallbackColors:true, level:"AAA", size:"small"}).toHexString(); // "#ffffff"
+	 * @return  {TinyColor}    A TinyColor instance of the msot readable color.
+	 */
 	static mostReadable(baseColor, colorList, args) {
 		return mostReadable(baseColor, colorList, args)
 	}
+	/**
+	 * Mix a second colour into the first
+	 *
+	 * @param  {TinyColor}  color1  The first color
+	 * @param  {TinyColor}  color2  The second color
+	 * @param  {number}     amount  The mix amount of the second color
+	 * @return {TinyColor}			   A new, mixed TinyColor instance
+	 */
 	static mix(color1, color2, amount) {
 		return calcMix(color1, color2, amount)
 	}
+	/**
+	 * Determines if dark.
+	 *
+	 * @return     {boolean}  True if dark, False otherwise.
+	 */
 	isDark() {
 		return this.getBrightness() < 128
 	}
+	/**
+	 * Determines if light.
+	 *
+	 * @return     {boolean}  True if light, False otherwise.
+	 */
 	isLight() {
 		return !this.isDark()
 	}
+	/**
+	 * Determines if valid.
+	 *
+	 * @return     {boolean}  True if valid, False otherwise.
+	 */
 	isValid() {
 		return this._ok
 	}
+	/**
+	 * Gets the original input.
+	 *
+	 * @return     {string|object}  The original input.
+	 */
 	getOriginalInput() {
 		return this._originalInput
 	}
+	/**
+	 * Gets the format.
+	 *
+	 * @return     {string}  The format.
+	 */
 	getFormat() {
 		return this._format
 	}
+	/**
+	 * Gets the alpha.
+	 *
+	 * @return     {<number>}  The alpha.
+	 */
 	getAlpha() {
 		return this._a
 	}
+	/**
+	 * Gets the brightness.
+	 *
+	 * @return     {number}  The brightness.
+	 */
 	getBrightness() {
 		return calcBrightness(this.toRgb())
 	}
+	/**
+	 * Gets the luminance.
+	 *
+	 * @return     {number}  The luminance.
+	 */
 	getLuminance() {
-		return calcLuminance(this.toRgb(), rawToDeepRgba(this))
+		return calcLuminance(rawToDeepRgba(this))
 	}
+	/**
+	 * Return the current color as a string.
+	 *
+	 * @param      {string}  format  The color format
+	 * @return     {string}  The current color, as a string.
+	 */
 	toString(format) {
 		return extensionApi.print(rawToRgba(this), this._format, format)
 	}
+	/**
+	 * Returns a name representation of the object.
+	 *
+	 * @return     {string}  The name of the colour.
+	 */
 	toName() {
 		return extensionApi.print(rawToRgba(this), 'name', 'toName')
 	}
+	/**
+	 * Returns a rgb representation of the object.
+	 *
+	 * @return     {object}  Rgb representation of the object.
+	 */
 	toRgb() {
 		return rawToDeepRgba(this)
 	}
+	/**
+	 * Returns a rgb string representation of the object.
+	 *
+	 * @return     {string}  Rgb string representation of the object.
+	 */
 	toRgbString() {
 		return rgbaToString(rawToRgba(this))
 	}
+	/**
+	 * Returns a rgb array representation of the object.
+	 *
+	 * @return     {[number]}  Rgb array representation of the object.
+	 */
 	toRgbArray() {
 		return rgbaToArray(rawToRgba(this))
 	}
+	/**
+	 * Returns a percentage rgb representation of the object.
+	 *
+	 * @return     {object}  Percentage rgb representation of the object.
+	 */
 	toPercentageRgb() {
 		return rgbaToPercentageRgba(rawToDeepRgba(this))
 	}
+	/**
+	 * Returns a percentage rgb string representation of the object.
+	 *
+	 * @return     {string}  Percentage rgb string representation of the object.
+	 */
 	toPercentageRgbString() {
 		return rgbaToString(rgbaToPercentageRgba(rawToRgba(this)))
 	}
+	/**
+	 * Return the hex string of a color, as pure hexadecimal.
+	 *
+	 * @param      {boolean}  allow3Char  Allow 3 digit RGB strings
+	 * @return     {string}  The Hex string of the color.
+	 */
 	toHex(allow3Char) {
 		return rgbToHex(rawToRgba(this), allow3Char)
 	}
+	/**
+	 * Return the hex string of a color, with a leading #
+	 *
+	 * @param      {boolean}  allow3Char  Allow 3 digit RGB strings
+	 * @return     {string}  The Hex string of the color.
+	 */
 	toHexString(allow3Char) {
 		return `#${this.toHex(allow3Char)}`
 	}
+	/**
+	 * Return the hex string of a color with aplha, as pure hexadecimal.
+	 *
+	 * @param      {boolean}  allow4Char  Allow 4 digit RGBA strings
+	 * @return     {string}  The Hex string of the color.
+	 */
 	toHex8(allow4Char) {
 		return rgbaToHex(rawToRgba(this), allow4Char)
 	}
+	/**
+	 * Return the hex string of a color with aplha, with a leading #
+	 *
+	 * @param      {boolean}  allow3Char  Allow 4 digit RGBA strings
+	 * @return     {string}  The Hex string of the color.
+	 */
 	toHex8String(allow4Char) {
 		return `#${this.toHex8(allow4Char)}`
 	}
+	/**
+	 * Returns a HSV object representation of the object.
+	 *
+	 * @return     {object}  HSV(A) representation of the color.
+	 */
 	toHsv() {
 		return extensionApi.raw(rawToDeepRgba(this), 'hsv')
 	}
+	/**
+	 * Returns a HSV string representation of the object.
+	 *
+	 * @return     {string}  hsv(h, s, v[, a]) representation of the color.
+	 */
 	toHsvString() {
 		return extensionApi.print(rawToDeepRgba(this), this._format, 'hsv')
 	}
+	/**
+	 * Returns a HSL object representation of the object.
+	 *
+	 * @return     {object}  HSL(A) representation of the color.
+	 */
 	toHsl() {
 		return extensionApi.raw(rawToDeepRgba(this), 'hsl')
 	}
+	/**
+	 * Returns a HSL string representation of the object.
+	 *
+	 * @return     {string}  hsl(h, s, l[, a]) representation of the color.
+	 */
 	toHslString() {
 		return extensionApi.print(rawToDeepRgba(this), this._format, 'hsl')
 	}
+	/**
+	 * Sets the alpha.
+	 *
+	 * @param      {number}  value   The alpha value (0 - 1.0)
+	 * @return     {TinyColor}  The current colour with the set alpha.
+	 */
 	setAlpha(value) {
 		this._a = boundAlpha(value);
 		this._roundA = mathRound(100 * this._a) / 100;
 		return this
 	}
+	/**
+	 * Creates a new instance of the object with same properties than original.
+	 *
+	 * @return     {TinyColor}  Copy of this object.
+	 */
 	clone() {
 		return new TinyColor(this.toString())
 	}
@@ -549,6 +988,19 @@ const matchers$4 = (function () {
 		rgba: new RegExp(`rgba${PERMISSIVE_MATCH4}`),
 	}
 })();
+/**
+ * Permissive string parsing.  Take in a number of formats, and output an object
+ * based on detected format.
+ *
+ * Try to match string input using regular expressions. Keep most of the number
+ * bounding out of this function - don't worry about [0,1] or [0,100] or [0,360]
+ * Just return an object and let the conversion functions handle that.
+ * This way the result will be the same whether the tinycolor is initialized
+ * with string or object.
+ *
+ * @param      {string}  color   The color
+ * @return     {object}  Returns `{ r, g, b }` or `{ r, g, b, a }`
+ */
 function rgbStringToObject(color) {
 	let r, g, b, a, match;
 	if ((match = matchers$4.rgb.exec(color))) {
@@ -1041,13 +1493,92 @@ api.toString = rgba => {
 function tinycolor(color, options) {
 	return new TinyColor(color, options)
 }
-tinycolor.equals = TinyColor.equals;
-tinycolor.registerFormat = TinyColor.registerFormat;
-tinycolor.fromRatio = TinyColor.fromRatio;
-tinycolor.mix = TinyColor.mix;
-tinycolor.readability = TinyColor.readability;
-tinycolor.isReadable = TinyColor.isReadable;
-tinycolor.mostReadable = TinyColor.mostReadable;
+/**
+ * Are two TinyColor colours equivalent?
+ *
+ * @alias  tinycolor.equals
+ * @param  {TinyColor}  color1  The first color
+ * @param  {TinyColor}  color2  The second color
+ * @return {boolean}    Equivalent or not?
+ */
+tinycolor.equals = (color1, color2) => TinyColor.equals(color1, color2);
+/**
+ * Register a TinyColor extension
+ *
+ * @alias  tinycolor.registerFormat
+ * @param  {string}  id                   The plugin identifier
+ * @param  {object}  [options={}]         Plugin options
+ * @param  {string}  options.alphaFormat  rgb|hex
+ * @param  {boolean} options.shortHex     Short hex codes #ABC, if possible
+ * @param  {boolean} options.upperCaseHex User UPPER case hex
+ * @return {TinyColorExtension}           The TinyColor extension
+ */
+tinycolor.registerFormat = (id, options = {}) => TinyColor.registerFormat(id, options);
+/**
+ * Create a new TinyColor from values from 0..1
+ *
+ * @alias  tinycolor.fromRatio
+ * @param  {object}    color    The color values
+ * @param  {object}    options  Options to pass to TinyColor constructor
+ * @return {TinyColor}          A TinyColor instance
+ */
+tinycolor.fromRatio = (color, options) => TinyColor.fromRatio(color, options);
+/**
+ * Mix a second colour into the first
+ *
+ * @alias  tinycolor.mix
+ * @param  {TinyColor}  color1  The first color
+ * @param  {TinyColor}  color2  The second color
+ * @param  {number}     amount  The mix amount of the second color
+ * @return {TinyColor}			   A new, mixed TinyColor instance
+ */
+tinycolor.mix = (color1, color2, amount) => TinyColor.mix(color1, color2, amount);
+/**
+ * How readable is the first color over the second color
+ *
+ * @alias  tinycolor.readability
+ * @param  {TinyColor}  color1  The first color
+ * @param  {TinyColor}  color2  The second color
+ * @return {number}             The color contrast defined by (WCAG Version 2)
+ */
+tinycolor.readability = (color1, color2) => TinyColor.readability(color1, color2);
+/**
+ * Ensure that foreground and background color combinations meet WCAG2 guidelines.
+ *
+ * @alias  tinycolor.isReadable
+ * @param   {TinyColor}        color1        The first color
+ * @param   {TinyColor}        color2        The second color
+ * @param   {object}           wcag2         The WCAG2 properties to test
+ * @param   {object}           wcag2.level   The level to test "AA" or "AAA" (default "AA")
+ * @param   {object}           wcag2.size    The content size to test "large" or "small" (default "small")
+ * @example                                  tinycolor.isReadable("#000", "#111") → false
+ * @example                                  tinycolor.isReadable("#000", "#111", {level:"AA",size:"large"}) → false
+ * @return  {(boolean|number)} True if readable, False otherwise.
+ */
+tinycolor.isReadable = (color1, color2, wcag2) => TinyColor.isReadable(color1, color2, wcag2);
+/**
+ * Given a base color and a list of possible foreground or background colors for that
+ * base, returns the most readable color.
+ *
+ * Optionally returns Black or White if the most readable color is unreadable.
+ *
+ * @alias  tinycolor.mostReadable
+ * @param   {TinyColor}    baseColor                     The base color
+ * @param   {[TinyColor]}  colorList                     An array of TinyColors
+ * @param   {object}       [args={}]                     The arguments
+ * @param   {boolean}      args.includeFallbackColors    Include fallback colors?
+ * @param   {object}       args.level                    The level to test "AA" or "AAA" (default "AA")
+ * @param   {object}       args.size                     The content size to test "large" or "small" (default "small")
+ * @example tinycolor.mostReadable(tinycolor.mostReadable("#123", ["#124", "#125"],{includeFallbackColors:false}).toHexString(); // "#112255"
+ * @example tinycolor.mostReadable(tinycolor.mostReadable("#123", ["#124", "#125"],{includeFallbackColors:true}).toHexString();  // "#ffffff"
+ * @example tinycolor.mostReadable("#a8015a", ["#faf3f3"], {includeFallbackColors:true,level:"AAA",size:"large"}).toHexString(); // "#faf3f3"
+ * @example tinycolor.mostReadable("#a8015a", ["#faf3f3"], {includeFallbackColors:true,level:"AAA",size:"small"}).toHexString(); // "#ffffff"
+ * @return  {TinyColor}    A TinyColor instance of the msot readable color.
+ */
+tinycolor.mostReadable = (baseColor, colorList, args) => TinyColor.mostReadable(baseColor, colorList, args);
+/**
+ * Named Colours (as per CSS color names)
+ */
 tinycolor.names = names;
 
 export { TinyColor, names, tinycolor };

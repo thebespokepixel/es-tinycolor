@@ -11,14 +11,20 @@ const matchers = (function () {
 	}
 })()
 
-// `rgbStringToObject`
-// Permissive string parsing.  Take in a number of formats, and output an object
-// based on detected format.  Returns `{ r, g, b }`
+/**
+ * Permissive string parsing.  Take in a number of formats, and output an object
+ * based on detected format.
+ *
+ * Try to match string input using regular expressions. Keep most of the number
+ * bounding out of this function - don't worry about [0,1] or [0,100] or [0,360]
+ * Just return an object and let the conversion functions handle that.
+ * This way the result will be the same whether the tinycolor is initialized
+ * with string or object.
+ *
+ * @param      {string}  color   The color
+ * @return     {object}  Returns `{ r, g, b }` or `{ r, g, b, a }`
+ */
 export default function rgbStringToObject(color) {
-	// Try to match string input using regular expressions.
-	// Keep most of the number bounding out of this function - don't worry about [0,1] or [0,100] or [0,360]
-	// Just return an object and let the conversion functions handle that.
-	// This way the result will be the same whether the tinycolor is initialized with string or object.
 	let r, g, b, a, match
 	if ((match = matchers.rgb.exec(color))) {
 		[r, g, b] = match.splice(1, 3)
