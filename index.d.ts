@@ -30,11 +30,11 @@ export class TinyColor {
     /**
      * Create a new TinyColor from values from 0..1
      *
-     * @param      {Object}     color    The color
-     * @param      {<type>}     options  The options
+     * @param      {object}     color    The color
+     * @param      {object}     options  The options
      * @return     {TinyColor}  The tiny color.
      */
-    static fromRatio(color: any, options: <type>() => any): TinyColor;
+    static fromRatio(color: object, options: object): TinyColor;
     /**
      * Analyze the 2 colors and returns the color contrast defined by (WCAG Version 2)
      *
@@ -141,9 +141,9 @@ export class TinyColor {
     /**
      * Gets the alpha.
      *
-     * @return     {<number>}  The alpha.
+     * @return     {number}  The alpha.
      */
-    getAlpha(): <number>() => any;
+    getAlpha(): number;
     /**
      * Gets the brightness.
      *

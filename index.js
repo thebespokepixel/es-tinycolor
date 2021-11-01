@@ -653,8 +653,8 @@ class TinyColor {
 	/**
 	 * Create a new TinyColor from values from 0..1
 	 *
-	 * @param      {Object}     color    The color
-	 * @param      {<type>}     options  The options
+	 * @param      {object}     color    The color
+	 * @param      {object}     options  The options
 	 * @return     {TinyColor}  The tiny color.
 	 */
 	static fromRatio(color, options) {
@@ -773,7 +773,7 @@ class TinyColor {
 	/**
 	 * Gets the alpha.
 	 *
-	 * @return     {<number>}  The alpha.
+	 * @return     {number}  The alpha.
 	 */
 	getAlpha() {
 		return this._a
