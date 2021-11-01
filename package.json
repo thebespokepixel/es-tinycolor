@@ -1,9 +1,9 @@
 {
-  "version": "3.0.0",
+  "version": "3.0.1",
   "name": "@thebespokepixel/es-tinycolor",
   "description": "Fast Color Parsing and Manipulation in es2015+, based on TinyColor2",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && npm run readme",
     "test": "xo && c8 --reporter=lcov --reporter=text ava",
     "doc-serve": "documentation serve --watch --theme node_modules/documentation-theme-bespoke --github --config src/docs/documentation.yml --project-name $npm_package_name  --project-version $npm_package_version src/index.js",
     "doc-build": "documentation build --format html --output docs --theme node_modules/documentation-theme-bespoke --github --config src/docs/documentation.yml --project-name $npm_package_name  --project-version $npm_package_version src/index.js",
@@ -52,7 +52,8 @@
     "c8": "^7.10.0",
     "documentation": "^13.2.5",
     "documentation-theme-bespoke": "^2.0.9",
-    "rollup": "^2.58.3",
+    "rollup": "^2.59.0",
+    "rollup-plugin-cleanup": "^3.2.1",
     "xo": "^0.46.3"
   },
   "xo": {
