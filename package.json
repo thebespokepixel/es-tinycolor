@@ -51,7 +51,7 @@
     "ava": "4.0.0-alpha.2",
     "c8": "^7.10.0",
     "documentation": "^13.2.5",
-    "documentation-theme-bespoke": "^2.0.9",
+    "documentation-theme-bespoke": "^2.0.12",
     "rollup": "^2.59.0",
     "rollup-plugin-cleanup": "^3.2.1",
     "xo": "^0.46.3"
