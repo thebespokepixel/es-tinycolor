@@ -4,7 +4,7 @@ import {tinycolor} from '@thebespokepixel/es-tinycolor'
 
 const color = tinycolor("red")
 
-color.toRgbString() // "rgba(255, 0, 0, 0.5)"
+color.toRgbString() // "rgba(255, 0, 0, 1)"
 ```
 
 Call `tinycolor(input)` or `new tinycolor(input)`, and you will have an object with the following properties.  See Accepted String Input and Accepted Object Input below for more information about what is accepted.
