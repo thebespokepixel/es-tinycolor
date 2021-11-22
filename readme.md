@@ -16,7 +16,7 @@
 
 ##### Documentation/Help
 
-[![Inch.io](https://inch-ci.org/github/thebespokepixel/es-tinycolor.svg?branch=master\&style=shields "Inch.io")](https://inch-ci.org/github/thebespokepixel/es-tinycolor "Inch.io")&#x20;[![Twitter](https://img.shields.io/twitter/follow/thebespokepixel?style=social "Twitter")](https://twitter.com/thebespokepixel "Twitter")&#x20;  
+[![Twitter](https://img.shields.io/twitter/follow/thebespokepixel?style=social "Twitter")](https://twitter.com/thebespokepixel "Twitter")&#x20;  
 
 
 ## Installation

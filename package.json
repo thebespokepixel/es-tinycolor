@@ -1,5 +1,5 @@
 {
-  "version": "3.0.6",
+  "version": "3.1.0",
   "name": "@thebespokepixel/es-tinycolor",
   "description": "Fast Color Parsing and Manipulation in es2015+, based on TinyColor2",
   "scripts": {
@@ -9,7 +9,7 @@
     "doc-build": "documentation build --format html --output docs --theme node_modules/documentation-theme-bespoke --github --config src/docs/documentation.yml --project-name $npm_package_name  --project-version $npm_package_version src/index.js",
     "readme": "compile-readme -u src/docs/example.md src/docs/readme.md > readme.md",
     "coverage": "c8 --reporter=lcov ava; open coverage/lcov-report/index.html",
-    "prepublishOnly": "npx -p typescript tsc index.js --declaration --allowJs --emitDeclarationOnly"
+    "prepublishOnly": "npx -p typescript tsc esm/index.js --declaration --allowJs --emitDeclarationOnly --outdir types"
   },
   "license": "MIT",
   "repository": {
@@ -30,20 +30,23 @@
   "contributors": [
     "Brian Grinstead <briangrinstead@gmail.com> (http://briangrinstead.com)"
   ],
-  "main": "index.js",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
   "type": "module",
-  "types": "index.d.ts",
+  "exports": {
+    "import": "./esm/index.js",
+    "default": "./cjs/index.js"
+  },
+  "types": "types/index.d.ts",
   "bugs": {
     "url": "https://github.com/thebespokepixel/es-tinycolor"
   },
   "homepage": "https://github.com/thebespokepixel/es-tinycolor",
   "files": [
-    "index.js",
-    "index.d.ts"
+    "esm",
+    "cjs",
+    "types"
   ],
-  "directories": {
-    "test": "test"
-  },
   "engines": {
     "node": ">=14.0"
   },
@@ -52,15 +55,16 @@
     "c8": "^7.10.0",
     "documentation": "^13.2.5",
     "documentation-theme-bespoke": "^2.0.14",
-    "rollup": "^2.59.0",
+    "rollup": "^2.60.1",
     "rollup-plugin-cleanup": "^3.2.1",
     "xo": "^0.46.4"
   },
   "xo": {
     "semicolon": false,
     "ignores": [
-      "index.js",
-      "index.d.ts",
+      "esm/**",
+      "cjs/**",
+      "types/**",
       "docs/**",
       "coverage/**"
     ],
@@ -112,7 +116,6 @@
         ]
       ],
       "Documentation/Help": [
-        "inch",
         "twitter"
       ]
     },

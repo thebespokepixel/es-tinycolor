@@ -20,5 +20,6 @@ ratings:
 exclude_paths:
 - test/
 - docs/
-- index.js
-- index.d.ts
+- esm/
+- cjs/
+- types/

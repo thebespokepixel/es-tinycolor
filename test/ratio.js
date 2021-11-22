@@ -1,6 +1,6 @@
 
 import test from 'ava'
-import {tinycolor} from '../index.js'
+import {tinycolor} from '../esm/index.js'
 
 test('With Ratio', t => {
 	t.is(tinycolor.fromRatio({r: 1, g: 1, b: 1}).toHexString(), '#ffffff', 'white')

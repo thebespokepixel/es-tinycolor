@@ -1,6 +1,6 @@
 
 import test from 'ava'
-import {tinycolor} from '../index.js'
+import {tinycolor} from '../esm/index.js'
 
 // The combination tests need to be expanded further
 function colorsToHexString(colors) {
