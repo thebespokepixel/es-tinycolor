@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import {tinycolor} from '../index.js'
+import {tinycolor} from '../esm/index.js'
 import conversions from './_conversions.js'
 import {colorObjectMatch, colorStringLimitDiff} from './_macros.js'
 

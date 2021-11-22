@@ -1,7 +1,7 @@
 /* eslint array-element-newline:0 */
 
 import test from 'ava'
-import {tinycolor} from '../index.js'
+import {tinycolor} from '../esm/index.js'
 
 /* Originally generated with:
 const results = []

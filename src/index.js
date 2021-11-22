@@ -5,15 +5,15 @@
  *  Based on TinyColor © Brian Grinstead
  */
 /* eslint import/no-unassigned-import: 0 */
-import TinyColor from './lib/classes/tinycolor'
+import TinyColor from './lib/classes/tinycolor.js'
 
-import './lib/extensions/rgb'
-import './lib/extensions/prgb'
-import './lib/extensions/hex'
-import './lib/extensions/hex8'
-import './lib/extensions/hsl'
-import './lib/extensions/hsv'
-import {names} from './lib/extensions/name'
+import './lib/extensions/rgb.js'
+import './lib/extensions/prgb.js'
+import './lib/extensions/hex.js'
+import './lib/extensions/hex8.js'
+import './lib/extensions/hsl.js'
+import './lib/extensions/hsv.js'
+import {names} from './lib/extensions/name.js'
 
 function tinycolor(color, options) {
 	return new TinyColor(color, options)

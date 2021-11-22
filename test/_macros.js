@@ -1,5 +1,5 @@
 import {inspect} from 'node:util'
-import {tinycolor} from '../index.js'
+import {tinycolor} from '../esm/index.js'
 
 function pretty(object) {
 	return inspect(object, {depth: 1, colors: true})
